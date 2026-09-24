@@ -1,0 +1,64 @@
+# ================= Dependencies & build =================
+node_modules
+dist
+dist-ssr
+.output
+.tanstack/**
+.vinxi
+.nitro
+
+# ================= Logs =================
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ================= Env & secrets — JANGAN COMMIT =================
+# ADMIN_PASSWORD dashboard, TELEGRAM/GITHUB token bot, GOOGLE_API_KEY dsb.
+.env
+.env.local
+.env.*.local
+.env-apikey*
+*.env-apikey*
+!.env.example
+
+# ================= Deploy =================
+.vercel
+.vercel/output
+
+# ================= Junk lokal — JANGAN PUSH =================
+# dump sesi dev internal
+session-export.json
+# kode verifikasi Google Search Console lokal
+gs.txt
+# salinan log build (mis. tempelan log Vercel) — jangan push
+error.txt
+error*.log
+*model*.txt
+# snippet iframe Google Maps (sudah inline di kode)
+link-embebgmpas.txt
+# referensi desain (~8MB), tidak dipakai aplikasi
+reff-img/**
+*.local
+*.bak
+*.tmp
+
+# ================= Editor & OS =================
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+desktop.ini
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Wrangler / Cloudflare
+.wrangler/
+.dev.vars

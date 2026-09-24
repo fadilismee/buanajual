@@ -1,0 +1,174 @@
+{
+  "entries": [
+    {
+      "id": "ba-2025-041",
+      "date": "2025-09-18",
+      "seller": "Bpk. Dani",
+      "origin": "Sleman",
+      "channel": "Drop ke Toko",
+      "payout": "Tunai di Tempat",
+      "items": [
+        { "name": "Laptop Asus X441BA", "grade": "GRADE D • MATOT", "price": 450000 },
+        { "name": "Keyboard laptop + heatsink", "grade": "KANIBAL", "price": 150000 }
+      ],
+      "total": 600000,
+      "note": "Mati total 2 tahun, PCB utuh. Cek lab 12 menit, langsung cair.",
+      "photos": [
+        {
+          "url": "https://picsum.photos/seed/ba-041-unit/800/600",
+          "caption": "Unit sebelum tes lab",
+          "kind": "unit"
+        },
+        {
+          "url": "https://picsum.photos/seed/ba-041-transfer/800/600",
+          "caption": "Bukti penyerahan tunai",
+          "kind": "transfer"
+        },
+        {
+          "url": "https://picsum.photos/seed/ba-041-spk/800/600",
+          "caption": "Salinan berita acara",
+          "kind": "doc"
+        }
+      ]
+    },
+    {
+      "id": "ba-2025-040",
+      "date": "2025-09-15",
+      "seller": "Mas Irfan",
+      "origin": "Potorono, Bantul",
+      "channel": "COD Jemput",
+      "payout": "Transfer BCA",
+      "items": [
+        { "name": "VGA Palit GTX 1660 Ti", "grade": "GRADE C • ARTEFAK", "price": 750000 }
+      ],
+      "total": 750000,
+      "note": "Artefak garis-garis, VRAM GDDR6 lolos tes. Dana masuk real-time.",
+      "photos": [
+        {
+          "url": "https://picsum.photos/seed/ba-040-unit/800/600",
+          "caption": "VGA sebelum dibongkar",
+          "kind": "unit"
+        },
+        {
+          "url": "https://picsum.photos/seed/ba-040-transfer/800/600",
+          "caption": "SS mutasi BCA",
+          "kind": "transfer"
+        }
+      ]
+    },
+    {
+      "id": "ba-2025-039",
+      "date": "2025-09-11",
+      "seller": "Dimas K.",
+      "origin": "Kotagede",
+      "channel": "Drop ke Toko",
+      "payout": "QRIS",
+      "items": [
+        { "name": "Motherboard B450M + Ryzen 5 3600", "grade": "GRADE B", "price": 1350000 },
+        { "name": "RAM DDR4 8GB x2", "grade": "GRADE A", "price": 400000 }
+      ],
+      "total": 1750000,
+      "note": "Upgrade ke AM5, komponen lama dijual borongan. Tes POST stabil.",
+      "photos": [
+        {
+          "url": "https://picsum.photos/seed/ba-039-unit/800/600",
+          "caption": "Paket mobo + CPU + RAM",
+          "kind": "unit"
+        },
+        {
+          "url": "https://picsum.photos/seed/ba-039-transfer/800/600",
+          "caption": "Bukti bayar QRIS",
+          "kind": "transfer"
+        },
+        {
+          "url": "https://picsum.photos/seed/ba-039-lab/800/600",
+          "caption": "Proses cek di lab",
+          "kind": "doc"
+        }
+      ]
+    },
+    {
+      "id": "ba-2025-038",
+      "date": "2025-09-07",
+      "seller": "Ibu Rina",
+      "origin": "Kota Yogyakarta",
+      "channel": "Ekspedisi J&T",
+      "payout": "Transfer Mandiri",
+      "items": [
+        { "name": "Laptop Lenovo ThinkPad T480", "grade": "GRADE B", "price": 2150000 },
+        { "name": "SSD NVMe 256GB", "grade": "GRADE A", "price": 250000 }
+      ],
+      "total": 2400000,
+      "note": "Kirim dari luar DIY. Unboxing video transparan, dana H+1 setelah tes.",
+      "photos": [
+        {
+          "url": "https://picsum.photos/seed/ba-038-unit/800/600",
+          "caption": "Paketan sampai di lab",
+          "kind": "unit"
+        },
+        {
+          "url": "https://picsum.photos/seed/ba-038-transfer/800/600",
+          "caption": "SS mutasi Mandiri",
+          "kind": "transfer"
+        }
+      ]
+    },
+    {
+      "id": "ba-2025-037",
+      "date": "2025-09-02",
+      "seller": "Bpk. Sutrisno",
+      "origin": "Banguntapan",
+      "channel": "Jemput Kantor",
+      "payout": "Transfer BRI",
+      "items": [
+        { "name": "10x PC kantor Intel i5 Gen 8", "grade": "BORONGAN", "price": 8500000 },
+        { "name": "Monitor 22\" LED", "grade": "MIXED", "price": 1500000 }
+      ],
+      "total": 10000000,
+      "note": "Lelang rongsokan kantor. Tim jemput + invoice resmi diserahkan di lokasi.",
+      "photos": [
+        {
+          "url": "https://picsum.photos/seed/ba-037-unit/800/600",
+          "caption": "Armada angkut borongan",
+          "kind": "unit"
+        },
+        {
+          "url": "https://picsum.photos/seed/ba-037-transfer/800/600",
+          "caption": "Bukti transfer BRI",
+          "kind": "transfer"
+        },
+        {
+          "url": "https://picsum.photos/seed/ba-037-doc/800/600",
+          "caption": "Invoice resmi",
+          "kind": "doc"
+        }
+      ]
+    },
+    {
+      "id": "ba-2025-036",
+      "date": "2025-08-28",
+      "seller": "Fajar A.",
+      "origin": "Depok, Sleman",
+      "channel": "Drop ke Toko",
+      "payout": "Tunai di Tempat",
+      "items": [
+        { "name": "Radeon RX 580 8GB", "grade": "GRADE C", "price": 550000 },
+        { "name": "PSU 550W Bronze", "grade": "GRADE B", "price": 250000 }
+      ],
+      "total": 800000,
+      "note": "Fan VGA macet, masih POST normal. Diambil untuk stok kanibal.",
+      "photos": [
+        {
+          "url": "https://picsum.photos/seed/ba-036-unit/800/600",
+          "caption": "VGA + PSU diserahkan",
+          "kind": "unit"
+        },
+        {
+          "url": "https://picsum.photos/seed/ba-036-transfer/800/600",
+          "caption": "Penerimaan tunai",
+          "kind": "transfer"
+        }
+      ]
+    }
+  ]
+}

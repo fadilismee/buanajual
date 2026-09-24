@@ -1,0 +1,259 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  Outlet,
+  Link,
+  createRootRouteWithContext,
+  useRouter,
+  HeadContent,
+  Scripts,
+} from "@tanstack/react-router";
+import type { ReactNode } from "react";
+
+import appCss from "../styles.css?url";
+
+function NotFoundComponent() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="max-w-md text-center">
+        <p className="font-monotech text-sm font-semibold uppercase tracking-widest text-primary">
+          Error 404
+        </p>
+        <h1 className="mt-2 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+          Halaman tidak ditemukan
+        </h1>
+        <p className="mt-3 text-sm text-muted-foreground">
+          Halaman yang Anda cari tidak ada atau sudah dipindahkan.
+        </p>
+        <div className="mt-6">
+          <Link
+            to="/jual"
+            className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Kembali ke Beranda
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+  console.error(error);
+  const router = useRouter();
+
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+      <div className="max-w-md text-center">
+        <p className="font-monotech text-sm font-semibold uppercase tracking-widest text-destructive">
+          Terjadi Kesalahan
+        </p>
+        <h1 className="mt-2 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+          Halaman ini gagal dimuat
+        </h1>
+        <p className="mt-3 text-sm text-muted-foreground">
+          Ada masalah di sisi kami. Coba muat ulang atau kembali ke beranda.
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
+            className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Coba Lagi
+          </button>
+          <Link
+            to="/jual"
+            className="inline-flex items-center justify-center rounded-lg border border-input bg-background px-5 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+          >
+            Kembali ke Beranda
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#faf8ff" },
+      {
+        name: "google-site-verification",
+        content: "D9D4lVIRUuQ1KP4nHWeOJWaH5SgfFGUJf1bpLSFjkEY",
+      },
+      { title: "Buana Computer — Toko Komputer Bantul Yogyakarta" },
+      {
+        name: "description",
+        content:
+          "Toko komputer Bantul, Yogyakarta: laptop, PC rakitan, monitor, komponen, servis hardware dan jual beli laptop bekas/rusak. Hubungi WA 6285979220599.",
+      },
+      {
+        name: "keywords",
+        content:
+          "buana computer, toko komputer bantul, jual laptop bekas yogyakarta, service komputer bantul, pc rakitan jogja",
+      },
+      { name: "author", content: "Buana Computer" },
+      { property: "og:title", content: "Buana Computer - Katalog Laptop & PC" },
+      {
+        property: "og:description",
+        content:
+          "Jelajahi katalog Buana Computer — laptop, PC rakitan, monitor, dan aksesoris lengkap dengan spesifikasi dan harga.",
+      },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Buana Computer" },
+      { property: "og:locale", content: "id_ID" },
+      { property: "og:image", content: "https://buanacomputer.web.id/Buanacomputer-logo.png" },
+      { property: "og:url", content: "https://buanacomputer.web.id" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Buana Computer - Katalog Laptop & PC" },
+      {
+        name: "twitter:description",
+        content:
+          "Jelajahi katalog Buana Computer — laptop, PC rakitan, monitor, dan aksesoris lengkap dengan spesifikasi dan harga.",
+      },
+      { name: "twitter:image", content: "https://buanacomputer.web.id/Buanacomputer-logo.png" },
+    ],
+    links: [
+      {
+        rel: "stylesheet",
+        href: appCss,
+      },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap",
+      },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/manifest.json" },
+    ],
+  }),
+  shellComponent: RootShell,
+  component: RootComponent,
+  notFoundComponent: NotFoundComponent,
+  errorComponent: ErrorComponent,
+});
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://buanacomputer.web.id/#website",
+  name: "Buana Computer",
+  alternateName: ["Buana Komputer", "Buana Computer Bantul", "Buanacomp"],
+  url: "https://buanacomputer.web.id",
+  inLanguage: "id-ID",
+  description:
+    "Toko komputer Bantul Yogyakarta: katalog laptop bekas & baru, PC rakitan, servis hardware, dan buyback barang rusak.",
+};
+
+const siteNavigationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: [
+    {
+      "@type": "SiteNavigationElement",
+      position: 1,
+      name: "Katalog Laptop & PC",
+      description: "Katalog laptop baru & second, PC rakitan, monitor, dan aksesoris komputer",
+      url: "https://buanacomputer.web.id/",
+    },
+    {
+      "@type": "SiteNavigationElement",
+      position: 2,
+      name: "Buana Journal & Tips Servis",
+      description: "Panduan rakit PC, review teardown, dan tips perawatan laptop dari meja teknisi",
+      url: "https://buanacomputer.web.id/blog",
+    },
+    {
+      "@type": "SiteNavigationElement",
+      position: 3,
+      name: "Tentang Laboratorium Buana",
+      description:
+        "Profil laboratorium servis mikro-elektronika, transparansi meja periksa, dan daur ulang e-waste",
+      url: "https://buanacomputer.web.id/about",
+    },
+  ],
+};
+
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Buana Computer",
+  image: "https://buanacomputer.web.id/Buanacomputer-logo.png",
+  url: "https://buanacomputer.web.id",
+  telephone: "6285979220599",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Mertosan Kulon, Potorono",
+    addressLocality: "Banguntapan, Bantul",
+    addressRegion: "DI Yogyakarta",
+    postalCode: "55196",
+    addressCountry: "ID",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -7.8372069,
+    longitude: 110.4148331,
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    opens: "09:00",
+    closes: "20:00",
+  },
+  priceRange: "Rp 675.000 - Rp 24.900.000",
+  sameAs: [
+    "https://service.buanacomputer.web.id",
+    "https://jual.buanacomputer.web.id",
+    "https://buanacomputer.web.id/blog",
+    "https://buanacomputer.web.id/about",
+  ],
+};
+
+function RootShell({ children }: { children: ReactNode }) {
+  return (
+    <html lang="id">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+function RootComponent() {
+  const { queryClient } = Route.useRouteContext();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <Outlet />
+    </QueryClientProvider>
+  );
+}
