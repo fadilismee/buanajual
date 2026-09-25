@@ -81,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "theme-color", content: "#faf8ff" },
+      { name: "theme-color", content: "#f8fafc" },
       {
         name: "google-site-verification",
         content: "D9D4lVIRUuQ1KP4nHWeOJWaH5SgfFGUJf1bpLSFjkEY",
@@ -107,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Gudang Komputer" },
       { property: "og:locale", content: "id_ID" },
-      { property: "og:image", content: "https://gudangkomputer.web.id/Buanacomputer-logo.png" },
+      { property: "og:image", content: "https://gudangkomputer.web.id/gudangkomputer-logo.png" },
       { property: "og:url", content: "https://gudangkomputer.web.id" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Gudang Komputer - Katalog Laptop & PC" },
@@ -116,7 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Jelajahi katalog Gudang Komputer — laptop, PC rakitan, monitor, dan aksesoris lengkap dengan spesifikasi dan harga.",
       },
-      { name: "twitter:image", content: "https://gudangkomputer.web.id/Buanacomputer-logo.png" },
+      { name: "twitter:image", content: "https://gudangkomputer.web.id/gudangkomputer-logo.png" },
     ],
     links: [
       {
@@ -195,7 +195,7 @@ const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: "Gudang Komputer",
-  image: "https://gudangkomputer.web.id/Buanacomputer-logo.png",
+  image: "https://gudangkomputer.web.id/gudangkomputer-logo.png",
   url: "https://gudangkomputer.web.id",
   telephone: "6285979220599",
   address: {

@@ -22,8 +22,9 @@ export function PromoBonus() {
             Bonus Taksir +10% untuk Motherboard & VGA Rusak/Artefak
           </h3>
           <p className="text-sm leading-relaxed text-on-surface-variant">
-            Khusus penyerahan via COD Jemput Barang dan Drop langsung ke Lab Gudang Komputer minggu
-            ini. Ekstra nilai kompensasi tunai tanpa potongan tersembunyi!
+            Khusus penyerahan via COD Jemput atau Drop langsung ke 3 cabang Gudang Komputer
+            (Gunungkidul, Lampung, Cikarang) minggu ini. Ekstra nilai kompensasi tunai tanpa
+            potongan tersembunyi!
           </p>
           <div className="flex flex-wrap items-center gap-2 pt-1">
             <Link

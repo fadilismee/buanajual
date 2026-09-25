@@ -24,7 +24,8 @@ export function TradeInCta() {
           </h3>
           <p className="text-on-pri/90">
             Hardware lama atau laptop rusak Anda langsung dipotongkan sebagai uang muka (DP) tukar
-            tambah PC kantor, PC gaming, maupun laptop normal bergaransi lab Gudang Komputer.
+            tambah PC kantor, PC gaming, maupun laptop normal bergaransi di 3 cabang resmi Gudang
+            Komputer (Gunungkidul, Lampung, Cikarang).
           </p>
         </div>
         <div className="flex w-full shrink-0 flex-col items-center gap-3 sm:w-auto sm:flex-row lg:flex-col xl:flex-row">

@@ -64,7 +64,7 @@ export const Route = createFileRoute("/jual/form")({
         content:
           "Isi detail unit bekas/rusak Anda, dapatkan estimasi taksiran kilat gratis dari teknisi 3 cabang Gudang Komputer (Gunungkidul, Lampung, Cikarang). Gratis, tanpa kewajiban menjual.",
       },
-      { property: "og:image", content: "https://gudangkomputer.web.id/Buanacomputer-logo.png" },
+      { property: "og:image", content: "https://gudangkomputer.web.id/gudangkomputer-logo.png" },
       { property: "og:url", content: "https://gudangkomputer.web.id/jual/form" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

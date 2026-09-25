@@ -61,70 +61,67 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /*
-   * Stitch "minimalist editorial" tokens (Material 3 Expressive, exact hex
-   * from reff-img DESIGN.md). Namespaced to avoid clobbering the shadcn
-   * tokens above (primary/secondary/background carry marketplace colors).
-   * Usage: bg-surface, text-on-surface, bg-pri, bg-pri-container,
-   * text-sec, bg-tertiary, border-outline-variant, font-heading, ...
+   * Gudang Komputer custom theme tokens.
+   * Slate Navy + Royal Tech Blue palette for high contrast & clarity.
    */
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-bodyedit: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-monotech: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-  --color-surface: #faf8ff;
-  --color-surface-dim: #d2d9f4;
-  --color-surface-bright: #faf8ff;
+  --color-surface: #f8fafc;
+  --color-surface-dim: #e2e8f0;
+  --color-surface-bright: #ffffff;
   --color-surface-lowest: #ffffff;
-  --color-surface-low: #f2f3ff;
-  --color-surface-container: #eaedff;
-  --color-surface-high: #e2e7ff;
-  --color-surface-highest: #dae2fd;
-  --color-surface-variant: #dae2fd;
-  --color-on-surface: #131b2e;
-  --color-on-surface-variant: #424656;
-  --color-inverse-surface: #283044;
-  --color-inverse-on-surface: #eef0ff;
-  --color-inverse-primary: #b3c5ff;
-  --color-outline: #727687;
-  --color-outline-variant: #c2c6d8;
-  --color-pri: #0050cb;
+  --color-surface-low: #f1f5f9;
+  --color-surface-container: #e2e8f0;
+  --color-surface-high: #cbd5e1;
+  --color-surface-highest: #94a3b8;
+  --color-surface-variant: #e2e8f0;
+  --color-on-surface: #0f172a;
+  --color-on-surface-variant: #475569;
+  --color-inverse-surface: #1e293b;
+  --color-inverse-on-surface: #f8fafc;
+  --color-inverse-primary: #93c5fd;
+  --color-outline: #64748b;
+  --color-outline-variant: #cbd5e1;
+  --color-pri: #1d4ed8;
   --color-on-pri: #ffffff;
-  --color-pri-container: #0066ff;
-  --color-on-pri-container: #f8f7ff;
-  --color-pri-fixed: #dae1ff;
-  --color-pri-fixed-dim: #b3c5ff;
-  --color-on-pri-fixed: #001849;
-  --color-on-pri-fixed-variant: #003fa4;
-  --color-sec: #00677f;
+  --color-pri-container: #2563eb;
+  --color-on-pri-container: #f8fafc;
+  --color-pri-fixed: #dbeafe;
+  --color-pri-fixed-dim: #bfdbfe;
+  --color-on-pri-fixed: #1e3a8a;
+  --color-on-pri-fixed-variant: #1d4ed8;
+  --color-sec: #0f766e;
   --color-on-sec: #ffffff;
-  --color-sec-container: #00d2ff;
-  --color-on-sec-container: #00566a;
-  --color-sec-fixed: #b6ebff;
-  --color-sec-fixed-dim: #47d6ff;
-  --color-on-sec-fixed: #001f28;
-  --color-on-sec-fixed-variant: #004e60;
-  --color-tertiary: #b3101f;
+  --color-sec-container: #14b8a6;
+  --color-on-sec-container: #042f2e;
+  --color-sec-fixed: #ccfbf1;
+  --color-sec-fixed-dim: #99f6e4;
+  --color-on-sec-fixed: #134e4a;
+  --color-on-sec-fixed-variant: #0f766e;
+  --color-tertiary: #b91c1c;
   --color-on-tertiary: #ffffff;
-  --color-tertiary-container: #d72f34;
-  --color-on-tertiary-container: #fff6f5;
-  --color-tertiary-fixed: #ffdad7;
-  --color-tertiary-fixed-dim: #ffb3ae;
-  --color-on-tertiary-fixed: #410004;
-  --color-on-tertiary-fixed-variant: #930014;
-  --color-error: #ba1a1a;
+  --color-tertiary-container: #dc2626;
+  --color-on-tertiary-container: #fef2f2;
+  --color-tertiary-fixed: #fee2e2;
+  --color-tertiary-fixed-dim: #fecaca;
+  --color-on-tertiary-fixed: #7f1d1d;
+  --color-on-tertiary-fixed-variant: #991b1b;
+  --color-error: #dc2626;
   --color-on-error: #ffffff;
-  --color-error-container: #ffdad6;
-  --color-on-error-container: #93000a;
-  --color-brand-50: #eef6ff;
+  --color-error-container: #fee2e2;
+  --color-on-error-container: #7f1d1d;
+  --color-brand-50: #eff6ff;
   --color-brand-100: #dbeafe;
   --color-brand-200: #bfdbfe;
-  --color-brand-500: #0066ff;
-  --color-brand-600: #0052cc;
-  --color-brand-700: #003fa4;
-  --color-brand-900: #001849;
-  --color-techdark: #080d1a;
-  --color-technavy: #0f172a;
-  --color-techslate: #1e293b;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-900: #1e3a8a;
+  --color-techdark: #0f172a;
+  --color-technavy: #1e293b;
+  --color-techslate: #334155;
 }
 
 :root {

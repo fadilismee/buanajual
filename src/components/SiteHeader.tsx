@@ -88,14 +88,11 @@ export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps)
             aria-label="Gudang Komputer — beranda"
           >
             <img
-              src="/Buanacomputer-logo.png"
+              src="/gudangkomputer-logo.png"
               alt="Gudang Komputer"
-              className="h-8 w-auto object-contain"
+              className="h-9 sm:h-10 w-auto object-contain rounded-md"
               loading="eager"
             />
-            <span className="hidden text-[15px] font-bold tracking-tight text-black sm:block">
-              GUDANG<span className="font-light"> KOMPUTER</span>
-            </span>
           </Link>
 
           <nav

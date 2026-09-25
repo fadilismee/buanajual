@@ -40,7 +40,7 @@ export const Route = createFileRoute("/jual/")({
         content:
           "Daripada jadi rongsokan, tukar hardware Anda menjadi rupiah di 3 cabang Gudang Komputer (Gunungkidul, Lampung, Cikarang). Terima laptop, PC, motherboard, VGA normal, rusak & matot — taksiran transparan, cair instan.",
       },
-      { property: "og:image", content: "https://gudangkomputer.web.id/Buanacomputer-logo.png" },
+      { property: "og:image", content: "https://gudangkomputer.web.id/gudangkomputer-logo.png" },
       { property: "og:url", content: "https://gudangkomputer.web.id/jual" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

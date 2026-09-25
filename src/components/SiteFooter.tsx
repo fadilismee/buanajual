@@ -33,13 +33,14 @@ export function SiteFooter() {
         <div className="grid gap-10 lg:grid-cols-12 pb-12 border-b border-white/10">
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-2">
-              <img
-                src="/Buanacomputer-logo.png"
-                alt="Gudang Komputer"
-                className="h-8 w-auto object-contain brightness-0 invert"
-                loading="lazy"
-              />
-              <span className="text-base font-bold tracking-tight">GUDANG KOMPUTER</span>
+              <div className="rounded-xl bg-white p-1.5 shadow-sm inline-flex items-center">
+                <img
+                  src="/gudangkomputer-logo.png"
+                  alt="Gudang Komputer"
+                  className="h-9 w-auto object-contain"
+                  loading="lazy"
+                />
+              </div>
             </div>
             <p className="max-w-md text-sm leading-relaxed text-white/70">
               Pusat buyback dan tukar tambah laptop bekas, laptop rusak, motherboard, VGA artefak,
