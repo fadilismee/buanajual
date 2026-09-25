@@ -1,216 +1,276 @@
-import { useEffect, useState } from "react";
-import { BadgeCheck, Banknote, Recycle, Store } from "lucide-react";
-import { Reveal } from "./Reveal";
-import jualAssets from "@/data/jualAssets.json";
-import { stats } from "./JualHero.data";
+import { useState } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import {
+  ArrowRight,
+  Building2,
+  CheckCircle2,
+  CircuitBoard,
+  Cpu,
+  Laptop,
+  MessageCircle,
+  ShieldCheck,
+  Sparkles,
+  Zap,
+} from "lucide-react";
+import { appraisalRates, type AppraisalCategory, type AppraisalCondition } from "@/data/sellPrices";
+
+const heroCategories: { id: AppraisalCategory; label: string; icon: typeof Laptop }[] = [
+  { id: "laptop", label: "Laptop", icon: Laptop },
+  { id: "vga", label: "VGA Card", icon: Zap },
+  { id: "motherboard", label: "Motherboard", icon: CircuitBoard },
+  { id: "pc_rakitan", label: "PC Rakitan", icon: Cpu },
+];
+
+const heroConditions: { id: AppraisalCondition; label: string; tag: string }[] = [
+  { id: "normal", label: "Normal Mulus", tag: "85% Nilai" },
+  { id: "minus_ringan", label: "Ada Minus", tag: "65% Nilai" },
+  { id: "rusak_spesifik", label: "Rusak / Artefak", tag: "45% Nilai" },
+  { id: "matot", label: "Mati Total (Matot)", tag: "Kanibal IC" },
+];
 
 export function JualHero() {
-  const slides = [
-    ...jualAssets.heroStack.map((src, i) => ({
-      src,
-      chip: "LAB GUDANG",
-      title: jualAssets.heroCaption + (i > 0 ? ` #${i + 1}` : ""),
-    })),
-    ...jualAssets.gallery.map((g) => ({ src: g.img, chip: g.chip, title: g.title })),
-    { src: jualAssets.hero, chip: "WORKSHOP", title: jualAssets.heroCaption },
-  ];
+  const navigate = useNavigate();
+  const [selectedCat, setSelectedCat] = useState<AppraisalCategory>("laptop");
+  const [selectedCond, setSelectedCond] = useState<AppraisalCondition>("minus_ringan");
 
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const estimatedRange = appraisalRates[selectedCat]?.[selectedCond] ?? "Rp 500.000 - Rp 2.500.000";
 
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-
-  useEffect(() => {
-    if (paused || reducedMotion || slides.length <= 1) return;
-    const id = window.setInterval(() => {
-      if (!document.hidden) setIndex((i) => (i + 1) % slides.length);
-    }, 3800);
-    return () => window.clearInterval(id);
-  }, [paused, reducedMotion, slides.length]);
-
-  const current = slides[index] ?? slides[0]!;
+  const handleQuickAjukan = () => {
+    navigate({
+      to: "/jual/form",
+      search: { category: selectedCat },
+    });
+  };
 
   return (
-    <section className="relative w-full overflow-hidden bg-surface-lowest">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-pri/5 via-transparent to-sec-container/10" />
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-4 py-10 sm:py-14 lg:grid-cols-12">
-        <Reveal from="left" delay={0} className="space-y-4 lg:col-span-8">
-          <div className="font-monotech inline-flex items-center gap-2 rounded-full border border-pri/15 bg-pri/5 px-3 py-1 text-[11px] text-pri">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-tertiary" />
-            <span>Update Harga Pasar: Minggu Ini</span>
-            <span className="mx-1 text-outline">•</span>
-            <span className="font-medium text-on-surface-variant">
-              Gunungkidul • Lampung • Cikarang
-            </span>
-          </div>
-          <div className="space-y-2">
-            <p className="font-monotech text-[13px] uppercase tracking-wider text-sec">
-              Katalog Terima & Buyback Komponen
-            </p>
-            <h1 className="font-heading text-2xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] tracking-tight text-on-surface">
-              Jual Hardware Bekas & Rusak Jadi{" "}
-              <span className="text-pri underline decoration-sec-container decoration-wavy underline-offset-8">
-                Rupiah
-              </span>{" "}
-              — Gudang Komputer
-            </h1>
-          </div>
-          <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg">
-            Gudang Komputer menerima laptop second, PC rakitan, motherboard mati/rusak, VGA artefak,
-            monitor bergaris, prosesor, SSD/HDD bad sector, hingga rongsokan limbah elektronik
-            kantor. Taksiran akurat, cek teknis transparan di tempat, dan pembayaran instan.
-          </p>
-          <div className="font-monotech flex flex-wrap items-center gap-2 pt-1 text-[11px] text-on-surface">
-            <div className="flex items-center gap-1.5 rounded border border-outline-variant/40 bg-surface-low px-3 py-1.5">
-              <BadgeCheck size={16} className="text-pri" />
-              <span>Estimasi Transparan</span>
+    <section className="relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 text-white">
+      {/* Background subtle mesh glow */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[800px] rounded-full bg-blue-600/15 blur-[120px]" />
+      <div className="pointer-events-none absolute top-1/2 -right-40 h-[350px] w-[350px] rounded-full bg-teal-500/10 blur-[100px]" />
+
+      <div className="relative mx-auto max-w-7xl px-4 py-12 sm:py-16 lg:py-20">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12">
+          {/* Left Column: Headline & Value Props */}
+          <div className="space-y-6 lg:col-span-7">
+            {/* Top Badge: 3 Branches */}
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-blue-500/30 bg-blue-950/60 px-3.5 py-1.5 text-xs text-blue-300 shadow-xs backdrop-blur-md">
+              <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="font-semibold text-white">Pusat Buyback Resmi:</span>
+              <span>Gunungkidul (DIY) • Lampung • Cikarang</span>
             </div>
-            <div className="flex items-center gap-1.5 rounded border border-outline-variant/40 bg-surface-low px-3 py-1.5">
-              <Recycle size={16} className="text-sec" />
-              <span>Terima Normal, Rusak, & Matot</span>
+
+            {/* Main Headline */}
+            <div className="space-y-3">
+              <h1 className="font-heading text-3xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-5xl lg:leading-[1.15]">
+                Ubah Laptop &amp; Hardware Bekas / Rusak Jadi{" "}
+                <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-teal-300 bg-clip-text text-transparent">
+                  Uang Tunai
+                </span>
+              </h1>
+              <p className="max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
+                Terima laptop mati total, VGA artefak, motherboard konslet, hingga lelang PC kantor.
+                Pengecekan lab transparan 15 menit, dana langsung cair detik itu juga.
+              </p>
             </div>
-            <div className="flex items-center gap-1.5 rounded border border-outline-variant/40 bg-surface-low px-3 py-1.5">
-              <Banknote size={16} className="text-tertiary" />
-              <span>Cair Instan Cash / BCA / QRIS</span>
+
+            {/* 3 Key Trust Pillars */}
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 pt-2">
+              <div className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 p-3 backdrop-blur-xs">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-600/30 text-blue-300">
+                  <Zap size={18} />
+                </div>
+                <div>
+                  <p className="font-heading text-xs font-bold text-white">15 Menit Cair</p>
+                  <p className="text-[11px] text-slate-400">Cash / Transfer real-time</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 p-3 backdrop-blur-xs">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-600/30 text-emerald-300">
+                  <Building2 size={18} />
+                </div>
+                <div>
+                  <p className="font-heading text-xs font-bold text-white">3 Cabang Resmi</p>
+                  <p className="text-[11px] text-slate-400">DIY, Lampung &amp; Jabar</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 p-3 backdrop-blur-xs">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-teal-600/30 text-teal-300">
+                  <ShieldCheck size={18} />
+                </div>
+                <div>
+                  <p className="font-heading text-xs font-bold text-white">Military Wipe</p>
+                  <p className="text-[11px] text-slate-400">100% Data dihapus tuntas</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </Reveal>
-        <Reveal from="right" delay={120} className="lg:col-span-4">
-          <HeroSlideshow
-            slides={slides}
-            index={index}
-            setIndex={setIndex}
-            setPaused={setPaused}
-            reducedMotion={reducedMotion}
-            current={current}
-          />
-        </Reveal>
-      </div>
-      <Reveal from="bottom" delay={200}>
-        <div className="relative mx-auto grid max-w-7xl grid-cols-2 gap-2.5 px-4 pb-10 sm:gap-4 sm:pb-14 lg:grid-cols-4">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="hover-lift flex items-center gap-2.5 rounded-xl border border-outline-variant/50 bg-surface-low p-3 sm:p-4"
-            >
-              <span
-                className={`font-heading text-xl sm:text-2xl font-bold tracking-tight ${s.valueClass}`}
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Link
+                to="/jual/form"
+                className="font-heading inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/30 transition-all hover:bg-blue-500 hover:scale-[1.02]"
               >
-                {s.value}
-              </span>
-              <p className="text-xs sm:text-sm leading-tight text-on-surface-variant">{s.label}</p>
+                <span>Isi Form Taksir Gratis</span>
+                <ArrowRight size={16} />
+              </Link>
+              <a
+                href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer%2C%20saya%20mau%20konsultasi%20jual%20hardware%20bekas%2Frusak"
+                target="_blank"
+                rel="noreferrer"
+                className="font-heading inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3.5 text-sm font-semibold text-white transition-all hover:bg-white/10"
+              >
+                <MessageCircle size={16} className="text-emerald-400" />
+                <span>Chat WA Teknisi</span>
+              </a>
             </div>
-          ))}
-          <div className="col-span-2 sm:col-span-1 flex items-center gap-2.5 rounded-xl border border-outline-variant/50 bg-surface-low p-3 sm:p-4">
-            <Store size={20} className="shrink-0 text-sec" />
-            <p className="text-xs sm:text-sm leading-tight text-on-surface-variant">
-              3 Cabang: Gunungkidul (DIY), Lampung &amp; Cikarang (Jabar)
-            </p>
           </div>
-          <a
-            href="#tabel-harga"
-            className="col-span-2 sm:col-span-1 hover-lift hover-glow font-heading flex items-center justify-center gap-2 rounded-xl bg-pri px-4 py-3 text-xs sm:text-sm font-semibold text-on-pri shadow-sm transition-all hover:bg-pri-container text-center"
-          >
-            Jelajahi Price List Lengkap <span aria-hidden>↓</span>
-          </a>
+
+          {/* Right Column: Interactive Instant Estimator Simulator */}
+          <div className="lg:col-span-5">
+            <div className="relative rounded-2xl border border-white/15 bg-slate-800/80 p-5 sm:p-7 shadow-2xl backdrop-blur-xl">
+              {/* Header simulator */}
+              <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <div className="flex items-center gap-2">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-500/20 text-blue-400">
+                    <Sparkles size={15} />
+                  </div>
+                  <h3 className="font-heading text-sm font-bold uppercase tracking-wider text-white">
+                    Simulasi Taksiran Kilat
+                  </h3>
+                </div>
+                <span className="font-monotech inline-flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  Live Rate
+                </span>
+              </div>
+
+              {/* Step 1: Select Category */}
+              <div className="mt-4 space-y-2">
+                <label className="font-monotech block text-[11px] font-semibold uppercase tracking-wider text-slate-300">
+                  1. Pilih Kategori Hardware
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {heroCategories.map((c) => {
+                    const isSelected = selectedCat === c.id;
+                    return (
+                      <button
+                        key={c.id}
+                        type="button"
+                        onClick={() => setSelectedCat(c.id)}
+                        className={`flex items-center gap-2 rounded-xl border p-2.5 text-left transition-all ${
+                          isSelected
+                            ? "border-blue-500 bg-blue-600/20 text-white shadow-xs"
+                            : "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+                        }`}
+                      >
+                        <c.icon
+                          size={16}
+                          className={isSelected ? "text-blue-400" : "text-slate-400"}
+                        />
+                        <span className="font-heading text-xs font-semibold">{c.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Step 2: Select Condition */}
+              <div className="mt-4 space-y-2">
+                <label className="font-monotech block text-[11px] font-semibold uppercase tracking-wider text-slate-300">
+                  2. Pilih Kondisi Unit
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {heroConditions.map((cond) => {
+                    const isSelected = selectedCond === cond.id;
+                    return (
+                      <button
+                        key={cond.id}
+                        type="button"
+                        onClick={() => setSelectedCond(cond.id)}
+                        className={`flex flex-col rounded-xl border p-2.5 text-left transition-all ${
+                          isSelected
+                            ? "border-blue-500 bg-blue-600/20 text-white shadow-xs"
+                            : "border-white/10 bg-white/5 text-slate-300 hover:bg-white/10"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-heading text-xs font-semibold">{cond.label}</span>
+                          {isSelected && <CheckCircle2 size={12} className="text-blue-400" />}
+                        </div>
+                        <span className="font-monotech mt-0.5 text-[10px] text-slate-400">
+                          {cond.tag}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Estimate Result Box */}
+              <div className="mt-5 rounded-xl border border-blue-500/30 bg-blue-950/40 p-4">
+                <span className="font-monotech text-[10px] uppercase tracking-wider text-blue-300">
+                  Estimasi Harga Terima di Lab:
+                </span>
+                <p className="font-heading mt-1 text-xl font-extrabold text-white sm:text-2xl">
+                  {estimatedRange}
+                </p>
+                <p className="mt-1 text-[11px] text-slate-300">
+                  *Estimasi awal. Unit mati total/artefak tetap kami hargai untuk kanibal part
+                  donor.
+                </p>
+              </div>
+
+              {/* Action */}
+              <button
+                type="button"
+                onClick={handleQuickAjukan}
+                className="font-heading mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-3 text-sm font-bold text-white shadow-md transition-all hover:from-blue-500 hover:to-indigo-500"
+              >
+                <span>Ajukan Taksiran Kategori Ini →</span>
+              </button>
+            </div>
+          </div>
         </div>
-      </Reveal>
+
+        {/* 3 Cabang Bar di Bawah Hero */}
+        <div className="mt-12 rounded-2xl border border-white/10 bg-white/5 p-4 sm:p-5 backdrop-blur-md">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="flex items-center gap-3">
+              <span className="font-monotech flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-600/30 text-xs font-bold text-blue-300">
+                01
+              </span>
+              <div>
+                <p className="font-heading text-sm font-bold text-white">Cabang Gunungkidul</p>
+                <p className="text-xs text-slate-400">D.I. Yogyakarta • Drop-off &amp; COD DIY</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span className="font-monotech flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-600/30 text-xs font-bold text-emerald-300">
+                02
+              </span>
+              <div>
+                <p className="font-heading text-sm font-bold text-white">Cabang Lampung</p>
+                <p className="text-xs text-slate-400">Sumatera • Pusat Layanan Regional</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span className="font-monotech flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-indigo-600/30 text-xs font-bold text-indigo-300">
+                03
+              </span>
+              <div>
+                <p className="font-heading text-sm font-bold text-white">Cabang Cikarang</p>
+                <p className="text-xs text-slate-400">
+                  Bekasi, Jabar • Area Jabodetabek &amp; Industri
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-  );
-}
-
-function HeroSlideshow({
-  slides,
-  index,
-  setIndex,
-  setPaused,
-  reducedMotion,
-  current,
-}: {
-  slides: { src: string; chip?: string; title?: string }[];
-  index: number;
-  setIndex: (i: number) => void;
-  setPaused: (v: boolean) => void;
-  reducedMotion: boolean;
-  current: { src: string; chip?: string; title?: string };
-}) {
-  return (
-    <div
-      className="group relative aspect-[3/4] w-full max-w-[260px] overflow-hidden rounded-xl border border-outline-variant/40 bg-surface-container shadow-lg sm:max-w-xs mx-auto lg:max-w-none"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-      role="region"
-      aria-label="Slideshow lab dan barang masuk Gudang Komputer"
-      aria-roledescription="carousel"
-    >
-      {slides.map((s, i) => {
-        const active = i === index;
-        const prev = (index - 1 + slides.length) % slides.length;
-        const visible = i === index || i === prev;
-        if (!visible) return null;
-        return (
-          <img
-            key={active ? `active-${index}-${s.src}` : `out-${i}-${s.src}`}
-            src={s.src}
-            alt={s.title ?? "Foto Gudang Komputer"}
-            loading={i === 0 ? "eager" : "lazy"}
-            aria-hidden={!active}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-in-out ${
-              active ? "z-10 opacity-100" : "z-0 opacity-0"
-            }`}
-            style={
-              active && !reducedMotion ? { animation: "kenburns 7s ease-out forwards" } : undefined
-            }
-          />
-        );
-      })}
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-1/3 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
-
-      <div className="absolute inset-x-0 bottom-0 z-30 p-3">
-        {current.chip && (
-          <span className="font-monotech inline-block rounded bg-white/90 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-on-surface">
-            {current.chip}
-          </span>
-        )}
-        <p className="font-heading mt-1 line-clamp-2 text-xs font-semibold text-white drop-shadow">
-          {current.title}
-        </p>
-      </div>
-
-      <div className="absolute right-2 bottom-2 z-30 flex items-center gap-1">
-        {slides.map((s, i) => (
-          <button
-            key={`dot-${i}-${s.src}`}
-            type="button"
-            onClick={() => setIndex(i)}
-            aria-label={`Tampilkan foto ${i + 1}: ${s.title ?? ""}`}
-            aria-current={i === index}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === index ? "w-4 bg-white" : "w-1.5 bg-white/50 hover:bg-white/80"
-            }`}
-          />
-        ))}
-      </div>
-
-      {!reducedMotion && (
-        <div className="absolute inset-x-0 top-0 z-30 h-0.5 bg-black/10">
-          <div
-            key={index}
-            className="h-full bg-white"
-            style={{ animation: "slide-progress 3.8s linear forwards" }}
-          />
-        </div>
-      )}
-    </div>
   );
 }
