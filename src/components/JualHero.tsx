@@ -41,59 +41,54 @@ export function JualHero() {
     <section className="relative w-full overflow-hidden bg-surface-lowest">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-pri/5 via-transparent to-sec-container/10" />
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-4 py-10 sm:py-14 lg:grid-cols-12">
-        <Reveal from="left" delay={0}>
-          <div className="space-y-4 lg:col-span-8">
-            <div className="font-monotech inline-flex items-center gap-2 rounded-full border border-pri/15 bg-pri/5 px-3 py-1 text-[11px] text-pri">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-tertiary" />
-              <span>Update Harga Pasar: Minggu Ini</span>
-              <span className="mx-1 text-outline">•</span>
-              <span className="font-medium text-on-surface-variant">Bantul & D.I. Yogyakarta</span>
-            </div>
-            <div className="space-y-2">
-              <p className="font-monotech text-[13px] uppercase tracking-wider text-sec">
-                Katalog Terima & Buyback Komponen
-              </p>
-              <h1 className="font-heading text-2xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] tracking-tight text-on-surface">
-                Jual Hardware Bekas & Rusak Jadi{" "}
-                <span className="text-pri underline decoration-sec-container decoration-wavy underline-offset-8">
-                  Rupiah
-                </span>{" "}
-                — Gudang Komputer Bantul
-              </h1>
-            </div>
-            <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg">
-              Gudang Komputer menerima laptop second, PC rakitan, motherboard mati/rusak, VGA
-              artefak, monitor bergaris, prosesor, SSD/HDD bad sector, hingga rongsokan limbah
-              elektronik kantor. Taksiran akurat, cek teknis transparan di tempat, dan pembayaran
-              instan.
+        <Reveal from="left" delay={0} className="space-y-4 lg:col-span-8">
+          <div className="font-monotech inline-flex items-center gap-2 rounded-full border border-pri/15 bg-pri/5 px-3 py-1 text-[11px] text-pri">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-tertiary" />
+            <span>Update Harga Pasar: Minggu Ini</span>
+            <span className="mx-1 text-outline">•</span>
+            <span className="font-medium text-on-surface-variant">Bantul & D.I. Yogyakarta</span>
+          </div>
+          <div className="space-y-2">
+            <p className="font-monotech text-[13px] uppercase tracking-wider text-sec">
+              Katalog Terima & Buyback Komponen
             </p>
-            <div className="font-monotech flex flex-wrap items-center gap-2 pt-1 text-[11px] text-on-surface">
-              <div className="flex items-center gap-1.5 rounded border border-outline-variant/40 bg-surface-low px-3 py-1.5">
-                <BadgeCheck size={16} className="text-pri" />
-                <span>Estimasi Transparan</span>
-              </div>
-              <div className="flex items-center gap-1.5 rounded border border-outline-variant/40 bg-surface-low px-3 py-1.5">
-                <Recycle size={16} className="text-sec" />
-                <span>Terima Normal, Rusak, & Matot</span>
-              </div>
-              <div className="flex items-center gap-1.5 rounded border border-outline-variant/40 bg-surface-low px-3 py-1.5">
-                <Banknote size={16} className="text-tertiary" />
-                <span>Cair Instan Cash / BCA / QRIS</span>
-              </div>
+            <h1 className="font-heading text-2xl sm:text-4xl lg:text-5xl font-bold leading-[1.15] tracking-tight text-on-surface">
+              Jual Hardware Bekas & Rusak Jadi{" "}
+              <span className="text-pri underline decoration-sec-container decoration-wavy underline-offset-8">
+                Rupiah
+              </span>{" "}
+              — Gudang Komputer Bantul
+            </h1>
+          </div>
+          <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg">
+            Gudang Komputer menerima laptop second, PC rakitan, motherboard mati/rusak, VGA artefak,
+            monitor bergaris, prosesor, SSD/HDD bad sector, hingga rongsokan limbah elektronik
+            kantor. Taksiran akurat, cek teknis transparan di tempat, dan pembayaran instan.
+          </p>
+          <div className="font-monotech flex flex-wrap items-center gap-2 pt-1 text-[11px] text-on-surface">
+            <div className="flex items-center gap-1.5 rounded border border-outline-variant/40 bg-surface-low px-3 py-1.5">
+              <BadgeCheck size={16} className="text-pri" />
+              <span>Estimasi Transparan</span>
+            </div>
+            <div className="flex items-center gap-1.5 rounded border border-outline-variant/40 bg-surface-low px-3 py-1.5">
+              <Recycle size={16} className="text-sec" />
+              <span>Terima Normal, Rusak, & Matot</span>
+            </div>
+            <div className="flex items-center gap-1.5 rounded border border-outline-variant/40 bg-surface-low px-3 py-1.5">
+              <Banknote size={16} className="text-tertiary" />
+              <span>Cair Instan Cash / BCA / QRIS</span>
             </div>
           </div>
         </Reveal>
-        <Reveal from="right" delay={120}>
-          <div className="lg:col-span-4">
-            <HeroSlideshow
-              slides={slides}
-              index={index}
-              setIndex={setIndex}
-              setPaused={setPaused}
-              reducedMotion={reducedMotion}
-              current={current}
-            />
-          </div>
+        <Reveal from="right" delay={120} className="lg:col-span-4">
+          <HeroSlideshow
+            slides={slides}
+            index={index}
+            setIndex={setIndex}
+            setPaused={setPaused}
+            reducedMotion={reducedMotion}
+            current={current}
+          />
         </Reveal>
       </div>
       <Reveal from="bottom" delay={200}>
@@ -111,22 +106,18 @@ export function JualHero() {
               <p className="text-xs sm:text-sm leading-tight text-on-surface-variant">{s.label}</p>
             </div>
           ))}
-          <Reveal from="bottom" delay={300}>
-            <div className="col-span-2 sm:col-span-1 flex items-center gap-2.5 rounded-xl border border-outline-variant/50 bg-surface-low p-3 sm:p-4">
-              <Store size={20} className="shrink-0 text-sec" />
-              <p className="text-xs sm:text-sm leading-tight text-on-surface-variant">
-                Mertosan Kulon, Banguntapan, Bantul DIY (COD Jogja)
-              </p>
-            </div>
-          </Reveal>
-          <Reveal from="bottom" delay={380}>
-            <a
-              href="#tabel-harga"
-              className="col-span-2 sm:col-span-1 hover-lift hover-glow font-heading flex items-center justify-center gap-2 rounded-xl bg-pri px-4 py-3 text-xs sm:text-sm font-semibold text-on-pri shadow-sm transition-all hover:bg-pri-container text-center"
-            >
-              Jelajahi Price List Lengkap <span aria-hidden>↓</span>
-            </a>
-          </Reveal>
+          <div className="col-span-2 sm:col-span-1 flex items-center gap-2.5 rounded-xl border border-outline-variant/50 bg-surface-low p-3 sm:p-4">
+            <Store size={20} className="shrink-0 text-sec" />
+            <p className="text-xs sm:text-sm leading-tight text-on-surface-variant">
+              Mertosan Kulon, Banguntapan, Bantul DIY (COD Jogja)
+            </p>
+          </div>
+          <a
+            href="#tabel-harga"
+            className="col-span-2 sm:col-span-1 hover-lift hover-glow font-heading flex items-center justify-center gap-2 rounded-xl bg-pri px-4 py-3 text-xs sm:text-sm font-semibold text-on-pri shadow-sm transition-all hover:bg-pri-container text-center"
+          >
+            Jelajahi Price List Lengkap <span aria-hidden>↓</span>
+          </a>
         </div>
       </Reveal>
     </section>

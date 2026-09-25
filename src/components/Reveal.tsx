@@ -21,8 +21,8 @@ type RevealProps = {
 };
 
 /**
- * Scroll-reveal: elemen masuk viewport sekali (IntersectionObserver),
- * lalu fade + translate. Hormati prefers-reduced-motion (langsung tampil).
+ * Scroll-reveal: elemen masuk viewport (IntersectionObserver),
+ * lalu fade + translate dengan halus. Hormati prefers-reduced-motion.
  */
 export function Reveal({
   children,
@@ -30,10 +30,10 @@ export function Reveal({
   className = "",
   from = "bottom",
   once = true,
-  threshold = 0.12,
-  rootMargin = "0px 0px -32px 0px",
-  duration = 700,
-  easing = "ease-out",
+  threshold = 0.05,
+  rootMargin = "60px 0px 60px 0px",
+  duration = 550,
+  easing = "cubic-bezier(0.16, 1, 0.3, 1)",
 }: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -48,15 +48,21 @@ export function Reveal({
       return;
     }
 
+    // Jika sudah ada di viewport saat load, langsung tampilkan
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 60 && rect.bottom > -60) {
+      setVisible(true);
+      setHasAnimated(true);
+      return;
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            if (!once || !hasAnimated) {
-              setVisible(true);
-              setHasAnimated(true);
-              if (once) io.disconnect();
-            }
+            setVisible(true);
+            setHasAnimated(true);
+            if (once) io.disconnect();
           } else if (!once && hasAnimated) {
             setVisible(false);
           }
@@ -70,20 +76,20 @@ export function Reveal({
 
   const offset =
     from === "left"
-      ? "-translate-x-10"
+      ? "-translate-x-6"
       : from === "right"
-        ? "translate-x-10"
+        ? "translate-x-6"
         : from === "scale"
-          ? "scale-95"
+          ? "scale-[0.97]"
           : from === "rotate"
-            ? "rotate-6 scale-95"
+            ? "rotate-2 scale-[0.97]"
             : from === "flip"
-              ? "rotate-y-90 scale-95"
+              ? "scale-[0.97]"
               : from === "blur"
-                ? "scale-95 blur-sm"
+                ? "scale-[0.97] blur-sm"
                 : from === "slide-down"
-                  ? "-translate-y-10"
-                  : "translate-y-10";
+                  ? "-translate-y-6"
+                  : "translate-y-6";
 
   return (
     <div

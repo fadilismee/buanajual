@@ -375,22 +375,17 @@ function StackedCard({
 
   // Depth-based visual values
   const isTop = depth === 0;
-  const scale = depth > 0 ? Math.max(0.93, 1 - depth * 0.025) : 1;
-  const brightness = depth > 0 ? Math.max(0.94, 1 - depth * 0.02) : 1;
-  const opacity = depth > 0 ? Math.max(0.88, 1 - depth * 0.035) : 1;
-  const translateY = depth > 0 ? depth * 2 : 0;
+  const scale = depth > 0 ? Math.max(0.95, 1 - depth * 0.018) : 1;
+  const brightness = depth > 0 ? Math.max(0.96, 1 - depth * 0.015) : 1;
+  const opacity = depth > 0 ? Math.max(0.92, 1 - depth * 0.02) : 1;
 
   // Multi-layer shadow system: soft depth shadow for physical deck feel
   const shadowAmbient =
     depth > 0
-      ? `0 ${8 + depth * 6}px ${24 + depth * 10}px rgba(16, 24, 40, ${0.08 + depth * 0.02})`
-      : "0 4px 16px rgba(16, 24, 40, 0.06)";
-  const shadowDirect =
-    depth > 0
-      ? `0 ${2 + depth * 2}px ${8 + depth * 4}px rgba(16, 24, 40, ${0.04 + depth * 0.01})`
-      : "0 1px 3px rgba(16, 24, 40, 0.04)";
+      ? `0 ${8 + depth * 4}px ${20 + depth * 6}px rgba(16, 24, 40, ${0.06 + depth * 0.015})`
+      : "0 4px 16px rgba(16, 24, 40, 0.05)";
   const shadowRim = isTop
-    ? "0 0 0 1px rgba(0, 80, 203, 0.1), 0 0 20px rgba(0, 80, 203, 0.06)"
+    ? "0 0 0 1.5px rgba(0, 80, 203, 0.15), 0 0 24px rgba(0, 80, 203, 0.04)"
     : "0 0 0 1px rgba(16, 24, 40, 0.06)";
 
   return (
@@ -401,89 +396,31 @@ function StackedCard({
         top: `calc(${STACK_BASE} + ${index * LAYER_GAP_PX}px)`,
         zIndex: index + 1, // later cards stack on top of earlier cards
         marginBottom: runway,
-        transform: `translate3d(0, ${translateY}px, 0) scale(${scale})`,
+        transform: `scale(${scale})`,
         transformOrigin: "top center",
-        transition: `transform 360ms ${SPRING_EASE}, filter 320ms ${SPRING_EASE_OUT}, opacity 320ms ${SPRING_EASE_OUT}`,
+        transition: `transform 320ms ${SPRING_EASE}, filter 280ms ${SPRING_EASE_OUT}, opacity 280ms ${SPRING_EASE_OUT}`,
         filter: `brightness(${brightness})`,
         opacity,
       }}
     >
+      {/* Badge nomor urut lapis — di atas kartu */}
+      <div className="flex items-center justify-between px-1 pb-1.5">
+        <span className="font-monotech inline-flex items-center gap-1.5 rounded-full border border-outline-variant/60 bg-surface-lowest px-2.5 py-0.5 text-[10px] font-bold text-on-surface-variant shadow-xs">
+          <span className="text-pri">#{String(index + 1).padStart(2, "0")}</span>
+          <span className="text-outline">/</span>
+          <span>{total}</span>
+        </span>
+        <span className="font-monotech text-[10px] text-outline">{entry.id.toUpperCase()}</span>
+      </div>
+
       {/* Physical layered card wrapper */}
       <article
-        className="relative rounded-2xl overflow-hidden bg-surface-lowest"
+        className="relative rounded-2xl overflow-hidden bg-surface-lowest transition-shadow duration-300"
         style={{
-          boxShadow: `${shadowAmbient}, ${shadowDirect}, ${shadowRim}`,
+          boxShadow: `${shadowAmbient}, ${shadowRim}`,
         }}
       >
-        {/* Subtle top rim light — hanya kartu paling atas */}
-        {isTop && (
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-px"
-            style={{
-              background:
-                "linear-gradient(90deg, transparent, rgba(255,255,255,0.9) 20%, rgba(255,255,255,0.9) 80%, transparent)",
-              opacity: 0.9,
-            }}
-            aria-hidden
-          />
-        )}
-
-        {/* Subtle noise texture overlay untuk feel premium */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.015]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-            backgroundSize: "256px 256px",
-          }}
-          aria-hidden
-        />
-
-        {/* Layer depth indicator dots di kiri kartu */}
-        <div
-          className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 flex flex-col items-center gap-1.5"
-          aria-hidden
-        >
-          {Array.from({ length: total }, (_, i) => (
-            <span
-              key={i}
-              className="block h-1.5 w-1.5 rounded-full transition-all duration-300"
-              style={{
-                background:
-                  i <= index
-                    ? i === index
-                      ? "var(--pri)"
-                      : "rgba(16,24,40,0.35)"
-                    : "rgba(16,24,40,0.15)",
-                transform: i === index ? "scale(1.4)" : "scale(1)",
-                boxShadow: i === index ? "0 0 8px var(--pri), 0 0 16px var(--pri)" : "none",
-              }}
-            />
-          ))}
-        </div>
-
-        {/* Badge urutan lapis di tepi atas kanan — premium style */}
-        <span
-          className="absolute -top-3 right-4 z-10 flex items-center gap-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-white/50 px-3 py-1 text-[10px] font-bold tracking-wider text-on-surface shadow-lg"
-          style={{
-            boxShadow: "0 4px 16px rgba(16,24,40,0.12), 0 0 0 1px rgba(255,255,255,0.5) inset",
-          }}
-          aria-hidden
-        >
-          <span className="font-monotech text-pri">{index + 1}</span>
-          <span className="text-on-surface-variant">/</span>
-          <span className="font-monotech text-on-surface-variant">{total}</span>
-        </span>
-
         <BeritaCard entry={entry} index={index} onOpenPhoto={onOpenPhoto} />
-
-        {/* Hover/focus lift effect — subtle */}
-        <div
-          className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100"
-          style={{
-            boxShadow: "0 0 0 1px rgba(0,80,203,0.15), 0 12px 40px rgba(0,80,203,0.12)",
-          }}
-          aria-hidden
-        />
       </article>
     </div>
   );
@@ -645,7 +582,8 @@ function BeritaAcaraPage() {
         if (!el) return false;
         const topPx = parseFloat(getComputedStyle(el).top);
         if (Number.isNaN(topPx)) return false;
-        return Math.abs(el.getBoundingClientRect().top - topPx) < 2;
+        const rect = el.getBoundingClientRect();
+        return rect.top <= topPx + 3 && rect.bottom > topPx;
       });
       const next = beritaEntries.map((_, i) => {
         let d = 0;
