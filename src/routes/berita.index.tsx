@@ -1,18 +1,24 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import type { RefObject } from "react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
   Banknote,
+  Building2,
   CalendarDays,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
   ClipboardList,
+  Cpu,
   FileText,
+  History,
   Image as ImageIcon,
+  Laptop,
   MapPin,
+  MessageCircle,
   Receipt,
+  Search,
   ShieldCheck,
   Truck,
   X,
@@ -23,11 +29,13 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { FloatingWa } from "@/components/FloatingWa";
 import { CountUp, Reveal } from "@/components/Reveal";
 import {
+  archiveLogs,
   beritaEntries,
   beritaStats,
   formatDate,
   formatDateShort,
   formatRp,
+  type ArchiveLog,
   type BeritaEntry,
   type BeritaPhoto,
 } from "@/data/beritaAcara";
@@ -336,8 +344,7 @@ function BeritaCard({
 }
 
 /* ------------------------------------------------------------------ */
-/* Sticky stacking card — LUXURY: glassmorphism, layered shadows,      */
-/* rim light, subtle parallax, spring easing, stack progress indicator.*/
+/* Sticky stacking card — LUXURY: layered physical cards               */
 /* ------------------------------------------------------------------ */
 const STACK_BASE = "6.5rem"; // di bawah sticky header (marquee + navbar)
 const LAYER_GAP_PX = 16; // offset per lapis — tepi kartu bawah tetap terlihat
@@ -370,8 +377,8 @@ function StackedCard({
     [stackRefs, index],
   );
 
-  // Kartu terakhir runway lebih pendek supaya CTA menyatu.
-  const runway = index === total - 1 ? "12vh" : "min(52vh, 460px)";
+  // Kartu terakhir runway pas agar tidak menabrak / tumpang tindih dengan section berikutnya
+  const runway = index === total - 1 ? "40px" : "min(40vh, 360px)";
 
   // Depth-based visual values
   const isTop = depth === 0;
@@ -436,24 +443,24 @@ function BeritaStats() {
       iconClass: "bg-pri/10 text-pri",
       label: "Berita Acara Terbit",
       value: beritaStats.totalEntries,
-      format: (n: number) => `${n}`,
-      suffix: "dokumen",
+      format: (n: number) => `${n.toLocaleString("id-ID")}+`,
+      suffix: "dokumen resmi",
     },
     {
       icon: Truck,
       iconClass: "bg-sec/10 text-sec",
-      label: "Barang Diserahkan",
+      label: "Barang Diterima",
       value: beritaStats.totalItems,
-      format: (n: number) => `${n}`,
-      suffix: "item",
+      format: (n: number) => `${n.toLocaleString("id-ID")}+`,
+      suffix: "unit & part",
     },
     {
       icon: Zap,
       iconClass: "bg-tertiary/10 text-tertiary",
-      label: "Nilai Sudah Cair",
+      label: "Total Nilai Dicairkan",
       value: beritaStats.totalPayout,
       format: (n: number) => formatRp(n),
-      suffix: "total",
+      suffix: "sejak 2023",
     },
   ];
 
@@ -474,11 +481,295 @@ function BeritaStats() {
               <p className="font-heading truncate text-lg font-extrabold tracking-tight text-on-surface sm:text-xl">
                 <CountUp value={c.value} format={c.format} />
               </p>
+              <p className="text-[11px] text-outline font-monotech mt-0.5">{c.suffix}</p>
             </div>
           </div>
         </Reveal>
       ))}
     </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Running Ticker Transaksi Live                                       */
+/* ------------------------------------------------------------------ */
+function LiveTransactionTicker() {
+  const recentSnippets = [
+    { text: "ASUS Vivobook 14 A412 (Short IC)", price: "Rp 950.000", loc: "Kasihan, Bantul" },
+    { text: "VGA Palit GTX 1660 Ti (Artefak)", price: "Rp 750.000", loc: "Potorono" },
+    { text: "Lenovo ThinkPad T480 (Lecet Normal)", price: "Rp 2.400.000", loc: "Kota Jogja" },
+    { text: "10x PC Kantor Core i5 Gen 8", price: "Rp 10.000.000", loc: "Banguntapan" },
+    { text: "Mobo B450M + Ryzen 5 3600", price: "Rp 1.750.000", loc: "Kotagede" },
+    { text: "MSI RTX 3070 8GB (No Display)", price: "Rp 1.800.000", loc: "Gamping, Sleman" },
+    { text: "Acer Nitro 5 Core i7 (Layar Pecah)", price: "Rp 2.850.000", loc: "Sewon, Bantul" },
+  ];
+
+  return (
+    <div className="overflow-hidden rounded-xl border border-emerald-200/70 bg-emerald-50/60 p-2.5 sm:p-3 text-emerald-950">
+      <div className="flex items-center gap-3">
+        <span className="font-monotech inline-flex items-center gap-1.5 shrink-0 rounded-full bg-emerald-600 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-200 animate-pulse" />
+          Live Log
+        </span>
+        <div className="flex w-max animate-marquee items-center gap-8 text-[12px] font-medium group-hover:[animation-play-state:paused] [animation-duration:32s]">
+          {[...recentSnippets, ...recentSnippets].map((item, idx) => (
+            <span key={idx} className="inline-flex items-center gap-2 whitespace-nowrap">
+              <CheckCircle2 size={13} className="text-emerald-600" />
+              <span>{item.text}</span>
+              <span className="font-heading font-bold text-emerald-800">{item.price}</span>
+              <span className="text-emerald-700/70 text-[11px]">({item.loc})</span>
+              <span className="text-emerald-400">•</span>
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Database Log 1.200+ Transaksi Lainnya (Search & Filter)             */
+/* ------------------------------------------------------------------ */
+const categoryTabs: { id: "all" | ArchiveLog["category"]; label: string; icon: typeof Laptop }[] = [
+  { id: "all", label: "Semua Kategori (1.240+)", icon: History },
+  { id: "laptop", label: "Laptop (520+)", icon: Laptop },
+  { id: "vga", label: "VGA Card (310+)", icon: Zap },
+  { id: "mobo", label: "Motherboard & CPU (280+)", icon: Cpu },
+  { id: "borongan", label: "Borongan Kantor (130+)", icon: Building2 },
+];
+
+function ArchiveDatabaseSection() {
+  const [selectedCat, setSelectedCat] = useState<"all" | ArchiveLog["category"]>("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showAll, setShowAll] = useState(false);
+
+  const filteredLogs = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return archiveLogs.filter((log) => {
+      const matchCat = selectedCat === "all" || log.category === selectedCat;
+      const matchQuery =
+        !q ||
+        log.id.toLowerCase().includes(q) ||
+        log.seller.toLowerCase().includes(q) ||
+        log.origin.toLowerCase().includes(q) ||
+        log.itemsSummary.toLowerCase().includes(q) ||
+        log.condition.toLowerCase().includes(q) ||
+        log.payoutMethod.toLowerCase().includes(q);
+      return matchCat && matchQuery;
+    });
+  }, [selectedCat, searchQuery]);
+
+  const displayedLogs = showAll ? filteredLogs : filteredLogs.slice(0, 8);
+
+  return (
+    <section className="mt-16 space-y-6 rounded-2xl border border-outline-variant/50 bg-surface-lowest p-5 shadow-sm sm:p-8">
+      {/* Header section */}
+      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between border-b border-surface-container pb-6">
+        <div>
+          <div className="font-monotech inline-flex items-center gap-1.5 rounded-full bg-pri/10 px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-pri">
+            <ShieldCheck size={14} />
+            Database Log 1.240+ Transaksi Terverifikasi
+          </div>
+          <h3 className="font-heading mt-2 text-2xl font-bold text-on-surface sm:text-3xl">
+            Pernah Jual Hardware Serupa ke Gudang Komputer?
+          </h3>
+          <p className="mt-1 max-w-2xl text-sm leading-relaxed text-on-surface-variant">
+            Di atas adalah 6 sampel dokumen fisik lengkap. Tabel di bawah memuat riwayat buyback
+            tercatat dari total 1.200+ unit yang sudah selesai diverifikasi dan dicairkan.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 rounded-xl bg-surface-low px-3 py-2 border border-outline-variant/30 text-xs font-monotech text-on-surface">
+          <span className="h-2 w-2 rounded-full bg-emerald-500" />
+          <span>Database Aktif: 2023 — Sekarang</span>
+        </div>
+      </div>
+
+      {/* Filter Tabs & Search */}
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {categoryTabs.map((tab) => {
+            const active = selectedCat === tab.id;
+            return (
+              <button
+                key={tab.id}
+                type="button"
+                onClick={() => setSelectedCat(tab.id)}
+                className={`font-monotech flex shrink-0 items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold transition-all ${
+                  active
+                    ? "bg-pri text-white shadow-xs"
+                    : "bg-surface-low text-on-surface-variant hover:bg-surface-container hover:text-on-surface"
+                }`}
+              >
+                <tab.icon size={14} />
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="relative w-full lg:w-72">
+          <Search
+            size={16}
+            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-outline"
+          />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Cari seri: RTX, i5, Matot..."
+            aria-label="Cari di database arsip"
+            className="w-full rounded-xl border border-outline-variant/50 bg-surface-lowest py-2 pl-9 pr-4 text-xs text-on-surface outline-none placeholder:text-outline focus:border-pri/40 focus:ring-2 focus:ring-pri/20"
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              aria-label="Hapus pencarian"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface"
+            >
+              <X size={14} />
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Log list / table */}
+      <div className="overflow-hidden rounded-xl border border-outline-variant/40 bg-surface-low">
+        <div className="divide-y divide-surface-container">
+          {displayedLogs.map((log) => {
+            const waQueryUrl =
+              `https://wa.me/6285979220599?text=` +
+              encodeURIComponent(
+                `Halo Gudang Komputer, saya punya hardware serupa dengan arsip ${log.id} (${log.itemsSummary}). Mau tanya taksirannya.`,
+              );
+
+            return (
+              <div
+                key={log.id}
+                className="flex flex-col gap-3 p-3.5 sm:p-4 transition-colors hover:bg-surface-lowest sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div className="min-w-0 space-y-1">
+                  <div className="flex flex-wrap items-center gap-2 font-monotech text-[11px] text-on-surface-variant">
+                    <span className="font-bold text-pri bg-pri/10 rounded px-1.5 py-0.5">
+                      {log.id}
+                    </span>
+                    <span className="text-outline">•</span>
+                    <span>{formatDateShort(log.date)}</span>
+                    <span className="text-outline">•</span>
+                    <span className="font-medium text-on-surface">{log.seller}</span>
+                    <span className="text-outline">({log.origin})</span>
+                  </div>
+                  <h4 className="font-heading text-sm font-semibold text-on-surface truncate">
+                    {log.itemsSummary}
+                  </h4>
+                  <div className="flex flex-wrap items-center gap-2 text-[11px] text-on-surface-variant">
+                    <span className="rounded bg-surface-high px-2 py-0.5 font-monotech text-[10px] text-on-surface-variant">
+                      {log.condition}
+                    </span>
+                    <span className="font-monotech text-[10px] text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-bold">
+                      {log.payoutMethod}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex shrink-0 items-center justify-between sm:flex-col sm:items-end gap-2 pt-2 sm:pt-0 border-t border-surface-container sm:border-0">
+                  <span className="font-heading text-base font-bold text-pri sm:text-lg">
+                    {formatRp(log.amount)}
+                  </span>
+                  <a
+                    href={waQueryUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-monotech inline-flex items-center gap-1 rounded-lg border border-pri/30 bg-surface-lowest px-2.5 py-1 text-[11px] font-semibold text-pri transition-colors hover:bg-pri hover:text-white"
+                  >
+                    <MessageCircle size={12} />
+                    <span>Taksir Serupa</span>
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+
+          {displayedLogs.length === 0 && (
+            <div className="p-8 text-center">
+              <p className="font-heading text-sm font-semibold text-on-surface">
+                Tidak ada riwayat yang cocok dengan "{searchQuery}"
+              </p>
+              <p className="mt-1 text-xs text-on-surface-variant">
+                Coba cari dengan nama brand (Asus, Lenovo, Gigabyte, Palit) atau kondisi (Matot,
+                Artefak).
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery("");
+                  setSelectedCat("all");
+                }}
+                className="font-monotech mt-3 inline-flex items-center gap-1 text-xs font-semibold text-pri hover:underline"
+              >
+                Reset Filter Pencarian
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Footer / Load More info */}
+      <div className="flex flex-col items-center justify-between gap-3 sm:flex-row pt-2">
+        <p className="font-monotech text-xs text-on-surface-variant text-center sm:text-left">
+          Menampilkan <strong className="text-on-surface">{displayedLogs.length}</strong> dari{" "}
+          <strong className="text-on-surface">{archiveLogs.length} sampel terbaru</strong> (dari
+          1.240+ total arsip fisik di lab Bantul).
+        </p>
+        {filteredLogs.length > 8 && (
+          <button
+            type="button"
+            onClick={() => setShowAll((v) => !v)}
+            className="font-heading rounded-xl border border-outline-variant/60 bg-surface-low px-4 py-2 text-xs font-bold text-on-surface transition-colors hover:bg-surface-high"
+          >
+            {showAll
+              ? "Tampilkan Lebih Sedikit ↑"
+              : `Buka ${filteredLogs.length - 8} Riwayat Lainnya ↓`}
+          </button>
+        )}
+      </div>
+
+      {/* Trust guarantees bar */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 pt-4 border-t border-surface-container">
+        <div className="flex items-start gap-2.5 rounded-xl bg-surface-low p-3">
+          <ShieldCheck size={18} className="shrink-0 text-pri mt-0.5" />
+          <div>
+            <p className="font-heading text-xs font-bold text-on-surface">Pasti Cair di Tempat</p>
+            <p className="text-[11px] text-on-surface-variant">
+              Tanpa tempo atau ditunda. Transfer real-time saat selesai diagnosa.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-2.5 rounded-xl bg-surface-low p-3">
+          <Receipt size={18} className="shrink-0 text-sec mt-0.5" />
+          <div>
+            <p className="font-heading text-xs font-bold text-on-surface">
+              Berita Acara (BAST) Sah
+            </p>
+            <p className="text-[11px] text-on-surface-variant">
+              Tercatat invoice resmi & dokumen serah terima fisik bermaterai.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-start gap-2.5 rounded-xl bg-surface-low p-3">
+          <FileText size={18} className="shrink-0 text-emerald-600 mt-0.5" />
+          <div>
+            <p className="font-heading text-xs font-bold text-on-surface">Military Data Wipe</p>
+            <p className="text-[11px] text-on-surface-variant">
+              Format tuntas HDD/SSD tanpa sisa sebelum barang dibongkar kanibal.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -646,20 +937,26 @@ function BeritaAcaraPage() {
       {/* Timeline daftar berita acara */}
       <section className="mx-auto w-full max-w-5xl px-4 py-10 sm:py-14">
         <Reveal>
-          <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
+          <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
               <span className="font-monotech text-[11px] font-semibold uppercase tracking-widest text-pri">
-                Arsip Terbaru
+                Arsip & Sampel Dokumen
               </span>
               <h2 className="font-heading mt-1 text-2xl font-bold text-on-surface sm:text-3xl">
                 Riwayat yang Sudah Dicairkan
               </h2>
             </div>
             <span className="font-monotech rounded-full bg-surface-container px-3 py-1 text-[11px] text-on-surface-variant">
-              Update: {beritaStats.latestDate ? formatDateShort(beritaStats.latestDate) : "—"}
+              Update Terakhir:{" "}
+              {beritaStats.latestDate ? formatDateShort(beritaStats.latestDate) : "—"}
             </span>
           </div>
         </Reveal>
+
+        {/* Live ticker bar */}
+        <div className="mb-8">
+          <LiveTransactionTicker />
+        </div>
 
         {/* Tumpukan kartu sticky — scroll ke bawah menumpuk, ke atas terbuka */}
         <div className="relative">
@@ -681,6 +978,9 @@ function BeritaAcaraPage() {
             />
           ))}
         </div>
+
+        {/* Database log 1.200+ transaksi lengkap & pencarian hardware serupa */}
+        <ArchiveDatabaseSection />
 
         {/* CTA bawah */}
         <Reveal delay={100}>
