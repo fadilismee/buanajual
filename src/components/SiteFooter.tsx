@@ -13,7 +13,7 @@ export function SiteFooter() {
                 className="h-8 w-auto object-contain brightness-0 invert"
                 loading="lazy"
               />
-              <span className="text-sm font-bold tracking-tight">BUANA COMPUTER</span>
+              <span className="text-sm font-bold tracking-tight">GUDANG KOMPUTER</span>
             </div>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/70">
               Toko laptop, PC rakitan, dan aksesoris komputer. Melayani satuan & korporat. Cek
@@ -32,7 +32,7 @@ export function SiteFooter() {
               <li>
                 WhatsApp:{" "}
                 <a
-                  href="https://wa.me/6285979220599?text=Halo%20Buana%20Computer"
+                  href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer"
                   target="_blank"
                   rel="noreferrer"
                   className="font-medium text-white hover:underline"
@@ -86,7 +86,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <a
-                  href="https://service.buanacomputer.web.id"
+                  href="https://service.gudangkomputer.web.id"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white hover:underline"
@@ -101,7 +101,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <a
-                  href="https://buanacomputer.web.id/blog"
+                  href="https://gudangkomputer.web.id/blog"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white hover:underline"
@@ -111,7 +111,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <a
-                  href="https://buanacomputer.web.id/about"
+                  href="https://gudangkomputer.web.id/about"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white hover:underline"
@@ -140,7 +140,7 @@ export function SiteFooter() {
           <p>© {new Date().getFullYear()} Gudang Komputer. Semua hak dilindungi.</p>
           <div className="flex gap-4">
             <a
-              href="https://buanacomputer.web.id/about"
+              href="https://gudangkomputer.web.id/about"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white"
@@ -148,7 +148,7 @@ export function SiteFooter() {
               Syarat Layanan
             </a>
             <a
-              href="https://buanacomputer.web.id/about"
+              href="https://gudangkomputer.web.id/about"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white"

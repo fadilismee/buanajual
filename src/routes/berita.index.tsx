@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import type { RefObject } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
@@ -48,9 +48,9 @@ export const Route = createFileRoute("/berita/")({
           "Riwayat transparan transaksi buyback: penjual, barang, foto bukti transfer, dan total dana yang sudah dicairkan.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://jual.buanacomputer.web.id/berita" },
+      { property: "og:url", content: "https://gudangkomputer.web.id/berita" },
     ],
-    links: [{ rel: "canonical", href: "https://jual.buanacomputer.web.id/berita" }],
+    links: [{ rel: "canonical", href: "https://gudangkomputer.web.id/berita" }],
   }),
   component: BeritaAcaraPage,
 });
@@ -375,26 +375,23 @@ function StackedCard({
 
   // Depth-based visual values
   const isTop = depth === 0;
-  const scale = depth > 0 ? Math.max(0.86, 1 - depth * 0.05) : 1;
-  const brightness = depth > 0 ? Math.max(0.88, 1 - depth * 0.06) : 1;
-  const blur = depth > 0 ? Math.min(8, depth * 1.5) : 0;
-  const opacity = depth > 0 ? Math.max(0.7, 1 - depth * 0.08) : 1;
-  // Subtle parallax: buried cards translate down slightly
-  const translateY = depth > 0 ? depth * 4 : 0;
-  const translateZ = depth > 0 ? -depth * 12 : 0;
+  const scale = depth > 0 ? Math.max(0.93, 1 - depth * 0.025) : 1;
+  const brightness = depth > 0 ? Math.max(0.94, 1 - depth * 0.02) : 1;
+  const opacity = depth > 0 ? Math.max(0.88, 1 - depth * 0.035) : 1;
+  const translateY = depth > 0 ? depth * 2 : 0;
 
-  // Multi-layer shadow system
+  // Multi-layer shadow system: soft depth shadow for physical deck feel
   const shadowAmbient =
     depth > 0
-      ? `0 ${12 + depth * 8}px ${32 + depth * 16}px rgba(16, 24, 40, ${0.08 + depth * 0.03})`
-      : "0 2px 8px rgba(16, 24, 40, 0.06)";
+      ? `0 ${8 + depth * 6}px ${24 + depth * 10}px rgba(16, 24, 40, ${0.08 + depth * 0.02})`
+      : "0 4px 16px rgba(16, 24, 40, 0.06)";
   const shadowDirect =
     depth > 0
-      ? `0 ${4 + depth * 3}px ${12 + depth * 6}px rgba(16, 24, 40, ${0.06 + depth * 0.02})`
-      : "0 1px 3px rgba(16, 24, 40, 0.05)";
+      ? `0 ${2 + depth * 2}px ${8 + depth * 4}px rgba(16, 24, 40, ${0.04 + depth * 0.01})`
+      : "0 1px 3px rgba(16, 24, 40, 0.04)";
   const shadowRim = isTop
-    ? "0 0 0 1px rgba(255,255,255,0.6), 0 0 20px rgba(0, 80, 203, 0.08)"
-    : "none";
+    ? "0 0 0 1px rgba(0, 80, 203, 0.1), 0 0 20px rgba(0, 80, 203, 0.06)"
+    : "0 0 0 1px rgba(16, 24, 40, 0.06)";
 
   return (
     <div
@@ -402,25 +399,19 @@ function StackedCard({
       className="sticky will-change-transform group"
       style={{
         top: `calc(${STACK_BASE} + ${index * LAYER_GAP_PX}px)`,
-        zIndex: total - index, // top card highest z
+        zIndex: index + 1, // later cards stack on top of earlier cards
         marginBottom: runway,
-        transform: `translate3d(0, ${translateY}px, ${translateZ}px) scale(${scale})`,
+        transform: `translate3d(0, ${translateY}px, 0) scale(${scale})`,
         transformOrigin: "top center",
-        transition: `transform 420ms ${SPRING_EASE}, filter 380ms ${SPRING_EASE_OUT}, opacity 380ms ${SPRING_EASE_OUT}`,
-        filter: `brightness(${brightness}) saturate(${isTop ? 1 : 0.85}) blur(${blur}px)`,
+        transition: `transform 360ms ${SPRING_EASE}, filter 320ms ${SPRING_EASE_OUT}, opacity 320ms ${SPRING_EASE_OUT}`,
+        filter: `brightness(${brightness})`,
         opacity,
       }}
     >
-      {/* Glassmorphism card wrapper */}
+      {/* Physical layered card wrapper */}
       <article
-        className="relative rounded-2xl overflow-hidden"
+        className="relative rounded-2xl overflow-hidden bg-surface-lowest"
         style={{
-          background: isTop
-            ? "linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%)"
-            : "linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.5) 100%)",
-          backdropFilter: `blur(${isTop ? 20 : 12}px) saturate(180%)`,
-          WebkitBackdropFilter: `blur(${isTop ? 20 : 12}px) saturate(180%)`,
-          border: isTop ? "1px solid rgba(255,255,255,0.8)" : "1px solid rgba(255,255,255,0.4)",
           boxShadow: `${shadowAmbient}, ${shadowDirect}, ${shadowRim}`,
         }}
       >
@@ -685,13 +676,13 @@ function BeritaAcaraPage() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-pri/6 via-transparent to-sec/8" />
         <div className="relative mx-auto max-w-5xl px-4 py-10 sm:py-14">
           <Reveal>
-            <a
-              href="/jual"
+            <Link
+              to="/jual"
               className="font-monotech mb-5 inline-flex items-center gap-1.5 rounded-full border border-outline-variant/50 bg-surface-low px-3 py-1 text-[12px] text-on-surface-variant transition-colors hover:border-pri/40 hover:text-pri"
             >
               <ArrowLeft size={13} />
               Kembali ke Price List
-            </a>
+            </Link>
             <div className="font-monotech mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-widest text-pri">
               <ShieldCheck size={14} />
               Dokumentasi Transparan
@@ -769,12 +760,12 @@ function BeritaAcaraPage() {
               </p>
             </div>
             <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
-              <a
-                href="/jual/form"
+              <Link
+                to="/jual/form"
                 className="font-heading rounded-xl bg-surface-lowest px-6 py-3 text-center font-bold text-pri shadow-md transition-colors hover:bg-surface-high"
               >
                 Ajukan Jual Sekarang →
-              </a>
+              </Link>
               <a
                 href={WA_LINK}
                 target="_blank"

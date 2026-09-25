@@ -1,5 +1,8 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { Outlet, useLocation, useRouter } from "@tanstack/react-router";
+import { Link, Outlet, useRouter } from "@tanstack/react-router";
+import { Reveal, StaggeredReveal, TextReveal, Parallax, CountUp } from "./Reveal";
+
+export { Reveal, StaggeredReveal, TextReveal, Parallax, CountUp };
 
 type PageTransitionProps = {
   children?: ReactNode;
@@ -20,24 +23,8 @@ export function PageTransition({
   exitClass = DEFAULT_EXIT,
   duration = 400,
 }: PageTransitionProps) {
-  const location = useLocation();
-  const router = useRouter();
   const [key, setKey] = useState(0);
-  const [isExiting, setIsExiting] = useState(false);
-  const [exitPath, setExitPath] = useState<string | null>(null);
-
-  // Navigasi manual untuk animasi exit
-  const navigateWithTransition = (to: string, opts?: { replace?: boolean }) => {
-    if (isExiting) return;
-    setIsExiting(true);
-    setExitPath(to);
-    setTimeout(() => {
-      router.navigate({ to, replace: opts?.replace ?? false });
-      setIsExiting(false);
-      setExitPath(null);
-      setKey((k) => k + 1); // force remount
-    }, duration);
-  };
+  const [isExiting] = useState(false);
 
   // Auto-handle browser back/forward
   useEffect(() => {
@@ -51,41 +38,17 @@ export function PageTransition({
   const contentClass = isExiting ? exitClass : enterClass;
 
   return (
-    <>
-      <div
-        key={key}
-        className={contentClass}
-        style={{ animationDuration: `${duration}ms` }}
-        role="main"
-        aria-live="polite"
-      >
-        {children ?? <Outlet />}
-      </div>
-      {/* Expose navigate function via context if needed */}
-    </>
+    <div
+      key={key}
+      className={contentClass}
+      style={{ animationDuration: `${duration}ms` }}
+      role="main"
+      aria-live="polite"
+    >
+      {children ?? <Outlet />}
+    </div>
   );
 }
-
-/** Hook untuk navigasi dengan transisi halaman */
-export function usePageTransition() {
-  const router = useRouter();
-  const [isExiting, setIsExiting] = useState(false);
-  const duration = 400;
-
-  const navigate = (to: string, opts?: { replace?: boolean }) => {
-    if (isExiting) return;
-    setIsExiting(true);
-    setTimeout(() => {
-      router.navigate({ to, replace: opts?.replace ?? false });
-      setIsExiting(false);
-    }, duration);
-  };
-
-  return { navigate, isExiting };
-}
-
-/** Link wrapper yang otomatis pakai transisi halaman */
-import { Link } from "@tanstack/react-router";
 
 interface AnimatedLinkProps {
   to: string;
@@ -96,7 +59,9 @@ interface AnimatedLinkProps {
 }
 
 export function AnimatedLink({ className = "", onClick, ...props }: AnimatedLinkProps) {
-  const { navigate, isExiting } = usePageTransition();
+  const router = useRouter();
+  const [isExiting, setIsExiting] = useState(false);
+  const duration = 400;
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (
@@ -118,11 +83,11 @@ export function AnimatedLink({ className = "", onClick, ...props }: AnimatedLink
     e.preventDefault();
     if (onClick) onClick(e);
     if (!isExiting) {
-      if (props.replace) {
-        navigate(props.to as string, { replace: true });
-      } else {
-        navigate(props.to as string);
-      }
+      setIsExiting(true);
+      setTimeout(() => {
+        router.navigate({ to: props.to, replace: props.replace ?? false });
+        setIsExiting(false);
+      }, duration);
     }
   };
 
@@ -161,7 +126,3 @@ export function StaggeredPageContent({
     </div>
   );
 }
-
-// Re-export Reveal for convenience (avoid circular import)
-import { Reveal, StaggeredReveal, TextReveal, Parallax, CountUp } from "./Reveal";
-export { Reveal, StaggeredReveal, TextReveal, Parallax, CountUp };

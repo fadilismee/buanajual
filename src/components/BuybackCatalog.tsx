@@ -1,10 +1,17 @@
 import { useState } from "react";
-import { Search, Info } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import {
+  CircuitBoard,
+  Info,
+  Laptop,
+  MemoryStick,
+  MessageCircle,
+  Search,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
 import { Reveal } from "./Reveal";
 import { buybackCategoryMeta, buybackItems, type BuybackCategory } from "@/data/sellPrices";
-import { skuPrefix, skuImage } from "@/components/JualHero.utils";
-import { gradeBadgeClass } from "@/components/JualHero.utils";
+import { skuPrefix } from "@/components/JualHero.utils";
 import { BuybackCard } from "./BuybackCard";
 
 const catalogFilters: { id: BuybackCategory | "all"; label: string }[] = [
@@ -15,62 +22,11 @@ const catalogFilters: { id: BuybackCategory | "all"; label: string }[] = [
   { id: "proc-ram", label: "Processor, RAM & SSD" },
 ];
 
-const groupIcons: Record<BuybackCategory, React.ComponentType<{ size?: number }>> = {
-  mobo: () => (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="2" y="3" width="20" height="14" rx="2" />
-      <path d="M8 17h8" />
-      <path d="M12 17v4" />
-    </svg>
-  ),
-  vga: () => (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-    </svg>
-  ),
-  laptop: () => (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="2" y="3" width="20" height="14" rx="2" />
-      <line x1="8" y1="17" x2="16" y2="17" />
-    </svg>
-  ),
-  "proc-ram": () => (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="2" y="3" width="20" height="14" rx="2" />
-      <path d="M6 17h.01" />
-      <path d="M10 17h.01" />
-      <path d="M14 17h.01" />
-      <path d="M18 17h.01" />
-    </svg>
-  ),
+const groupIcons: Record<BuybackCategory, LucideIcon> = {
+  mobo: CircuitBoard,
+  vga: Zap,
+  laptop: Laptop,
+  "proc-ram": MemoryStick,
 };
 
 interface BuybackCatalogProps {
@@ -147,17 +103,7 @@ export function BuybackCatalog({ query, onQueryChange, onAjukan }: BuybackCatalo
                 rel="noreferrer"
                 className="font-heading mt-4 inline-flex items-center gap-1.5 rounded-lg bg-pri px-4 py-2 text-sm font-semibold text-on-pri transition-colors hover:bg-pri-container"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-4 h-4"
-                >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
+                <MessageCircle size={16} />
                 Tanya via WhatsApp
               </a>
             </div>

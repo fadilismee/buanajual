@@ -6,7 +6,6 @@ import {
   useRouter,
   HeadContent,
   Scripts,
-  useLocation,
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { PageTransition } from "@/components/PageTransition";
@@ -96,7 +95,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "keywords",
         content:
-          "buana computer, toko komputer bantul, jual laptop bekas yogyakarta, service komputer bantul, pc rakitan jogja",
+          "gudang komputer, toko komputer bantul, jual laptop bekas yogyakarta, service komputer bantul, pc rakitan jogja, buyback laptop rusak",
       },
       { name: "author", content: "Gudang Komputer" },
       { property: "og:title", content: "Gudang Komputer - Katalog Laptop & PC" },
@@ -108,8 +107,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Gudang Komputer" },
       { property: "og:locale", content: "id_ID" },
-      { property: "og:image", content: "https://buanacomputer.web.id/Buanacomputer-logo.png" },
-      { property: "og:url", content: "https://buanacomputer.web.id" },
+      { property: "og:image", content: "https://gudangkomputer.web.id/Buanacomputer-logo.png" },
+      { property: "og:url", content: "https://gudangkomputer.web.id" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Gudang Komputer - Katalog Laptop & PC" },
       {
@@ -117,7 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Jelajahi katalog Gudang Komputer — laptop, PC rakitan, monitor, dan aksesoris lengkap dengan spesifikasi dan harga.",
       },
-      { name: "twitter:image", content: "https://buanacomputer.web.id/Buanacomputer-logo.png" },
+      { name: "twitter:image", content: "https://gudangkomputer.web.id/Buanacomputer-logo.png" },
     ],
     links: [
       {
@@ -149,10 +148,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "@id": "https://buanacomputer.web.id/#website",
+  "@id": "https://gudangkomputer.web.id/#website",
   name: "Gudang Komputer",
   alternateName: ["Gudang Komputer", "Gudang Komputer Bantul"],
-  url: "https://buanacomputer.web.id",
+  url: "https://gudangkomputer.web.id",
   inLanguage: "id-ID",
   description:
     "Toko komputer Bantul Yogyakarta: katalog laptop bekas & baru, PC rakitan, servis hardware, dan buyback barang rusak.",
@@ -167,22 +166,22 @@ const siteNavigationJsonLd = {
       position: 1,
       name: "Katalog Laptop & PC",
       description: "Katalog laptop baru & second, PC rakitan, monitor, dan aksesoris komputer",
-      url: "https://buanacomputer.web.id/",
+      url: "https://gudangkomputer.web.id/",
     },
     {
       "@type": "SiteNavigationElement",
       position: 2,
-      name: "Buana Journal & Tips Servis",
+      name: "Journal & Tips Servis",
       description: "Panduan rakit PC, review teardown, dan tips perawatan laptop dari meja teknisi",
-      url: "https://buanacomputer.web.id/blog",
+      url: "https://gudangkomputer.web.id/blog",
     },
     {
       "@type": "SiteNavigationElement",
       position: 3,
-      name: "Tentang Laboratorium Buana",
+      name: "Tentang Laboratorium Gudang Komputer",
       description:
         "Profil laboratorium servis mikro-elektronika, transparansi meja periksa, dan daur ulang e-waste",
-      url: "https://buanacomputer.web.id/about",
+      url: "https://gudangkomputer.web.id/about",
     },
   ],
 };
@@ -191,8 +190,8 @@ const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: "Gudang Komputer",
-  image: "https://buanacomputer.web.id/Buanacomputer-logo.png",
-  url: "https://buanacomputer.web.id",
+  image: "https://gudangkomputer.web.id/Buanacomputer-logo.png",
+  url: "https://gudangkomputer.web.id",
   telephone: "6285979220599",
   address: {
     "@type": "PostalAddress",
@@ -215,10 +214,10 @@ const localBusinessJsonLd = {
   },
   priceRange: "Rp 675.000 - Rp 24.900.000",
   sameAs: [
-    "https://service.buanacomputer.web.id",
-    "https://jual.buanacomputer.web.id",
-    "https://buanacomputer.web.id/blog",
-    "https://buanacomputer.web.id/about",
+    "https://service.gudangkomputer.web.id",
+    "https://gudangkomputer.web.id/jual",
+    "https://gudangkomputer.web.id/blog",
+    "https://gudangkomputer.web.id/about",
   ],
 };
 
@@ -250,7 +249,6 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const location = useLocation();
 
   return (
     <QueryClientProvider client={queryClient}>

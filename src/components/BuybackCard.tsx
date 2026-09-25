@@ -1,5 +1,4 @@
-import { Link } from "@tanstack/react-router";
-import { BuybackItem } from "@/data/sellPrices";
+import type { BuybackItem } from "@/data/sellPrices";
 
 interface BuybackCardProps {
   item: BuybackItem;

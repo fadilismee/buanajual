@@ -1,10 +1,8 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useCallback, useEffect, useState } from "react";
-import { Search } from "lucide-react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FloatingWa } from "@/components/FloatingWa";
-import { Reveal } from "@/components/Reveal";
 import { JualHero } from "@/components/JualHero";
 import { PromoBonus } from "@/components/PromoBonus";
 import { GradeGuide } from "@/components/GradeGuide";
@@ -42,16 +40,14 @@ export const Route = createFileRoute("/jual/")({
         content:
           "Daripada jadi rongsokan, tukar hardware Anda menjadi rupiah. Terima laptop, PC, motherboard, VGA normal, rusak & matot — taksiran transparan, cair instan.",
       },
-      { property: "og:image", content: "https://jual.buanacomputer.web.id/Buanacomputer-logo.png" },
-      { property: "og:url", content: "https://jual.buanacomputer.web.id/" },
+      { property: "og:image", content: "https://gudangkomputer.web.id/Buanacomputer-logo.png" },
+      { property: "og:url", content: "https://gudangkomputer.web.id/jual" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://jual.buanacomputer.web.id/" }],
+    links: [{ rel: "canonical", href: "https://gudangkomputer.web.id/jual" }],
   }),
   component: JualPage,
 });
-
-const WA_NUMBER = "6285979220599";
 
 function JualPage() {
   const navigate = useNavigate();
@@ -104,13 +100,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Beranda",
-      item: "https://buanacomputer.web.id/",
+      item: "https://gudangkomputer.web.id/",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Jual Hardware Bekas & Rusak",
-      item: "https://jual.buanacomputer.web.id/",
+      item: "https://gudangkomputer.web.id/jual",
     },
   ],
 };

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Link, type LinkProps } from "@tanstack/react-router";
 
 type RevealProps = {
   children: ReactNode;
@@ -121,7 +120,13 @@ export function StaggeredReveal({
   return (
     <div className={wrapperClassName}>
       {children.map((child, i) => (
-        <Reveal key={i} delay={baseDelay + i * stepDelay} from={from} {...props}>
+        <Reveal
+          key={i}
+          delay={baseDelay + i * stepDelay}
+          from={from}
+          className={className}
+          {...props}
+        >
           {child}
         </Reveal>
       ))}
@@ -140,7 +145,7 @@ export function CountUp({
   format?: (n: number) => string;
 }) {
   const ref = useRef<HTMLSpanElement | null>(null);
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(value);
   const started = useRef(false);
 
   useEffect(() => {
@@ -152,6 +157,8 @@ export function CountUp({
       setDisplay(value);
       return;
     }
+
+    setDisplay(0);
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -171,7 +178,7 @@ export function CountUp({
           requestAnimationFrame(tick);
         }
       },
-      { threshold: 0.4 },
+      { threshold: 0.1 },
     );
     io.observe(el);
     return () => io.disconnect();

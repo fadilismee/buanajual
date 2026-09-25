@@ -64,11 +64,11 @@ export const Route = createFileRoute("/jual/form")({
         content:
           "Isi detail unit bekas/rusak Anda, dapatkan estimasi taksiran kilat gratis dari teknisi Gudang Komputer. Gratis, tanpa kewajiban menjual.",
       },
-      { property: "og:image", content: "https://jual.buanacomputer.web.id/Buanacomputer-logo.png" },
-      { property: "og:url", content: "https://jual.buanacomputer.web.id/form" },
+      { property: "og:image", content: "https://gudangkomputer.web.id/Buanacomputer-logo.png" },
+      { property: "og:url", content: "https://gudangkomputer.web.id/jual/form" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://jual.buanacomputer.web.id/form" }],
+    links: [{ rel: "canonical", href: "https://gudangkomputer.web.id/jual/form" }],
   }),
   component: JualFormPage,
 });
@@ -310,19 +310,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "Beranda",
-      item: "https://buanacomputer.web.id/",
+      item: "https://gudangkomputer.web.id/",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Jual Hardware Bekas",
-      item: "https://jual.buanacomputer.web.id/",
+      item: "https://gudangkomputer.web.id/jual",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "Formulir Taksiran",
-      item: "https://jual.buanacomputer.web.id/form",
+      item: "https://gudangkomputer.web.id/jual/form",
     },
   ],
 };
@@ -933,8 +933,8 @@ function JualFormPage() {
                   />
                   <span className="text-sm text-on-surface-variant">
                     Saya menyatakan unit ini milik pribadi yang sah (bukan barang curian/sengketa)
-                    dan bersedia menyertakan foto identitas saat pencairan dana sesuai SOP Buana
-                    Computer.
+                    dan bersedia menyertakan foto identitas saat pencairan dana sesuai SOP Gudang
+                    Komputer.
                   </span>
                 </label>
               </div>

@@ -7,7 +7,9 @@ type SiteHeaderProps = {
   onQueryChange?: (value: string) => void;
 };
 
-const WA_LINK = "https://wa.me/6285979220599?text=Halo%20Buana%20Computer";
+const WA_LINK =
+  "https://wa.me/6285979220599?text=" +
+  encodeURIComponent("Halo Gudang Komputer, saya ingin tanya-tanya soal jual hardware bekas");
 
 export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps) {
   const navigate = useNavigate();
@@ -92,7 +94,7 @@ export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps)
               loading="eager"
             />
             <span className="hidden text-[15px] font-bold tracking-tight text-black sm:block">
-              BUANA<span className="font-light"> COMPUTER</span>
+              GUDANG<span className="font-light"> KOMPUTER</span>
             </span>
           </Link>
 

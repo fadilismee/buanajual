@@ -19,7 +19,7 @@ export function StepsSection() {
         <p className="text-sm leading-relaxed text-on-surface-variant">{s.desc}</p>
       </div>
       <div className="font-monotech flex items-center gap-1 text-[11px] font-semibold text-pri">
-        <s.icon />
+        <s.icon size={16} />
         <span>{s.foot}</span>
       </div>
     </Reveal>

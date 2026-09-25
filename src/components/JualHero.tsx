@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { BadgeCheck, Banknote, ChevronLeft, ChevronRight, Recycle, Store } from "lucide-react";
-import { Reveal, StaggeredReveal } from "./Reveal";
+import { BadgeCheck, Banknote, Recycle, Store } from "lucide-react";
+import { Reveal } from "./Reveal";
 import jualAssets from "@/data/jualAssets.json";
 import { stats } from "./JualHero.data";
 
@@ -8,7 +8,7 @@ export function JualHero() {
   const slides = [
     ...jualAssets.heroStack.map((src, i) => ({
       src,
-      chip: "LAB BUANA",
+      chip: "LAB GUDANG",
       title: jualAssets.heroCaption + (i > 0 ? ` #${i + 1}` : ""),
     })),
     ...jualAssets.gallery.map((g) => ({ src: g.img, chip: g.chip, title: g.title })),
@@ -89,7 +89,6 @@ export function JualHero() {
               slides={slides}
               index={index}
               setIndex={setIndex}
-              paused={paused}
               setPaused={setPaused}
               reducedMotion={reducedMotion}
               current={current}
@@ -138,7 +137,6 @@ function HeroSlideshow({
   slides,
   index,
   setIndex,
-  paused,
   setPaused,
   reducedMotion,
   current,
@@ -146,7 +144,6 @@ function HeroSlideshow({
   slides: { src: string; chip?: string; title?: string }[];
   index: number;
   setIndex: (i: number) => void;
-  paused: boolean;
   setPaused: (v: boolean) => void;
   reducedMotion: boolean;
   current: { src: string; chip?: string; title?: string };

@@ -1,10 +1,5 @@
 import { Reveal } from "./Reveal";
 import { Link } from "@tanstack/react-router";
-import { Recycle } from "lucide-react";
-
-const WA_TRADEIN =
-  "https://wa.me/6285979220599?text=" +
-  encodeURIComponent("Halo Gudang Komputer, saya ingin tukar tambah hardware lama");
 
 export function PromoBonus() {
   return (

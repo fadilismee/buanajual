@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import jualAssets from "@/data/jualAssets.json";
@@ -94,18 +94,7 @@ export function GalleryTerima() {
           </div>
           <button
             type="button"
-            onClick={() => {
-              const el = trackRef.current;
-              if (!el) return;
-              if (el.scrollLeft <= 24) el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
-              else
-                el.scrollBy({
-                  left: -(
-                    (el.querySelector<HTMLElement>("[data-gal-card]")?.offsetWidth ?? 280) + 16
-                  ),
-                  behavior: "smooth",
-                });
-            }}
+            onClick={prev}
             aria-label="Geser galeri ke kiri"
             className="absolute top-1/2 left-0 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-outline-variant/50 bg-surface-lowest text-on-surface shadow-md transition-colors hover:bg-pri hover:text-on-pri"
           >
@@ -113,15 +102,7 @@ export function GalleryTerima() {
           </button>
           <button
             type="button"
-            onClick={() => {
-              const el = trackRef.current;
-              if (!el) return;
-              const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 24;
-              const card = el.querySelector<HTMLElement>("[data-gal-card]");
-              const stepSize = (card?.offsetWidth ?? 280) + 16;
-              if (atEnd) el.scrollTo({ left: 0, behavior: "smooth" });
-              else el.scrollBy({ left: stepSize, behavior: "smooth" });
-            }}
+            onClick={next}
             aria-label="Geser galeri ke kanan"
             className="absolute top-1/2 right-0 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-outline-variant/50 bg-surface-lowest text-on-surface shadow-md transition-colors hover:bg-pri hover:text-on-pri"
           >
