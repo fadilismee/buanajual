@@ -46,7 +46,9 @@ export function JualHero() {
             <span className="h-2 w-2 animate-pulse rounded-full bg-tertiary" />
             <span>Update Harga Pasar: Minggu Ini</span>
             <span className="mx-1 text-outline">•</span>
-            <span className="font-medium text-on-surface-variant">Bantul & D.I. Yogyakarta</span>
+            <span className="font-medium text-on-surface-variant">
+              Gunungkidul • Lampung • Cikarang
+            </span>
           </div>
           <div className="space-y-2">
             <p className="font-monotech text-[13px] uppercase tracking-wider text-sec">
@@ -57,7 +59,7 @@ export function JualHero() {
               <span className="text-pri underline decoration-sec-container decoration-wavy underline-offset-8">
                 Rupiah
               </span>{" "}
-              — Gudang Komputer Bantul
+              — Gudang Komputer
             </h1>
           </div>
           <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg">
@@ -109,7 +111,7 @@ export function JualHero() {
           <div className="col-span-2 sm:col-span-1 flex items-center gap-2.5 rounded-xl border border-outline-variant/50 bg-surface-low p-3 sm:p-4">
             <Store size={20} className="shrink-0 text-sec" />
             <p className="text-xs sm:text-sm leading-tight text-on-surface-variant">
-              Mertosan Kulon, Banguntapan, Bantul DIY (COD Jogja)
+              3 Cabang: Gunungkidul (DIY), Lampung &amp; Cikarang (Jabar)
             </p>
           </div>
           <a

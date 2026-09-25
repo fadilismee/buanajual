@@ -86,16 +86,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "google-site-verification",
         content: "D9D4lVIRUuQ1KP4nHWeOJWaH5SgfFGUJf1bpLSFjkEY",
       },
-      { title: "Gudang Komputer — Toko Komputer Bantul Yogyakarta" },
+      { title: "Gudang Komputer — Toko Komputer & Buyback Hardware" },
       {
         name: "description",
         content:
-          "Toko komputer Bantul, Yogyakarta: laptop, PC rakitan, monitor, komponen, servis hardware dan jual beli laptop bekas/rusak. Hubungi WA 6285979220599.",
+          "Pusat jual beli & buyback laptop bekas, PC rakitan, motherboard, dan VGA di 3 cabang resmi: Gunungkidul (DIY), Lampung, dan Cikarang (Jabar). Hubungi WA 6285979220599.",
       },
       {
         name: "keywords",
         content:
-          "gudang komputer, toko komputer bantul, jual laptop bekas yogyakarta, service komputer bantul, pc rakitan jogja, buyback laptop rusak",
+          "gudang komputer, jual laptop bekas, buyback hardware, jual vga rusak, jual motherboard rusak, toko komputer gunungkidul, toko komputer lampung, toko komputer cikarang, service komputer",
       },
       { name: "author", content: "Gudang Komputer" },
       { property: "og:title", content: "Gudang Komputer - Katalog Laptop & PC" },
@@ -150,11 +150,16 @@ const websiteJsonLd = {
   "@type": "WebSite",
   "@id": "https://gudangkomputer.web.id/#website",
   name: "Gudang Komputer",
-  alternateName: ["Gudang Komputer", "Gudang Komputer Bantul"],
+  alternateName: [
+    "Gudang Komputer",
+    "Gudang Komputer Gunungkidul",
+    "Gudang Komputer Lampung",
+    "Gudang Komputer Cikarang",
+  ],
   url: "https://gudangkomputer.web.id",
   inLanguage: "id-ID",
   description:
-    "Toko komputer Bantul Yogyakarta: katalog laptop bekas & baru, PC rakitan, servis hardware, dan buyback barang rusak.",
+    "Toko komputer & pusat buyback hardware di Gunungkidul (DIY), Lampung, dan Cikarang (Jabar).",
 };
 
 const siteNavigationJsonLd = {
@@ -195,16 +200,9 @@ const localBusinessJsonLd = {
   telephone: "6285979220599",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Mertosan Kulon, Potorono",
-    addressLocality: "Banguntapan, Bantul",
+    addressLocality: "Gunungkidul",
     addressRegion: "DI Yogyakarta",
-    postalCode: "55196",
     addressCountry: "ID",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: -7.8372069,
-    longitude: 110.4148331,
   },
   openingHoursSpecification: {
     "@type": "OpeningHoursSpecification",
@@ -212,7 +210,7 @@ const localBusinessJsonLd = {
     opens: "09:00",
     closes: "20:00",
   },
-  priceRange: "Rp 675.000 - Rp 24.900.000",
+  priceRange: "Rp 50.000 - Rp 25.000.000",
   sameAs: [
     "https://service.gudangkomputer.web.id",
     "https://gudangkomputer.web.id/jual",

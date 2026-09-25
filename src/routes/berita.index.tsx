@@ -36,7 +36,7 @@ import {
 export const Route = createFileRoute("/berita/")({
   head: () => ({
     meta: [
-      { title: "Berita Acara Transaksi — Gudang Komputer Bantul" },
+      { title: "Berita Acara Transaksi — Gudang Komputer" },
       {
         name: "description",
         content:
@@ -756,7 +756,8 @@ function BeritaAcaraPage() {
                 Serahkan hardware lama, terima berita acara & dana instan.
               </h3>
               <p className="text-sm text-on-pri/90">
-                Isi form taksiran gratis — proses kurang dari 15 menit di lab Bantul.
+                Isi form taksiran gratis — proses cepat di 3 cabang (Gunungkidul, Lampung,
+                Cikarang).
               </p>
             </div>
             <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">

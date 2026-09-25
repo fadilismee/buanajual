@@ -43,8 +43,8 @@ export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps)
 
   const marqueeItems = [
     "Konsultasi Gratis — Chat WA 0859-7922-0599 →",
-    "Jual Rusak? HP 80rb–600rb • Laptop 500rb–2,5jt — Estimasi Via WA →",
-    "Bantul 55196 — Jemput Gratis Area Bantul →",
+    "Jual Rusak? Laptop 500rb–2,5jt • VGA • Mobo — Estimasi Cepat Via WA →",
+    "3 Lokasi Cabang: Gunungkidul (DIY) • Lampung • Cikarang (Jabar) →",
     "Harga Terbaik & Transparan — Cek Price List Sekarang →",
   ];
 
@@ -211,8 +211,10 @@ export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps)
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-between rounded-lg px-3 py-2.5 hover:bg-black/5 hover:text-black"
               >
-                <span>Lokasi & Kontak</span>
-                <span className="text-xs text-muted-foreground">Bantul DIY →</span>
+                <span>3 Lokasi Cabang</span>
+                <span className="text-xs text-muted-foreground">
+                  Gunungkidul • Lampung • Cikarang →
+                </span>
               </a>
             </nav>
           </div>

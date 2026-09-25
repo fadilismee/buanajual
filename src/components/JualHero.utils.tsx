@@ -35,8 +35,8 @@ export const steps: { n: string; icon: LucideIcon; title: string; desc: string; 
     n: "02",
     icon: Truck,
     title: "Drop ke Toko atau Jemput",
-    desc: "Bawa hardware langsung ke lab Gudang Komputer di Bantul. Untuk unit banyak atau borongan kantor, kami sediakan kurir jemput lokasi.",
-    foot: "Layanan COD DIY Tersedia",
+    desc: "Bawa hardware langsung ke cabang terdekat (Gunungkidul, Lampung, atau Cikarang). Untuk unit banyak atau borongan kantor, kami sediakan kurir jemput lokasi.",
+    foot: "Layanan COD Cabang Tersedia",
   },
   {
     n: "03",
@@ -65,11 +65,11 @@ export const faqs = [
   },
   {
     q: "Apakah menerima lelang rongsokan borongan dari kantor, sekolah, atau warnet?",
-    a: "Sangat bisa! Kami melayani pembelian 10 hingga 200+ unit PC/laptop/monitor. Tim penaksir datang langsung ke lokasi Anda di Yogyakarta, Magelang, Solo, dan Klaten lengkap dengan invoice resmi serta armada pengangkut.",
+    a: "Sangat bisa! Kami melayani pembelian 10 hingga 200+ unit PC/laptop/monitor. Tim penaksir datang langsung ke lokasi Anda di wilayah jangkauan cabang Gunungkidul (DIY), Lampung (Sumatera), dan Cikarang (Jabodetabek) lengkap dengan invoice resmi serta armada pengangkut.",
   },
   {
-    q: "Bagaimana jika saya berdomisili di luar Daerah Istimewa Yogyakarta?",
-    a: "Kirimkan paket via ekspedisi (J&T, JNE, SiCepat) ke workshop kami di Bantul setelah estimasi awal via WhatsApp. Unboxing dan tes diagnosa lab kami videokan transparan, lalu dana ditransfer ke rekening bank Anda.",
+    q: "Bagaimana jika saya berdomisili di luar area 3 cabang?",
+    a: "Kirimkan paket via ekspedisi (J&T, JNE, SiCepat) ke cabang kami terdekat setelah estimasi awal via WhatsApp. Unboxing dan tes diagnosa lab kami videokan transparan, lalu dana ditransfer ke rekening bank Anda.",
   },
 ];
 

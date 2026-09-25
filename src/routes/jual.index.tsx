@@ -19,26 +19,26 @@ export const Route = createFileRoute("/jual/")({
   head: () => ({
     meta: [
       {
-        title: "Jual Laptop Bekas & Hardware Rusak Harga Terbaik — Gudang Komputer Bantul",
+        title: "Jual Laptop Bekas & Hardware Rusak Harga Terbaik — Gudang Komputer",
       },
       {
         name: "description",
         content:
-          "Jual laptop bekas, laptop rusak, motherboard, VGA, RAM & SSD ke Gudang Komputer Bantul, Yogyakarta. Price list buyback transparan, cek lab 15 menit, dana cair instan. WA 6285979220599.",
+          "Jual laptop bekas, laptop rusak, motherboard, VGA, RAM & SSD ke 3 cabang Gudang Komputer (Gunungkidul DIY, Lampung, Cikarang). Price list buyback transparan, cek lab 15 menit, dana cair instan. WA 6285979220599.",
       },
       {
         name: "keywords",
         content:
-          "jual laptop bekas, jual laptop rusak, harga beli laptop mati, jual motherboard rusak, jual vga rusak, jual rongsokan komputer, buyback hardware bantul, tukar tambah laptop yogyakarta",
+          "jual laptop bekas, jual laptop rusak, harga beli laptop mati, jual motherboard rusak, jual vga rusak, buyback gunungkidul, buyback lampung, buyback cikarang, tukar tambah laptop",
       },
       {
         property: "og:title",
-        content: "Jual Hardware Bekas & Rusak Jadi Rupiah — Gudang Komputer Bantul",
+        content: "Jual Hardware Bekas & Rusak Jadi Rupiah — Gudang Komputer",
       },
       {
         property: "og:description",
         content:
-          "Daripada jadi rongsokan, tukar hardware Anda menjadi rupiah. Terima laptop, PC, motherboard, VGA normal, rusak & matot — taksiran transparan, cair instan.",
+          "Daripada jadi rongsokan, tukar hardware Anda menjadi rupiah di 3 cabang Gudang Komputer (Gunungkidul, Lampung, Cikarang). Terima laptop, PC, motherboard, VGA normal, rusak & matot — taksiran transparan, cair instan.",
       },
       { property: "og:image", content: "https://gudangkomputer.web.id/Buanacomputer-logo.png" },
       { property: "og:url", content: "https://gudangkomputer.web.id/jual" },

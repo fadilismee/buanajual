@@ -43,17 +43,17 @@ export const Route = createFileRoute("/jual/form")({
   head: () => ({
     meta: [
       {
-        title: "Form Pengajuan Jual & Taksir Hardware Bekas/Rusak — Gudang Komputer Bantul",
+        title: "Form Pengajuan Jual & Taksir Hardware Bekas/Rusak — Gudang Komputer",
       },
       {
         name: "description",
         content:
-          "Formulir pengajuan jual hardware bekas atau rusak: laptop, PC, motherboard, VGA, RAM & SSD. Estimasi kilat gratis, taksiran transparan, dana cair instan. Gudang Komputer Bantul, Yogyakarta. WA 6285979220599.",
+          "Formulir pengajuan jual hardware bekas atau rusak: laptop, PC, motherboard, VGA, RAM & SSD di 3 cabang Gudang Komputer (Gunungkidul DIY, Lampung, Cikarang). Estimasi kilat gratis, taksiran transparan, dana cair instan. WA 6285979220599.",
       },
       {
         name: "keywords",
         content:
-          "formulir jual laptop bekas, taksir hardware rusak, jual laptop matot, estimasi harga laptop bekas, appraisal buyback bantul, jual motherboard rusak, jual vga artefak, tukar tambah laptop yogyakarta",
+          "formulir jual laptop bekas, taksir hardware rusak, jual laptop matot, estimasi harga laptop bekas, buyback gunungkidul, buyback lampung, buyback cikarang, jual motherboard rusak, jual vga artefak, tukar tambah laptop",
       },
       {
         property: "og:title",
@@ -62,7 +62,7 @@ export const Route = createFileRoute("/jual/form")({
       {
         property: "og:description",
         content:
-          "Isi detail unit bekas/rusak Anda, dapatkan estimasi taksiran kilat gratis dari teknisi Gudang Komputer. Gratis, tanpa kewajiban menjual.",
+          "Isi detail unit bekas/rusak Anda, dapatkan estimasi taksiran kilat gratis dari teknisi 3 cabang Gudang Komputer (Gunungkidul, Lampung, Cikarang). Gratis, tanpa kewajiban menjual.",
       },
       { property: "og:image", content: "https://gudangkomputer.web.id/Buanacomputer-logo.png" },
       { property: "og:url", content: "https://gudangkomputer.web.id/jual/form" },
@@ -119,22 +119,29 @@ type Handover = "store_visit" | "pickup_jogja" | "expedition";
 const handovers: { id: Handover; title: string; tag: string; desc: string }[] = [
   {
     id: "store_visit",
-    title: "Bawa Langsung ke Toko (Rekomendasi Cepat)",
+    title: "Bawa Langsung ke Toko / Lab Cabang (Rekomendasi Cepat)",
     tag: "Tes Kilat 15 Menit",
-    desc: "Mertosan Kulon, Potorono, Banguntapan, Bantul. Pengecekan lab transparan langsung di hadapan Anda, dana cair di menit ke-16.",
+    desc: "Pilih cabang terdekat (Gunungkidul, Lampung, atau Cikarang). Pengecekan lab transparan langsung di hadapan Anda, dana cair di menit ke-16.",
   },
   {
     id: "pickup_jogja",
-    title: "Layanan Jemput Teknisi (Area DIY)",
+    title: "Layanan Jemput Teknisi (Area Cabang)",
     tag: "Gratis Jemput",
-    desc: "Khusus wilayah Bantul, Kota Yogyakarta, dan Sleman. Teknisi kami datang ke rumah/kantor dengan alat tes portabel.",
+    desc: "Khusus wilayah jangkauan Gunungkidul/DIY, Lampung, dan Cikarang/Bekasi. Teknisi kami datang ke rumah/kantor dengan alat tes portabel.",
   },
   {
     id: "expedition",
-    title: "Kirim via Ekspedisi / Paket (Luar DIY)",
+    title: "Kirim via Ekspedisi / Paket (Seluruh Indonesia)",
     tag: "J&T, JNE, Paxel",
-    desc: "Unit dikirim dengan packing aman berbubble wrap. Video unboxing tanpa cut saat tiba di lab Gudang Komputer.",
+    desc: "Unit dikirim dengan packing aman berbubble wrap. Video unboxing tanpa cut saat tiba di lab cabang Gudang Komputer.",
   },
+];
+
+type Branch = "gunungkidul" | "lampung" | "cikarang";
+const branches: { id: Branch; label: string; region: string }[] = [
+  { id: "gunungkidul", label: "Cabang Gunungkidul", region: "D.I. Yogyakarta" },
+  { id: "lampung", label: "Cabang Lampung", region: "Sumatera" },
+  { id: "cikarang", label: "Cabang Cikarang", region: "Jawa Barat (Bekasi)" },
 ];
 
 type Payout = "bca" | "mandiri" | "bri" | "ewallet" | "cash";
@@ -338,6 +345,7 @@ function JualFormPage() {
   const [notes, setNotes] = useState("");
   const [photos, setPhotos] = useState<{ name: string; url: string }[]>([]);
   const photoUrlsRef = useRef<string[]>([]);
+  const [branch, setBranch] = useState<Branch>("gunungkidul");
   const [handover, setHandover] = useState<Handover>("store_visit");
   const [name, setName] = useState("");
   const [wa, setWa] = useState("");
@@ -348,6 +356,7 @@ function JualFormPage() {
   const catLabel = appraisalCategories.find((c) => c.id === category)?.label ?? category;
   const condLabel = appraisalConditions.find((c) => c.id === condition)?.label ?? condition;
   const handoverLabel = handovers.find((h) => h.id === handover)?.title ?? handover;
+  const branchLabel = branches.find((b) => b.id === branch)?.label ?? branch;
   const payoutLabel = payouts.find((p) => p.id === payout)?.label ?? payout;
   const rate = appraisalRates[category][condition];
 
@@ -396,6 +405,7 @@ function JualFormPage() {
       `Kategori: ${catLabel}\n` +
       `Model/Tipe: ${model || "-"}\n` +
       `Kondisi: ${condLabel}\n` +
+      `Cabang Pilihan: ${branchLabel}\n` +
       `Kelengkapan: ${completeness.length > 0 ? completeness.join(", ") : "-"}\n` +
       `Foto: ${photos.length > 0 ? `${photos.length} foto (menyusul via chat)` : "menyusul via chat"}\n` +
       `Penyerahan: ${handoverLabel}\n` +
@@ -817,35 +827,82 @@ function JualFormPage() {
                 <StepHeader
                   n={4}
                   total={5}
-                  title="Metode Penyerahan Unit"
-                  desc="Pilih jalur yang paling praktis & nyaman bagi Anda"
+                  title="Cabang & Metode Penyerahan Unit"
+                  desc="Pilih cabang terdekat dan jalur penyerahan yang paling nyaman"
                 />
+
+                {/* Pilih Cabang */}
                 <div className="space-y-2">
-                  {handovers.map((h) => (
-                    <label
-                      key={h.id}
-                      className="flex cursor-pointer items-start gap-3 rounded-lg bg-surface p-3 transition-all hover:bg-surface-container"
-                    >
-                      <input
-                        type="radio"
-                        name="handover"
-                        checked={handover === h.id}
-                        onChange={() => setHandover(h.id)}
-                        className="mt-1 accent-[#0050cb]"
-                      />
-                      <div className="flex-1">
-                        <div className="flex flex-wrap items-center justify-between gap-1">
-                          <span className="font-heading text-[15px] font-semibold text-on-surface">
-                            {h.title}
+                  <span className="font-heading block text-sm font-semibold text-on-surface">
+                    Pilih Cabang Terdekat *
+                  </span>
+                  <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                    {branches.map((b) => (
+                      <label
+                        key={b.id}
+                        className={`flex cursor-pointer flex-col rounded-xl border p-3 transition-all hover:border-pri/40 ${
+                          branch === b.id
+                            ? "border-pri bg-pri/5 ring-1 ring-pri"
+                            : "border-outline-variant/50 bg-surface-low"
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="branch"
+                          checked={branch === b.id}
+                          onChange={() => setBranch(b.id)}
+                          className="sr-only"
+                        />
+                        <div className="flex items-center justify-between">
+                          <span className="font-heading text-sm font-bold text-on-surface">
+                            {b.label}
                           </span>
-                          <span className="font-monotech text-[11px] font-semibold text-sec">
-                            {h.tag}
-                          </span>
+                          <span
+                            className={`h-2.5 w-2.5 rounded-full ${
+                              branch === b.id ? "bg-pri" : "border border-outline"
+                            }`}
+                          />
                         </div>
-                        <p className="mt-0.5 text-sm text-on-surface-variant">{h.desc}</p>
-                      </div>
-                    </label>
-                  ))}
+                        <span className="font-monotech mt-1 text-[11px] text-on-surface-variant">
+                          {b.region}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Metode Penyerahan */}
+                <div className="space-y-2 pt-2">
+                  <span className="font-heading block text-sm font-semibold text-on-surface">
+                    Metode Penyerahan *
+                  </span>
+                  <div className="space-y-2">
+                    {handovers.map((h) => (
+                      <label
+                        key={h.id}
+                        className="flex cursor-pointer items-start gap-3 rounded-lg bg-surface p-3 transition-all hover:bg-surface-container"
+                      >
+                        <input
+                          type="radio"
+                          name="handover"
+                          checked={handover === h.id}
+                          onChange={() => setHandover(h.id)}
+                          className="mt-1 accent-[#0050cb]"
+                        />
+                        <div className="flex-1">
+                          <div className="flex flex-wrap items-center justify-between gap-1">
+                            <span className="font-heading text-[15px] font-semibold text-on-surface">
+                              {h.title}
+                            </span>
+                            <span className="font-monotech text-[11px] font-semibold text-sec">
+                              {h.tag}
+                            </span>
+                          </div>
+                          <p className="mt-0.5 text-sm text-on-surface-variant">{h.desc}</p>
+                        </div>
+                      </label>
+                    ))}
+                  </div>
                 </div>
               </div>
 
