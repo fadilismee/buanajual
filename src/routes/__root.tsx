@@ -6,9 +6,10 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useLocation,
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-
+import { PageTransition } from "@/components/PageTransition";
 import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
@@ -86,7 +87,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "google-site-verification",
         content: "D9D4lVIRUuQ1KP4nHWeOJWaH5SgfFGUJf1bpLSFjkEY",
       },
-      { title: "Buana Computer — Toko Komputer Bantul Yogyakarta" },
+      { title: "Gudang Komputer — Toko Komputer Bantul Yogyakarta" },
       {
         name: "description",
         content:
@@ -97,24 +98,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "buana computer, toko komputer bantul, jual laptop bekas yogyakarta, service komputer bantul, pc rakitan jogja",
       },
-      { name: "author", content: "Buana Computer" },
-      { property: "og:title", content: "Buana Computer - Katalog Laptop & PC" },
+      { name: "author", content: "Gudang Komputer" },
+      { property: "og:title", content: "Gudang Komputer - Katalog Laptop & PC" },
       {
         property: "og:description",
         content:
-          "Jelajahi katalog Buana Computer — laptop, PC rakitan, monitor, dan aksesoris lengkap dengan spesifikasi dan harga.",
+          "Jelajahi katalog Gudang Komputer — laptop, PC rakitan, monitor, dan aksesoris lengkap dengan spesifikasi dan harga.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "Buana Computer" },
+      { property: "og:site_name", content: "Gudang Komputer" },
       { property: "og:locale", content: "id_ID" },
       { property: "og:image", content: "https://buanacomputer.web.id/Buanacomputer-logo.png" },
       { property: "og:url", content: "https://buanacomputer.web.id" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Buana Computer - Katalog Laptop & PC" },
+      { name: "twitter:title", content: "Gudang Komputer - Katalog Laptop & PC" },
       {
         name: "twitter:description",
         content:
-          "Jelajahi katalog Buana Computer — laptop, PC rakitan, monitor, dan aksesoris lengkap dengan spesifikasi dan harga.",
+          "Jelajahi katalog Gudang Komputer — laptop, PC rakitan, monitor, dan aksesoris lengkap dengan spesifikasi dan harga.",
       },
       { name: "twitter:image", content: "https://buanacomputer.web.id/Buanacomputer-logo.png" },
     ],
@@ -149,8 +150,8 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": "https://buanacomputer.web.id/#website",
-  name: "Buana Computer",
-  alternateName: ["Buana Komputer", "Buana Computer Bantul", "Buanacomp"],
+  name: "Gudang Komputer",
+  alternateName: ["Gudang Komputer", "Gudang Komputer Bantul"],
   url: "https://buanacomputer.web.id",
   inLanguage: "id-ID",
   description:
@@ -189,7 +190,7 @@ const siteNavigationJsonLd = {
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "Buana Computer",
+  name: "Gudang Komputer",
   image: "https://buanacomputer.web.id/Buanacomputer-logo.png",
   url: "https://buanacomputer.web.id",
   telephone: "6285979220599",
@@ -249,11 +250,13 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <PageTransition>
+        <Outlet />
+      </PageTransition>
     </QueryClientProvider>
   );
 }

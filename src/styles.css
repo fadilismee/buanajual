@@ -305,7 +305,277 @@
   }
 }
 
-/* ------------------------------------------------------------------ */
+/* ===================================================================== */
+/* GLOBAL ANIMATION SYSTEM — entrance, exit, micro-interactions, page   */
+/* transitions. All respect prefers-reduced-motion.                     */
+/* ===================================================================== */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-left {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(-24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scale-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.94); }
+}
+
+@keyframes rotate-in {
+  from { opacity: 0; transform: rotate(-6deg) scale(0.94); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+@keyframes flip-in {
+  from { opacity: 0; transform: rotateY(-90deg) scale(0.95); }
+  to { opacity: 1; transform: rotateY(0) scale(1); }
+}
+
+@keyframes blur-in {
+  from { opacity: 0; filter: blur(8px); transform: scale(0.96); }
+  to { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(2deg); }
+  75% { transform: rotate(-2deg); }
+}
+
+/* Entrance animation utilities — gunakan via class di komponen */
+.animate-fade-in { animation: fade-in 500ms ease-out forwards; }
+.animate-fade-out { animation: fade-out 300ms ease-in forwards; }
+.animate-slide-up { animation: slide-up 600ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-slide-down { animation: slide-down 600ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-slide-left { animation: slide-left 600ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-slide-right { animation: slide-right 600ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-scale-in { animation: scale-in 500ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-scale-out { animation: scale-out 300ms cubic-bezier(0.4,0,1,1) forwards; }
+.animate-rotate-in { animation: rotate-in 600ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-flip-in { animation: flip-in 700ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.animate-blur-in { animation: blur-in 600ms cubic-bezier(0.16,1,0.3,1) forwards; }
+
+/* Stagger delays — combine with entrance classes */
+.delay-0 { animation-delay: 0ms; }
+.delay-1 { animation-delay: 60ms; }
+.delay-2 { animation-delay: 120ms; }
+.delay-3 { animation-delay: 180ms; }
+.delay-4 { animation-delay: 240ms; }
+.delay-5 { animation-delay: 300ms; }
+.delay-6 { animation-delay: 360ms; }
+.delay-7 { animation-delay: 420ms; }
+.delay-8 { animation-delay: 480ms; }
+.delay-9 { animation-delay: 540ms; }
+.delay-10 { animation-delay: 600ms; }
+
+/* Duration overrides */
+.duration-fast { animation-duration: 300ms; }
+.duration-normal { animation-duration: 500ms; }
+.duration-slow { animation-duration: 800ms; }
+
+/* Easing overrides */
+.ease-spring { animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+.ease-spring-out { animation-timing-function: cubic-bezier(0.05, 0.9, 0.1, 1); }
+.ease-expo-out { animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1); }
+
+/* Micro-interaction utilities */
+.hover-lift {
+  transition: transform 200ms cubic-bezier(0.16,1,0.3,1), box-shadow 200ms ease-out;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(16,24,40,0.12), 0 4px 12px rgba(16,24,40,0.08);
+}
+
+.hover-scale {
+  transition: transform 150ms cubic-bezier(0.16,1,0.3,1);
+}
+.hover-scale:hover { transform: scale(1.03); }
+.hover-scale:active { transform: scale(0.98); }
+
+.hover-glow {
+  transition: box-shadow 250ms ease-out, border-color 250ms ease-out;
+}
+.hover-glow:hover {
+  box-shadow: 0 0 0 2px var(--color-pri), 0 8px 24px rgba(0,80,203,0.2);
+  border-color: var(--color-pri);
+}
+
+.tap-shrink:active { transform: scale(0.96); }
+
+/* Focus ring animation */
+.focus-ring:focus-visible {
+  animation: fade-in 150ms ease-out;
+  outline: 2px solid var(--color-pri);
+  outline-offset: 2px;
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-surface-variant) 25%, var(--color-surface-high) 50%, var(--color-surface-variant) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 0.5rem;
+}
+
+/* Page transition wrapper — mount/unmount transitions */
+.page-transition-enter {
+  animation: fade-in 200ms ease-out, slide-up 400ms cubic-bezier(0.16,1,0.3,1);
+}
+.page-transition-exit {
+  animation: fade-out 150ms ease-in, scale-out 250ms cubic-bezier(0.4,0,1,1);
+}
+
+/* Reduced motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-fade-out,
+  .animate-slide-up,
+  .animate-slide-down,
+  .animate-slide-left,
+  .animate-slide-right,
+  .animate-scale-in,
+  .animate-scale-out,
+  .animate-rotate-in,
+  .animate-flip-in,
+  .animate-blur-in,
+  .page-transition-enter,
+  .page-transition-exit,
+  .hover-lift,
+  .hover-scale,
+  .hover-glow,
+  .tap-shrink,
+  .skeleton {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  .skeleton { animation: none; background: var(--color-surface-variant); }
+}
+
+/* Floating action button pulse */
+@keyframes fab-pulse {
+  0% { box-shadow: 0 4px 16px rgba(0,80,203,0.3); }
+  50% { box-shadow: 0 4px 24px rgba(0,80,203,0.5), 0 0 0 8px rgba(0,80,203,0.15); }
+  100% { box-shadow: 0 4px 16px rgba(0,80,203,0.3); }
+}
+.fab-pulse { animation: fab-pulse 2.5s ease-in-out infinite; }
+
+/* Scroll indicator bounce */
+@keyframes scroll-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
+}
+.animate-scroll-bounce { animation: scroll-bounce 2s ease-in-out infinite; }
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-text {
+  background: linear-gradient(90deg, var(--color-pri), var(--color-sec), var(--color-tertiary), var(--color-pri));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+/* Card entrance stagger container */
+.stagger-container > * {
+  opacity: 0;
+  animation: slide-up 600ms cubic-bezier(0.16,1,0.3,1) forwards;
+}
+.stagger-container > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-container > *:nth-child(2) { animation-delay: 80ms; }
+.stagger-container > *:nth-child(3) { animation-delay: 160ms; }
+.stagger-container > *:nth-child(4) { animation-delay: 240ms; }
+.stagger-container > *:nth-child(5) { animation-delay: 320ms; }
+.stagger-container > *:nth-child(6) { animation-delay: 400ms; }
+.stagger-container > *:nth-child(7) { animation-delay: 480ms; }
+.stagger-container > *:nth-child(8) { animation-delay: 560ms; }
+
+/* List item slide-in from left/right alternating */
+.stagger-alt > *:nth-child(odd) { animation-name: slide-left; }
+.stagger-alt > *:nth-child(even) { animation-name: slide-right; }
+
+/* Hero text reveal per word/char — utilities for JS-driven */
+.reveal-word { display: inline-block; overflow: hidden; }
+.reveal-word > span { display: inline-block; transform: translateY(100%); animation: slide-up 700ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.reveal-char { display: inline-block; transform: translateY(100%); animation: slide-up 500ms cubic-bezier(0.16,1,0.3,1) forwards; }
+
+/* Smooth scroll enhancements for anchor links */
+html:not([data-reduced-motion]) {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar with animation */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: 4px;
+  transition: background 200ms ease, width 200ms ease;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-outline); }
+::-webkit-scrollbar-corner { background: transparent; }
+
+/* Selection flash */
+::selection { background: var(--color-pri-fixed); color: var(--color-on-pri-fixed); }
+
+/* ===================================================================== */
 /* Buana Admin design system (light, reff Dashboard-reff).             */
 /* Kelas .adm-* dipakai khusus area /admin: kartu terang, eyebrow mono */
 /* uppercase, tombol biru, tabel + drawer form. Navbar tetap di atas.  */

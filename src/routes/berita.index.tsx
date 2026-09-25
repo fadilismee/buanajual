@@ -35,13 +35,13 @@ import {
 export const Route = createFileRoute("/berita/")({
   head: () => ({
     meta: [
-      { title: "Berita Acara Transaksi — Buana Computer Bantul" },
+      { title: "Berita Acara Transaksi — Gudang Komputer Bantul" },
       {
         name: "description",
         content:
-          "Daftar berita acara buyback Buana Computer: siapa yang menjual, barang apa yang laris, bukti transfer, dan rincian dana yang sudah cair. Transparan & bisa diverifikasi.",
+          "Daftar berita acara buyback Gudang Komputer: siapa yang menjual, barang apa yang laris, bukti transfer, dan rincian dana yang sudah cair. Transparan & bisa diverifikasi.",
       },
-      { property: "og:title", content: "Berita Acara Transaksi — Buana Computer" },
+      { property: "og:title", content: "Berita Acara Transaksi — Gudang Komputer" },
       {
         property: "og:description",
         content:
@@ -57,7 +57,7 @@ export const Route = createFileRoute("/berita/")({
 
 const WA_LINK =
   "https://wa.me/6285979220599?text=" +
-  encodeURIComponent("Halo Buana Computer, saya mau lihat contoh berita acara jual hardware");
+  encodeURIComponent("Halo Gudang Komputer, saya mau lihat contoh berita acara jual hardware");
 
 const photoKindMeta: Record<
   BeritaPhoto["kind"],

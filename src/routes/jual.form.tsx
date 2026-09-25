@@ -43,12 +43,12 @@ export const Route = createFileRoute("/jual/form")({
   head: () => ({
     meta: [
       {
-        title: "Form Pengajuan Jual & Taksir Hardware Bekas/Rusak — Buana Computer Bantul",
+        title: "Form Pengajuan Jual & Taksir Hardware Bekas/Rusak — Gudang Komputer Bantul",
       },
       {
         name: "description",
         content:
-          "Formulir pengajuan jual hardware bekas atau rusak: laptop, PC, motherboard, VGA, RAM & SSD. Estimasi kilat gratis, taksiran transparan, dana cair instan. Buana Computer Bantul, Yogyakarta. WA 6285979220599.",
+          "Formulir pengajuan jual hardware bekas atau rusak: laptop, PC, motherboard, VGA, RAM & SSD. Estimasi kilat gratis, taksiran transparan, dana cair instan. Gudang Komputer Bantul, Yogyakarta. WA 6285979220599.",
       },
       {
         name: "keywords",
@@ -57,12 +57,12 @@ export const Route = createFileRoute("/jual/form")({
       },
       {
         property: "og:title",
-        content: "Form Pengajuan Jual & Taksir Hardware — Buana Computer",
+        content: "Form Pengajuan Jual & Taksir Hardware — Gudang Komputer",
       },
       {
         property: "og:description",
         content:
-          "Isi detail unit bekas/rusak Anda, dapatkan estimasi taksiran kilat gratis dari teknisi Buana Computer. Gratis, tanpa kewajiban menjual.",
+          "Isi detail unit bekas/rusak Anda, dapatkan estimasi taksiran kilat gratis dari teknisi Gudang Komputer. Gratis, tanpa kewajiban menjual.",
       },
       { property: "og:image", content: "https://jual.buanacomputer.web.id/Buanacomputer-logo.png" },
       { property: "og:url", content: "https://jual.buanacomputer.web.id/form" },
@@ -133,7 +133,7 @@ const handovers: { id: Handover; title: string; tag: string; desc: string }[] = 
     id: "expedition",
     title: "Kirim via Ekspedisi / Paket (Luar DIY)",
     tag: "J&T, JNE, Paxel",
-    desc: "Unit dikirim dengan packing aman berbubble wrap. Video unboxing tanpa cut saat tiba di lab Buana Computer.",
+    desc: "Unit dikirim dengan packing aman berbubble wrap. Video unboxing tanpa cut saat tiba di lab Gudang Komputer.",
   },
 ];
 
@@ -237,7 +237,7 @@ function TrustSidebarCards() {
           <span className="font-bold tracking-wide text-pri">0859-7922-0599</span>
         </div>
         <a
-          href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Halo Buana Computer, saya mau konsultasi jual hardware bekas")}`}
+          href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Halo Gudang Komputer, saya mau konsultasi jual hardware bekas")}`}
           target="_blank"
           rel="noreferrer"
           className="font-heading flex w-full items-center justify-center gap-2 rounded-lg bg-surface-lowest py-2 font-semibold text-pri shadow-sm transition-colors hover:bg-surface"
@@ -248,7 +248,7 @@ function TrustSidebarCards() {
 
       <div className="space-y-4 rounded-xl bg-surface-lowest p-5 shadow-sm">
         <h3 className="font-heading font-semibold text-on-surface">
-          Kenapa Jual ke Buana Computer?
+          Kenapa Jual ke Gudang Komputer?
         </h3>
         <div className="space-y-4">
           {trustPillars.map((t) => (
@@ -390,7 +390,7 @@ function JualFormPage() {
   ];
 
   const waMessage = encodeURIComponent(
-    `Halo Buana Computer, saya ingin mengajukan taksir/jual hardware:\n\n` +
+    `Halo Gudang Komputer, saya ingin mengajukan taksir/jual hardware:\n\n` +
       `Nama: ${name || "-"}\n` +
       `No. WA: ${wa || "-"}\n` +
       `Kategori: ${catLabel}\n` +
@@ -960,7 +960,7 @@ function JualFormPage() {
                     <p className="font-semibold">Terkirim ke WhatsApp!</p>
                     <p className="mt-1">
                       Chat WA sudah terbuka. Silakan kirim foto barang di sana untuk estimasi harga
-                      dari Buana Computer.
+                      dari Gudang Komputer.
                     </p>
                     <a
                       href={waHref}

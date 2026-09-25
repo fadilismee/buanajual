@@ -1,0 +1,16 @@
+{
+  "name": "buanajual",
+  "gitSource": {
+    "type": "github",
+    "repo": "fadilismee/buanajual",
+    "ref": "main"
+  },
+  "projectSettings": {
+    "framework": "tanstack-start",
+    "buildCommand": "npm run build",
+    "outputDirectory": ".output/public",
+    "devCommand": "npm run dev",
+    "installCommand": "npm install"
+  },
+  "target": "production"
+}

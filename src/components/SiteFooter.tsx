@@ -9,7 +9,7 @@ export function SiteFooter() {
             <div className="flex items-center gap-2">
               <img
                 src="/Buanacomputer-logo.png"
-                alt="Buana Computer"
+                alt="Gudang Komputer"
                 className="h-8 w-auto object-contain brightness-0 invert"
                 loading="lazy"
               />
@@ -126,7 +126,7 @@ export function SiteFooter() {
         <div className="h-[200px] w-full overflow-hidden rounded-lg sm:h-[260px] lg:h-auto lg:min-h-[300px]">
           <iframe
             src="https://maps.google.com/maps?q=-7.8372069,110.4148331&z=17&hl=id&output=embed"
-            title="Lokasi Buana Computer Bantul"
+            title="Lokasi Gudang Komputer Bantul"
             className="h-full w-full border-0"
             allowFullScreen
             loading="lazy"
@@ -137,7 +137,7 @@ export function SiteFooter() {
 
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Buana Computer. Semua hak dilindungi.</p>
+          <p>© {new Date().getFullYear()} Gudang Komputer. Semua hak dilindungi.</p>
           <div className="flex gap-4">
             <a
               href="https://buanacomputer.web.id/about"

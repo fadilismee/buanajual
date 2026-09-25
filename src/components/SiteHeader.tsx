@@ -83,11 +83,11 @@ export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps)
           <Link
             to="/jual"
             className="flex shrink-0 items-center gap-2"
-            aria-label="Buana Computer — beranda"
+            aria-label="Gudang Komputer — beranda"
           >
             <img
               src="/Buanacomputer-logo.png"
-              alt="Buana Computer"
+              alt="Gudang Komputer"
               className="h-8 w-auto object-contain"
               loading="eager"
             />
