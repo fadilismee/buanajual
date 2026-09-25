@@ -1,47 +1,47 @@
 {
-  "hero": "https://picsum.photos/seed/buana-jual-hero/900/1100",
+  "hero": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=900&q=80",
   "heroStack": [
-    "https://picsum.photos/seed/buana-hero-s1/900/1100",
-    "https://picsum.photos/seed/buana-hero-s2/900/1100",
-    "https://picsum.photos/seed/buana-hero-s3/900/1100"
+    "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=900&q=80",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+    "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=900&q=80"
   ],
-  "heroCaption": "Workshop & Lab Gudang Komputer",
+  "heroCaption": "Workshop & Lab Diagnosa Gudang Komputer",
   "gallery": [
     {
-      "img": "https://picsum.photos/seed/buana-gal-matot/640/480",
-      "title": "Bangkai Laptop Core i5 Matot",
+      "img": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&q=80",
+      "title": "Laptop Core i7 / i5 Mati Total & Kanibal",
       "chip": "GRADE D • MATOT",
-      "note": "Mati total bertahun-tahun. Keyboard & heatsink di-save, dibayar Rp 200-600rb."
+      "note": "Mati total bertahun-tahun. Keyboard, layar, & heatsink di-save, dibayar Rp 400rb - 1,5jt."
     },
     {
-      "img": "https://picsum.photos/seed/buana-gal-layar/640/480",
-      "title": "Layar Pecah / Bergaris",
-      "chip": "GRADE C • RUSAK SEBAGIAN",
-      "note": "Panel retak & artefak display kami hargai per modul."
-    },
-    {
-      "img": "https://picsum.photos/seed/buana-gal-vga/640/480",
-      "title": "VGA Artefak Garis-garis",
+      "img": "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80",
+      "title": "VGA Card RTX / GTX Artefak Garis",
       "chip": "GRADE C/D • ARTEFAK",
-      "note": "VRAM GDDR6 & heatsink jadi bahan reballing, dibayar Rp 450rb-1,2jt."
+      "note": "VRAM GDDR6 & heatsink jadi bahan donor lab, dibayar Rp 450rb - 2,5jt."
     },
     {
-      "img": "https://picsum.photos/seed/buana-gal-korosi/640/480",
-      "title": "Korosi & Bekas Cairan",
-      "chip": "GRADE D • MATOT",
-      "note": "Jalur korosi parah, IC donor & mosfet masih berharga kanibal."
+      "img": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+      "title": "Motherboard LGA & AM4 Konslet / Terbakar",
+      "chip": "GRADE D • KANIBAL",
+      "note": "Jalur korosi & short circuit, IC donor & mosfet daya 12V tetap dibayar."
     },
     {
-      "img": "https://picsum.photos/seed/buana-gal-debu/640/480",
-      "title": "Kotor & Berdebu Parah",
-      "chip": "GRADE B • MINUS KOSMETIK",
-      "note": "Unit lama gudangan: kami bersihkan & uji ulang di lab."
+      "img": "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&q=80",
+      "title": "PC Gaming & Workstation Borongan Kantor",
+      "chip": "GRADE A/B • LELANG",
+      "note": "Lelang borongan 5 - 50 unit PC kantor, tim kurir jemput langsung ke lokasi."
     },
     {
-      "img": "https://picsum.photos/seed/buana-gal-normal/640/480",
-      "title": "Unit Normal & Mulus",
+      "img": "https://images.unsplash.com/photo-1562976540-1502c2145186?w=800&q=80",
+      "title": "RAM DDR4/DDR5 & Processor Intel/Ryzen",
       "chip": "GRADE A • NORMAL",
-      "note": "Siap pakai, lengkap dos/box: valuasi paling maksimal."
+      "note": "Uji multi-tester 100% stabil, valuasi tertinggi hingga 85% harga pasar."
+    },
+    {
+      "img": "https://images.unsplash.com/photo-1544652478-6653e09f18a2?w=800&q=80",
+      "title": "SSD M.2 NVMe & Storage Bad Sector",
+      "chip": "GRADE B/C • STORAGE",
+      "note": "Format sanitasi militer (Military Wipe) bebas bocor data sebelum dipakai donor."
     }
   ]
 }

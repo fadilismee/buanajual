@@ -4,6 +4,8 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FloatingWa } from "@/components/FloatingWa";
 import { JualHero } from "@/components/JualHero";
+import { HardwareBentoGrid } from "@/components/HardwareBentoGrid";
+import { HardwareConditionStage } from "@/components/HardwareConditionStage";
 import { PromoBonus } from "@/components/PromoBonus";
 import { GradeGuide } from "@/components/GradeGuide";
 import { GalleryTerima } from "@/components/GalleryTerima";
@@ -79,10 +81,12 @@ function JualPage() {
       />
       <SiteHeader query={query} onQueryChange={handleQueryChange} />
       <JualHero />
+      <HardwareBentoGrid />
+      <HardwareConditionStage />
       <PromoBonus />
+      <BuybackCatalog query={query} onQueryChange={handleQueryChange} onAjukan={handleAjukan} />
       <GradeGuide />
       <GalleryTerima />
-      <BuybackCatalog query={query} onQueryChange={handleQueryChange} onAjukan={handleAjukan} />
       <StepsSection />
       <JualFaq />
       <TradeInCta />
