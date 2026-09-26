@@ -7,7 +7,8 @@ const categories = [
     tag: "NOTEBOOK & MACBOOK",
     title: "Laptop & MacBook",
     priceBadge: "s/d Rp 18,5 Jt",
-    image: "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&q=80",
+    image:
+      "https://lh3.googleusercontent.com/aida/AEtjO1WGYoemnXceGxHRG3U7J46agNDt8yxEZJGsuDY0Fk6YMmMhcwfF3Nq-H93MEIB1r2GvmSoy6i2GQHiHfTKj9E7e5ZwJR1iGsniLOCD9nYgQyQqf5Aai2ogH48f39fO7Yvhl35WEbRX03C-dISDDoGPtvVKzPXfhWz3i5E-FZw1QqH4CTtZvDTyEtHmoo1ZIreAThaVcQLdOWAkNEb38CJ2JNIiaGWqsmxVorIEile5hp3aOrI2lkQT9d_JS",
     gridClass: "md:col-span-5 lg:col-span-4 md:row-span-2",
     isTall: true,
     waLink:
@@ -19,7 +20,8 @@ const categories = [
     tag: "SERIES RTX & RX",
     title: "VGA / Kartu Grafis",
     priceBadge: "s/d Rp 14,0 Jt",
-    image: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=800&q=80",
+    image:
+      "https://lh3.googleusercontent.com/aida/AEtjO1VFYTJ66IZcoaOtGNFIRXDslEH1CLVSrJbNbDn61bMqnRsbAQhm7lfPgDT4Dy63vpBfOI2qD9XP1cdCNi_w977aPZRAZYQhMwIxfPl1CpC3WoELDy-78xBg3jCTEi7cm41-elrnm-F3JmbyKv_FLsLnRzDF_reQdMS2j4mQvf8uv8atXgdNNzs4-Mb708C2GK_hZkXzM7__gkZ82yiVyPb96MPMnkCe-Z8irRIWHSx1R-rk9xqvIRqvEGt7",
     gridClass: "md:col-span-7 lg:col-span-5",
     isTall: false,
     waLink:
@@ -31,7 +33,8 @@ const categories = [
     tag: "CUSTOM RIG & AIO",
     title: "PC Desktop & Rig",
     priceBadge: "s/d Rp 22,0 Jt",
-    image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=800&q=80",
+    image:
+      "https://lh3.googleusercontent.com/aida/AEtjO1V2Vw_faD54FK9_gfV3LuMhk2___EXozZjUCuVZ5AOM5KBtMXga8c0_XPlBUPDtKKTPxQL7MHbmeR26yFbEWyITLmxAfSFZjy2xMGRbhuU36gA6LcYVQClLZfXJtdeGWO77N3rErQzw3A9Q6ANMIKHM4L1VkR8Mziz9T1qmf-LfmdRP_g0WSQPuTAJv88QGR8EcZkNQfpGgEXlABx-BPsY2IWGJGRdBa-SKLPLINW5zbflHc-k30UvCgY",
     gridClass: "md:col-span-6 lg:col-span-3",
     isTall: false,
     waLink:
@@ -43,7 +46,8 @@ const categories = [
     tag: "RACKMOUNT & STORAGE",
     title: "Server & Enterprise",
     priceBadge: "s/d Rp 85,0 Jt",
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+    image:
+      "https://lh3.googleusercontent.com/aida/AEtjO1X0-wlf0EoJrAR84kLu2l31wLEyVPbjKXRtwLjhrz59rOyGQKI4UfQjWgGRUI2z4RKu_EuvchHXUa5WHwJ27wc40ihynT6TNSoNm8cBalVVhD62lknhuE67cIRsvtb1xMs3PZCS16tnV4sor6o7oWj79dWuEdSBQP3aLQdVOzj2APdeHOFnf1obY6f1scaah_UDC0ATU95teep_AfXSx6ANk9L1cIGoOCRULWCh_gLEhEro-dkHTAoG6cIA",
     gridClass: "md:col-span-6 lg:col-span-4",
     isTall: false,
     waLink:
@@ -55,7 +59,8 @@ const categories = [
     tag: "CPU & MOBO",
     title: "Motherboard & CPU",
     priceBadge: "s/d Rp 7,5 Jt",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+    image:
+      "https://lh3.googleusercontent.com/aida/AEtjO1XpJ4-8x5qTfwLW8IDiew6MeY0QkbKQRQpRAg11jYCPLwIFPjGj7pBDrGF3SY5VhdNEsqs2QTdPgq7C7GpuV9lB3Vv55ZSH2zRJv45-fXSqOfMbuTC-eT06e7W_vGPwNt1yvsxg9bcaKAwdWWSQBWKn60PrYViAtykcxJ5N3c9fjBZWFn-NPHG8lGyLXrv6sYUGXGB5LxW7lzh0S2nPey-ePFzTbuMTAWVZ-SJ4Cvjba5OkHle9eMJpido6",
     gridClass: "md:col-span-6 lg:col-span-2",
     isTall: false,
     waLink:
@@ -67,7 +72,8 @@ const categories = [
     tag: "PART MATI & KANIBAL",
     title: "Limbah E-Waste",
     priceBadge: "Rp 350rb/Kg",
-    image: "https://images.unsplash.com/photo-1562976540-1502c2145186?w=800&q=80",
+    image:
+      "https://lh3.googleusercontent.com/aida/AEtjO1Uzez8G6LJablXLTLJAFTpXIV4tJQbjyKlo8EUZx4WVzh5COoE3GM_qQl9UBibfvGFIyyKFOdt0PL-g0w-btajpJUEd3JrdzsnMipGJu8ntEWh70o0syNsOoSeFDylCqhUg5OlGfWD9zLCegdhm84OlBfvkhLs8u9LpgaIeMxYbs2nRzx3a9Zmy_iYrno3OBDzafKZIelje2GdQLScDaCIEFrv4OZmhd43AhXwUeRHuX-EfL5fXxWsrU9pw",
     gridClass: "md:col-span-6 lg:col-span-2",
     isTall: false,
     waLink:

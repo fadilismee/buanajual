@@ -1,5 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { FloatingWa } from "@/components/FloatingWa";
@@ -9,8 +8,6 @@ import { StepsSection } from "@/components/StepsSection";
 import { B2BLiquidation } from "@/components/B2BLiquidation";
 import { DepoLocations } from "@/components/DepoLocations";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
-import { HardwareConditionStage } from "@/components/HardwareConditionStage";
-import { BuybackCatalog } from "@/components/BuybackCatalog";
 import { JualFaq } from "@/components/JualFaq";
 import { TradeInCta } from "@/components/TradeInCta";
 
@@ -26,7 +23,7 @@ export const Route = createFileRoute("/jual/")({
       {
         name: "description",
         content:
-          "Pusat buyback & lelang hardware komputer: laptop, VGA artefak, motherboard mati total, PC kantor di 3 depo cabang (Cikarang, Gunungkidul DIY, Lampung). Estimasi < 15 menit, dana cair langsung di tempat. WA 0859-7922-0599.",
+          "Pusat buyback & likuidasi hardware: laptop mati total, VGA artefak, motherboard konslet, PC kantor di 3 depo cabang (Cikarang, Gunungkidul DIY, Lampung). Estimasi < 15 menit, dana cair langsung di tempat. WA 0859-7922-0599.",
       },
       {
         name: "keywords",
@@ -52,44 +49,23 @@ export const Route = createFileRoute("/jual/")({
 });
 
 function JualPage() {
-  const navigate = useNavigate();
-  const search = Route.useSearch();
-  const [query, setQuery] = useState(search.q ?? "");
-
-  useEffect(() => {
-    setQuery(search.q ?? "");
-  }, [search.q]);
-
-  const handleQueryChange = (value: string) => {
-    setQuery(value);
-    navigate({
-      to: "/jual",
-      search: value.trim() ? { q: value } : {},
-      replace: true,
-    });
-  };
-
-  const handleAjukan = (title: string, category: string) => {
-    navigate({ to: "/jual/form", search: { model: title, category } });
-  };
-
   return (
     <div className="min-h-screen bg-surface text-on-surface">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <SiteHeader query={query} onQueryChange={handleQueryChange} />
-      <JualHero />
-      <HardwareBentoGrid />
-      <StepsSection />
-      <B2BLiquidation />
-      <DepoLocations />
-      <TestimonialsSection />
-      <HardwareConditionStage />
-      <BuybackCatalog query={query} onQueryChange={handleQueryChange} onAjukan={handleAjukan} />
-      <JualFaq />
-      <TradeInCta />
+      <SiteHeader />
+      <main>
+        <JualHero />
+        <HardwareBentoGrid />
+        <StepsSection />
+        <B2BLiquidation />
+        <TestimonialsSection />
+        <DepoLocations />
+        <JualFaq />
+        <TradeInCta />
+      </main>
       <SiteFooter />
       <FloatingWa />
     </div>
