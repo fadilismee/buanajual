@@ -1,50 +1,48 @@
+import { MessageCircle } from "lucide-react";
 import { Reveal } from "./Reveal";
-import { Link } from "@tanstack/react-router";
-import { Recycle, MessageCircle } from "lucide-react";
 
-const WA_TRADEIN =
+const WA_DIRECT =
   "https://wa.me/6285979220599?text=" +
-  encodeURIComponent("Halo Gudang Komputer, saya ingin tukar tambah hardware lama");
+  encodeURIComponent("Halo Gudang Komputer, saya mau jual hardware komputer bekas/rusak");
 
 export function TradeInCta() {
   return (
-    <Reveal from="bottom" delay={0} className="mx-auto w-full max-w-7xl px-4 pb-10 sm:pb-14">
-      <Reveal
-        from="left"
-        delay={0}
-        className="flex flex-col items-center justify-between gap-6 rounded-2xl bg-gradient-to-r from-pri via-pri-container to-sec p-6 text-on-pri shadow-xl lg:flex-row lg:p-10"
-      >
-        <div className="max-w-2xl space-y-2">
-          <div className="font-monotech inline-flex items-center gap-1.5 rounded-full bg-on-pri/20 px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider">
-            <Recycle size={14} />
-            Program Tukar Tambah (Trade-In Upgrade)
+    <section className="relative w-full bg-surface-container py-16 border-t border-surface-container-high text-center overflow-hidden">
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-primary-container/15 blur-[120px] rounded-full" />
+
+      <div className="relative w-full max-w-[800px] mx-auto px-4 flex flex-col items-center gap-4">
+        <Reveal from="bottom">
+          <div className="space-y-3">
+            <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl uppercase text-on-surface font-extrabold tracking-tight">
+              Siap Ubah Hardware Menjadi Uang Tunai?
+            </h2>
+            <p className="text-xs sm:text-base text-on-surface-variant max-w-lg mx-auto leading-relaxed">
+              Hubungi tim teknisi kami via WhatsApp sekarang untuk estimasi penawaran instan dalam
+              15 menit di 3 cabang resmi.
+            </p>
           </div>
-          <h3 className="font-heading text-2xl font-bold sm:text-3xl">
-            Bawa Laptop / PC Lama Rusak Anda, Bawa Pulang Rakitan Baru Bergaransi!
-          </h3>
-          <p className="text-on-pri/90">
-            Hardware lama atau laptop rusak Anda langsung dipotongkan sebagai uang muka (DP) tukar
-            tambah PC kantor, PC gaming, maupun laptop normal bergaransi di 3 cabang resmi Gudang
-            Komputer (Gunungkidul, Lampung, Cikarang).
-          </p>
-        </div>
-        <div className="flex w-full shrink-0 flex-col items-center gap-3 sm:w-auto sm:flex-row lg:flex-col xl:flex-row">
-          <Link
-            to="/jual/form"
-            className="font-heading flex w-full items-center justify-center gap-2 rounded-xl bg-surface-lowest px-6 py-3 text-center font-bold text-pri shadow-md transition-colors hover:bg-surface-high sm:w-auto"
-          >
-            Konsultasi Trade-In <span aria-hidden>→</span>
-          </Link>
-          <a
-            href={WA_TRADEIN}
-            target="_blank"
-            rel="noreferrer"
-            className="font-heading flex w-full items-center justify-center gap-2 rounded-xl border border-on-pri/30 bg-on-pri/10 px-5 py-3 text-center text-on-pri transition-colors hover:bg-on-pri/20 sm:w-auto"
-          >
-            <MessageCircle size={18} /> Hubungi Tim Sales
-          </a>
-        </div>
-      </Reveal>
-    </Reveal>
+
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
+            <a
+              className="inline-flex items-center gap-2 bg-primary-container hover:bg-secondary-container text-white px-8 py-3.5 rounded font-heading text-xs sm:text-sm uppercase tracking-wider font-bold transition-all duration-300 shadow-lg shadow-primary-container/25 hover:shadow-[0_0_25px_rgba(255,94,20,0.5)] hover:scale-[1.02]"
+              href={WA_DIRECT}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <MessageCircle size={18} />
+              <span>Konsultasi Penjualan via WhatsApp</span>
+            </a>
+          </div>
+
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 font-monotech text-[11px] text-on-surface-variant">
+            <span>✓ Cek Lab Gratis 15 Menit</span>
+            <span>•</span>
+            <span>✓ 3 Cabang Resmi (DIY, Lampung, Cikarang)</span>
+            <span>•</span>
+            <span>✓ Dana Cair Detik Itu Juga</span>
+          </div>
+        </Reveal>
+      </div>
+    </section>
   );
 }

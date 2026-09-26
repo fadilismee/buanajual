@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, MessageCircle, Search, X } from "lucide-react";
+import { Menu, Search, X, Zap } from "lucide-react";
 
 type SiteHeaderProps = {
   query?: string;
@@ -9,7 +9,7 @@ type SiteHeaderProps = {
 
 const WA_LINK =
   "https://wa.me/6285979220599?text=" +
-  encodeURIComponent("Halo Gudang Komputer, saya ingin tanya-tanya soal jual hardware bekas");
+  encodeURIComponent("Halo Gudang Komputer, saya mau cek estimasi harga hardware");
 
 export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps) {
   const navigate = useNavigate();
@@ -18,6 +18,7 @@ export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps)
   const isJual = pathname === "/jual" || pathname === "/";
   const [localQuery, setLocalQuery] = useState("");
   const query = propQuery ?? localQuery;
+
   const handleQueryChange = (value: string) => {
     onQueryChange?.(value);
     setLocalQuery(value);
@@ -27,6 +28,8 @@ export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps)
     if (e) e.preventDefault();
     if (isJual) {
       onQueryChange?.(query);
+      const el = document.getElementById("katalog-buyback");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     } else {
       const q = query.trim();
       navigate({ to: "/jual", search: q ? { q } : {} });
@@ -37,200 +40,190 @@ export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps)
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinkClass = (active: boolean) =>
-    `rounded-lg px-3 py-2 text-[13px] font-medium transition-colors ${
-      active ? "bg-pri/10 text-pri" : "text-black/70 hover:bg-black/5 hover:text-black"
+    `rounded px-3 py-1.5 text-xs font-semibold uppercase tracking-wider transition-colors ${
+      active
+        ? "bg-primary-container text-on-primary-container font-bold"
+        : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
     }`;
 
   const marqueeItems = [
-    "Konsultasi Gratis — Chat WA 0859-7922-0599 →",
-    "Jual Rusak? Laptop 500rb–2,5jt • VGA • Mobo — Estimasi Cepat Via WA →",
-    "3 Lokasi Cabang: Gunungkidul (DIY) • Lampung • Cikarang (Jabar) →",
-    "Harga Terbaik & Transparan — Cek Price List Sekarang →",
+    "ESTIMASI < 15 MENIT • DANA CAIR INSTAN",
+    "3 DEPO CABANG: CIKARANG (JABAR) • GUNUNGKIDUL (DIY) • LAMPUNG",
+    "TERIMA SEGALA KONDISI: NORMAL, RUSAK, MINUS & MATOT",
+    "SANITASI MILITER (MILITARY DATA WIPE) 100% AMAN AUDIT ISO",
+    "LELANG & LIKUIDASI PC KANTOR / INSTANSI SE-INDONESIA",
   ];
 
-  const searchInput = (
-    <div className="relative w-full">
-      <Search
-        size={16}
-        className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-black/40"
-      />
-      <input
-        value={query}
-        onChange={(e) => handleQueryChange(e.target.value)}
-        placeholder="Cari seri: RTX 3060, H61 Matot, ThinkPad..."
-        aria-label="Cari hardware"
-        className="h-10 w-full rounded-full border border-black/10 bg-muted/50 pl-9 pr-4 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-pri/40 focus:bg-white focus:ring-2 focus:ring-pri/20"
-      />
-    </div>
-  );
-
   return (
-    <header className="sticky top-0 z-40 w-full">
-      {/* Top bar — running text CTA, hover pause */}
-      <div className="overflow-hidden bg-[#0f0f0f] text-white">
-        <div className="group flex items-center whitespace-nowrap py-1.5 text-[11px] tracking-wide sm:py-2 sm:text-xs">
-          <div className="flex w-max animate-marquee items-center gap-8 group-hover:[animation-play-state:paused] sm:gap-10 [animation-duration:28s]">
-            {[...marqueeItems, ...marqueeItems].map((txt, i) => (
-              <span key={`${txt}-${i}`} className="px-2 text-white/80">
-                {txt}
-              </span>
-            ))}
-          </div>
+    <header className="sticky top-0 z-40 w-full border-b border-surface-container bg-surface/95 backdrop-blur-md">
+      {/* Top Ticker Bar */}
+      <div className="overflow-hidden bg-surface-container-lowest border-b border-surface-container py-1.5 text-on-surface-variant text-[11px] font-monotech">
+        <div className="flex w-max animate-marquee items-center gap-10">
+          {[...marqueeItems, ...marqueeItems].map((txt, i) => (
+            <span key={i} className="inline-flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary-container" />
+              <span>{txt}</span>
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* Main navbar */}
-      <div className="border-b border-black/10 bg-white/95 shadow-sm backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3 lg:gap-5">
-          <Link
-            to="/jual"
-            className="flex shrink-0 items-center gap-2"
-            aria-label="Gudang Komputer — beranda"
-          >
+      {/* Main Navbar */}
+      <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        {/* Brand Logo */}
+        <Link to="/jual" className="flex shrink-0 items-center gap-2" aria-label="Gudang Komputer">
+          <div className="rounded-lg bg-white p-1 shadow-sm">
             <img
               src="/gudangkomputer-logo.png"
-              alt="Gudang Komputer"
-              className="h-9 sm:h-10 w-auto object-contain rounded-md"
-              loading="eager"
+              alt="Gudang Komputer Logo"
+              className="h-8 w-auto object-contain"
             />
+          </div>
+        </Link>
+
+        {/* Desktop Nav */}
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Navigasi Utama">
+          <Link to="/jual" className={navLinkClass(isJual)}>
+            Beranda
           </Link>
+          <a href="/jual#katalog-buyback" className={navLinkClass(false)}>
+            Kategori
+          </a>
+          <a href="/jual#cara-kerja" className={navLinkClass(false)}>
+            Cara Kerja
+          </a>
+          <a href="/jual#lokasi-depo" className={navLinkClass(false)}>
+            3 Depo Cabang
+          </a>
+          <Link to="/berita" className={navLinkClass(pathname.startsWith("/berita"))}>
+            Berita Acara
+          </Link>
+          <Link to="/jual/form" className={navLinkClass(pathname.startsWith("/jual/form"))}>
+            Form Taksiran
+          </Link>
+        </nav>
 
-          <nav
-            className="hidden items-center gap-1 text-[13px] lg:flex"
-            aria-label="Navigasi utama"
-          >
-            <Link to="/jual" className={navLinkClass(isJual)}>
-              Beranda
-            </Link>
-            <Link to="/jual/form" className={navLinkClass(pathname.startsWith("/jual/form"))}>
-              Ajukan Jual
-            </Link>
-            <Link to="/berita" className={navLinkClass(pathname.startsWith("/berita"))}>
-              Berita Acara
-            </Link>
-            <a href="#kontak" className={navLinkClass(false)}>
-              Kontak
-            </a>
-          </nav>
-
+        {/* Search Bar & Actions */}
+        <div className="flex items-center gap-2.5">
           {/* Desktop Search */}
-          <form onSubmit={handleSearchSubmit} className="mx-2 hidden max-w-md flex-1 lg:flex">
-            {searchInput}
+          <form onSubmit={handleSearchSubmit} className="relative hidden md:block w-48 lg:w-64">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-outline" />
+            <input
+              value={query}
+              onChange={(e) => handleQueryChange(e.target.value)}
+              placeholder="Cari hardware..."
+              className="w-full rounded-md border border-surface-container-high bg-surface-container-low py-1.5 pl-8 pr-3 text-xs text-on-surface placeholder:text-outline outline-none focus:border-primary-container"
+            />
           </form>
 
-          {/* Mobile Spacer */}
-          <div className="flex-1 lg:hidden" />
+          {/* Mobile Search Toggle */}
+          <button
+            type="button"
+            onClick={() => {
+              setSearchOpen((v) => !v);
+              setMenuOpen(false);
+            }}
+            className="flex h-9 w-9 items-center justify-center rounded border border-surface-container-high bg-surface-container text-on-surface md:hidden"
+            aria-label="Cari hardware"
+          >
+            {searchOpen ? <X size={16} /> : <Search size={16} />}
+          </button>
 
-          {/* Action buttons */}
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                setSearchOpen((v) => !v);
-                setMenuOpen(false);
-              }}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 text-black/70 transition-colors hover:bg-black hover:text-white lg:hidden"
-              aria-label={searchOpen ? "Tutup pencarian" : "Buka pencarian"}
-              aria-expanded={searchOpen}
-            >
-              {searchOpen ? <X size={18} /> : <Search size={18} />}
-            </button>
+          {/* Primary CTA Button */}
+          <a
+            href={WA_LINK}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 rounded bg-primary-container px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-secondary-container hover:shadow-[0_0_15px_rgba(255,94,20,0.4)]"
+          >
+            <Zap size={14} />
+            <span className="hidden sm:inline">Cek Harga Instan</span>
+            <span className="sm:hidden">Cek Harga</span>
+          </a>
 
-            <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-pri px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-pri-container sm:px-4"
-            >
-              <MessageCircle size={15} />
-              <span className="hidden sm:inline">Chat WA</span>
-            </a>
-
-            {/* Mobile menu button */}
-            <button
-              type="button"
-              onClick={() => {
-                setMenuOpen((v) => !v);
-                setSearchOpen(false);
-              }}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/10 text-black/70 transition-colors hover:bg-black hover:text-white lg:hidden"
-              aria-label={menuOpen ? "Tutup menu" : "Buka menu"}
-              aria-expanded={menuOpen}
-            >
-              {menuOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
+          {/* Mobile Menu Toggle */}
+          <button
+            type="button"
+            onClick={() => {
+              setMenuOpen((v) => !v);
+              setSearchOpen(false);
+            }}
+            className="flex h-9 w-9 items-center justify-center rounded border border-surface-container-high bg-surface-container text-on-surface lg:hidden"
+            aria-label="Menu"
+          >
+            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
         </div>
-
-        {/* Mobile slide-down navigation drawer */}
-        {menuOpen && (
-          <div className="border-t border-black/10 bg-white px-4 py-4 shadow-lg lg:hidden">
-            <nav
-              className="flex flex-col gap-1 text-sm font-medium text-black/80"
-              aria-label="Navigasi mobile"
-            >
-              <Link
-                to="/jual"
-                onClick={() => setMenuOpen(false)}
-                className={`flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors ${
-                  isJual ? "bg-pri/10 text-pri" : "hover:bg-black/5 hover:text-black"
-                }`}
-              >
-                <span>Beranda</span>
-                <span className="text-xs text-muted-foreground">Buyback →</span>
-              </Link>
-              <Link
-                to="/jual/form"
-                onClick={() => setMenuOpen(false)}
-                className={`flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors ${
-                  pathname.startsWith("/jual/form")
-                    ? "bg-pri/10 text-pri"
-                    : "hover:bg-black/5 hover:text-black"
-                }`}
-              >
-                <span>Ajukan Jual</span>
-                <span className="text-xs text-muted-foreground">Form →</span>
-              </Link>
-              <Link
-                to="/berita"
-                onClick={() => setMenuOpen(false)}
-                className={`flex items-center justify-between rounded-lg px-3 py-2.5 transition-colors ${
-                  pathname.startsWith("/berita")
-                    ? "bg-pri/10 text-pri"
-                    : "hover:bg-black/5 hover:text-black"
-                }`}
-              >
-                <span>Berita Acara</span>
-                <span className="text-xs text-muted-foreground">Arsip →</span>
-              </Link>
-              <a
-                href="#kontak"
-                onClick={() => setMenuOpen(false)}
-                className="flex items-center justify-between rounded-lg px-3 py-2.5 hover:bg-black/5 hover:text-black"
-              >
-                <span>3 Lokasi Cabang</span>
-                <span className="text-xs text-muted-foreground">
-                  Gunungkidul • Lampung • Cikarang →
-                </span>
-              </a>
-            </nav>
-          </div>
-        )}
       </div>
 
-      {/* Mobile search drawer */}
+      {/* Mobile Search Bar */}
       {searchOpen && (
-        <div className="border-b border-black/10 bg-white px-4 py-3 shadow-sm lg:hidden">
+        <div className="border-t border-surface-container bg-surface-container-low px-4 py-3 md:hidden">
           <form onSubmit={handleSearchSubmit} className="flex gap-2">
-            {searchInput}
+            <input
+              value={query}
+              onChange={(e) => handleQueryChange(e.target.value)}
+              placeholder="Cari tipe laptop, VGA, mobo..."
+              className="w-full rounded border border-surface-container-high bg-surface-container py-2 pl-3 pr-3 text-xs text-on-surface outline-none focus:border-primary-container"
+            />
             <button
               type="submit"
-              className="shrink-0 rounded-full bg-pri px-4 text-sm font-semibold text-white transition-colors hover:bg-pri-container"
+              className="shrink-0 rounded bg-primary-container px-4 text-xs font-bold text-white uppercase"
             >
               Cari
             </button>
           </form>
         </div>
+      )}
+
+      {/* Mobile Drawer Navigation */}
+      {menuOpen && (
+        <nav className="border-t border-surface-container bg-surface-container-lowest px-4 py-4 lg:hidden">
+          <div className="flex flex-col gap-1.5 text-xs font-semibold uppercase tracking-wider">
+            <Link
+              to="/jual"
+              onClick={() => setMenuOpen(false)}
+              className="rounded p-2.5 text-on-surface hover:bg-surface-container"
+            >
+              Beranda
+            </Link>
+            <a
+              href="/jual#katalog-buyback"
+              onClick={() => setMenuOpen(false)}
+              className="rounded p-2.5 text-on-surface hover:bg-surface-container"
+            >
+              Kategori Diterima
+            </a>
+            <a
+              href="/jual#cara-kerja"
+              onClick={() => setMenuOpen(false)}
+              className="rounded p-2.5 text-on-surface hover:bg-surface-container"
+            >
+              Cara Kerja Transparan
+            </a>
+            <a
+              href="/jual#lokasi-depo"
+              onClick={() => setMenuOpen(false)}
+              className="rounded p-2.5 text-on-surface hover:bg-surface-container"
+            >
+              3 Depo Cabang (Cikarang, GK, Lampung)
+            </a>
+            <Link
+              to="/berita"
+              onClick={() => setMenuOpen(false)}
+              className="rounded p-2.5 text-on-surface hover:bg-surface-container"
+            >
+              Berita Acara Transaksi
+            </Link>
+            <Link
+              to="/jual/form"
+              onClick={() => setMenuOpen(false)}
+              className="rounded p-2.5 text-primary-container bg-primary-container/10 font-bold"
+            >
+              Form Pengajuan Taksiran →
+            </Link>
+          </div>
+        </nav>
       )}
     </header>
   );

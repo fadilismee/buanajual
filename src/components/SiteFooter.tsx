@@ -1,83 +1,86 @@
 import { Link } from "@tanstack/react-router";
-import { Building2, MapPin, MessageCircle } from "lucide-react";
+import { Building2, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
 
 export function SiteFooter() {
   const branches = [
     {
-      city: "Gunungkidul (Yogyakarta)",
-      badge: "Cabang DIY",
-      address: "Gunungkidul, D.I. Yogyakarta",
-      desc: "Pengecekan lab transparan, COD jemput Jogja & sekitarnya, terima borongan kantor.",
-      waText: "Halo Gudang Komputer Cabang Gunungkidul, saya mau jual/taksir hardware bekas",
+      city: "Depo Cikarang (Jawa Barat)",
+      badge: "Kawasan Industri Jabodetabek",
+      address: "Kawasan Industri MM2100, Jl. Selayar Blok D, Cikarang Barat, Kab. Bekasi 17530",
+      desc: "Live testing lab, terima satuan & lelang komputer kantor.",
+      waText: "Halo PIC Depo Cikarang, saya mau jual/taksir hardware bekas",
     },
     {
-      city: "Lampung (Sumatera)",
-      badge: "Cabang Sumatera",
-      address: "Lampung (Pusat Layanan Regional)",
-      desc: "Pusat buyback & kanibal part hardware Sumatera, drop-in lab & kirim paket.",
-      waText: "Halo Gudang Komputer Cabang Lampung, saya mau jual/taksir hardware bekas",
+      city: "Depo Gunungkidul (Yogyakarta)",
+      badge: "Hub DIY & Jawa Tengah",
+      address: "Jl. KH Agus Salim, Ledoksari, Kepek, Wonosari, Kab. Gunungkidul 55813",
+      desc: "Pusat timbang e-waste & PC matot, COD jemput wilayah Jogja.",
+      waText: "Halo PIC Depo Gunungkidul, saya mau jual/taksir hardware bekas",
     },
     {
-      city: "Cikarang (Jawa Barat)",
-      badge: "Cabang Jabodetabek",
-      address: "Cikarang, Kab. Bekasi, Jawa Barat",
-      desc: "Layanan buyback area industri & perumahan Jabodetabek, terima lelang & satuan.",
-      waText: "Halo Gudang Komputer Cabang Cikarang, saya mau jual/taksir hardware bekas",
+      city: "Depo Lampung (Sumatera)",
+      badge: "Pusat Layanan Regional",
+      address: "Jl. Sultan Agung No. 88, Way Halim Permai, Kota Bandar Lampung 35141",
+      desc: "Hub buyback & kanibal part Sumatera, drop-in & ekspedisi.",
+      waText: "Halo PIC Depo Lampung, saya mau jual/taksir hardware bekas",
     },
   ];
 
   return (
-    <footer id="kontak" className="border-t border-white/10 bg-[#0f0f0f] text-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:py-16">
-        {/* Top summary & navigation grid */}
-        <div className="grid gap-10 lg:grid-cols-12 pb-12 border-b border-white/10">
+    <footer
+      id="kontak"
+      className="border-t border-surface-container bg-surface-container-lowest text-on-surface"
+    >
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        {/* Top Summary & Navigation */}
+        <div className="grid gap-10 lg:grid-cols-12 pb-12 border-b border-surface-container">
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-2">
-              <div className="rounded-xl bg-white p-1.5 shadow-sm inline-flex items-center">
+              <div className="rounded-lg bg-white p-1.5 shadow-sm inline-flex items-center">
                 <img
                   src="/gudangkomputer-logo.png"
-                  alt="Gudang Komputer"
-                  className="h-9 w-auto object-contain"
+                  alt="Gudang Komputer Logo"
+                  className="h-8 w-auto object-contain"
                   loading="lazy"
                 />
               </div>
+              <span className="font-heading text-lg font-extrabold uppercase tracking-tight text-white">
+                GUDANG KOMPUTER
+              </span>
             </div>
-            <p className="max-w-md text-sm leading-relaxed text-white/70">
-              Pusat buyback dan tukar tambah laptop bekas, laptop rusak, motherboard, VGA artefak,
-              dan lelang komputer kantor. Taksiran akurat, cek lab 15 menit, dan pembayaran instan
-              di 3 lokasi cabang resmi.
+
+            <p className="max-w-md text-xs sm:text-sm leading-relaxed text-on-surface-variant">
+              Pusat pertukaran &amp; buyback resmi hardware komputer, laptop mati/normal, GPU
+              artefak, dan lelang komputer kantor dengan sistem diagnosa terbuka dan pencairan dana
+              instan.
             </p>
-            <div className="pt-2 flex flex-wrap gap-2">
-              <a
-                href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-xl bg-pri px-4 py-2.5 text-xs font-bold text-white transition-colors hover:bg-pri-container"
-              >
-                <MessageCircle size={15} />
-                <span>WhatsApp Hotline 0859-7922-0599</span>
-              </a>
+
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <span className="font-monotech inline-flex items-center gap-1.5 text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded">
+                <ShieldCheck size={13} />
+                ISO 14001:2015 Data Wipe Certified
+              </span>
             </div>
           </div>
 
           <div className="lg:col-span-7 grid gap-8 sm:grid-cols-3">
             <div className="text-sm">
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-white/90">
+              <h4 className="font-monotech text-xs font-bold uppercase tracking-widest text-primary-fixed mb-3">
                 Layanan Kami
               </h4>
-              <ul className="mt-4 space-y-2 text-white/75">
+              <ul className="space-y-2 text-xs text-on-surface-variant font-heading font-medium">
                 <li>
-                  <Link to="/jual" className="hover:text-white hover:underline">
-                    Jual Hardware Bekas
+                  <Link to="/jual" className="hover:text-primary-container transition-colors">
+                    Katalog Kategori
                   </Link>
                 </li>
                 <li>
-                  <Link to="/jual/form" className="hover:text-white hover:underline">
+                  <Link to="/jual/form" className="hover:text-primary-container transition-colors">
                     Form Taksiran Online
                   </Link>
                 </li>
                 <li>
-                  <Link to="/berita" className="hover:text-white hover:underline">
+                  <Link to="/berita" className="hover:text-primary-container transition-colors">
                     Berita Acara Transaksi
                   </Link>
                 </li>
@@ -86,7 +89,7 @@ export function SiteFooter() {
                     href="https://service.gudangkomputer.web.id"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-white hover:underline"
+                    className="hover:text-primary-container transition-colors"
                   >
                     Layanan Servis Lab
                   </a>
@@ -95,57 +98,55 @@ export function SiteFooter() {
             </div>
 
             <div className="text-sm">
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-white/90">
+              <h4 className="font-monotech text-xs font-bold uppercase tracking-widest text-primary-fixed mb-3">
                 Jam Operasional
               </h4>
-              <ul className="mt-4 space-y-2 text-white/75 text-xs">
+              <ul className="space-y-2 text-xs text-on-surface-variant font-monotech">
                 <li>
                   <strong className="text-white">Senin – Sabtu:</strong>
                   <br />
-                  09.00 – 20.00 WIB
+                  08.30 – 17.00 WIB
                 </li>
                 <li>
                   <strong className="text-white">Minggu:</strong>
                   <br />
-                  10.00 – 17.00 WIB (Janjian WA)
+                  Janjian Online via WA
                 </li>
-                <li className="pt-1 text-white/50">Konsultasi online via WhatsApp 24 jam.</li>
+                <li className="pt-1 text-[11px] text-emerald-400">Konsultasi WA: 24 Jam</li>
               </ul>
             </div>
 
             <div className="text-sm">
-              <h4 className="text-xs font-semibold uppercase tracking-widest text-white/90">
-                Informasi & Panduan
+              <h4 className="font-monotech text-xs font-bold uppercase tracking-widest text-primary-fixed mb-3">
+                Hotline &amp; B2B
               </h4>
-              <ul className="mt-4 space-y-2 text-white/75">
+              <ul className="space-y-2 text-xs text-on-surface-variant font-heading font-medium">
                 <li>
                   <a
-                    href="https://gudangkomputer.web.id/blog"
+                    href="https://wa.me/6285979220599"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white hover:underline"
+                    rel="noreferrer"
+                    className="hover:text-primary-container transition-colors"
                   >
-                    Blog &amp; Tips Hardware
+                    WA: 0859-7922-0599
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="/jual#b2b-liquidation"
+                    className="hover:text-primary-container transition-colors"
+                  >
+                    Lelang Aset Kantor B2B
                   </a>
                 </li>
                 <li>
                   <a
                     href="https://gudangkomputer.web.id/about"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white hover:underline"
+                    rel="noreferrer"
+                    className="hover:text-primary-container transition-colors"
                   >
-                    Tentang Laboratorium
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://gudangkomputer.web.id/about"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white hover:underline"
-                  >
-                    Keamanan Data Wipe
+                    Keamanan Data Sanitasi
                   </a>
                 </li>
               </ul>
@@ -153,19 +154,19 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* 3 Location Branches Grid */}
-        <div className="py-10 border-b border-white/10">
+        {/* 3 Regional Depo Locations Grid */}
+        <div className="py-10 border-b border-surface-container">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <div>
-              <span className="font-monotech text-[10px] font-bold uppercase tracking-widest text-pri-fixed">
-                Jaringan Cabang Resmi
+              <span className="font-monotech text-[10px] font-bold uppercase tracking-widest text-primary-container">
+                JARINGAN DEPO RESMI
               </span>
-              <h3 className="font-heading text-lg font-bold text-white sm:text-xl">
-                3 Lokasi Workshop &amp; Lab Gudang Komputer
+              <h3 className="font-heading text-lg font-bold text-white sm:text-xl uppercase">
+                3 Lokasi Depo &amp; Lab Gudang Komputer
               </h3>
             </div>
-            <span className="font-monotech rounded-full bg-white/10 px-3 py-1 text-[11px] text-white/75">
-              Siap Melayani Satuan &amp; Borongan
+            <span className="font-monotech rounded-full bg-surface-container px-3 py-1 text-[11px] text-primary-fixed border border-surface-container-high">
+              Siap Layani Satuan &amp; Borongan Kantor
             </span>
           </div>
 
@@ -173,36 +174,36 @@ export function SiteFooter() {
             {branches.map((b) => (
               <div
                 key={b.city}
-                className="flex flex-col justify-between rounded-xl border border-white/10 bg-white/5 p-4 sm:p-5 transition-all hover:border-white/20 hover:bg-white/[0.07]"
+                className="flex flex-col justify-between rounded-xl border border-surface-container-high bg-surface-container p-4 sm:p-5 transition-all hover:border-primary-container/40"
               >
-                <div className="space-y-2.5">
+                <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-monotech inline-flex items-center gap-1 rounded bg-pri/30 px-2 py-0.5 text-[10px] font-bold text-pri-fixed">
+                    <span className="font-monotech inline-flex items-center gap-1 rounded bg-primary-container/20 px-2 py-0.5 text-[10px] font-bold text-primary-fixed">
                       <Building2 size={12} />
                       {b.badge}
                     </span>
-                    <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-monotech">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                    <span className="flex items-center gap-1 text-[10px] text-emerald-400 font-monotech">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       Aktif Melayani
                     </span>
                   </div>
-                  <h4 className="font-heading text-base font-bold text-white">{b.city}</h4>
-                  <p className="flex items-start gap-1.5 text-xs text-white/70">
-                    <MapPin size={14} className="shrink-0 text-white/40 mt-0.5" />
+                  <h4 className="font-heading text-sm font-bold text-white uppercase">{b.city}</h4>
+                  <p className="flex items-start gap-1.5 text-xs text-on-surface-variant">
+                    <MapPin size={13} className="shrink-0 text-primary-container mt-0.5" />
                     <span>{b.address}</span>
                   </p>
-                  <p className="text-xs text-white/60 leading-relaxed">{b.desc}</p>
+                  <p className="text-xs text-on-surface-variant/80 leading-relaxed">{b.desc}</p>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-white/10">
+                <div className="pt-3 mt-3 border-t border-surface-container-high">
                   <a
                     href={`https://wa.me/6285979220599?text=${encodeURIComponent(b.waText)}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-monotech inline-flex w-full items-center justify-center gap-1.5 rounded-lg border border-white/15 bg-white/5 py-2 text-xs font-semibold text-white transition-colors hover:bg-pri hover:border-pri"
+                    className="font-monotech inline-flex w-full items-center justify-center gap-1.5 rounded bg-surface-container-low hover:bg-primary-container hover:text-white border border-surface-container-high py-2 text-xs font-bold text-on-surface transition-colors"
                   >
                     <MessageCircle size={13} />
-                    <span>Hubungi Cabang {b.city.split(" ")[0]}</span>
+                    <span>Hubungi {b.city.split(" ")[1]}</span>
                   </a>
                 </div>
               </div>
@@ -210,15 +211,17 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Bottom copyright */}
-        <div className="pt-8 flex flex-col gap-2 text-xs text-white/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Gudang Komputer. Semua hak dilindungi.</p>
+        {/* Bottom copyright bar */}
+        <div className="pt-8 flex flex-col gap-2 text-xs text-on-surface-variant sm:flex-row sm:items-center sm:justify-between font-monotech">
+          <p>
+            © {new Date().getFullYear()} PT Gudang Komputer Nusantara. Seluruh Hak Cipta Dilindungi.
+          </p>
           <div className="flex gap-4">
             <a
               href="https://gudangkomputer.web.id/about"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white"
+              className="hover:text-primary-container transition-colors"
             >
               Syarat Layanan
             </a>
@@ -226,7 +229,7 @@ export function SiteFooter() {
               href="https://gudangkomputer.web.id/about"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white"
+              className="hover:text-primary-container transition-colors"
             >
               Kebijakan Privasi
             </a>

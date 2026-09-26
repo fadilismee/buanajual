@@ -5,12 +5,12 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { FloatingWa } from "@/components/FloatingWa";
 import { JualHero } from "@/components/JualHero";
 import { HardwareBentoGrid } from "@/components/HardwareBentoGrid";
-import { HardwareConditionStage } from "@/components/HardwareConditionStage";
-import { PromoBonus } from "@/components/PromoBonus";
-import { GradeGuide } from "@/components/GradeGuide";
-import { GalleryTerima } from "@/components/GalleryTerima";
-import { BuybackCatalog } from "@/components/BuybackCatalog";
 import { StepsSection } from "@/components/StepsSection";
+import { B2BLiquidation } from "@/components/B2BLiquidation";
+import { DepoLocations } from "@/components/DepoLocations";
+import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { HardwareConditionStage } from "@/components/HardwareConditionStage";
+import { BuybackCatalog } from "@/components/BuybackCatalog";
 import { JualFaq } from "@/components/JualFaq";
 import { TradeInCta } from "@/components/TradeInCta";
 
@@ -21,26 +21,26 @@ export const Route = createFileRoute("/jual/")({
   head: () => ({
     meta: [
       {
-        title: "Jual Laptop Bekas & Hardware Rusak Harga Terbaik — Gudang Komputer",
+        title: "Gudang Komputer — Jual Hardware Bekas, Rusak & Mati Total Cair Instan",
       },
       {
         name: "description",
         content:
-          "Jual laptop bekas, laptop rusak, motherboard, VGA, RAM & SSD ke 3 cabang Gudang Komputer (Gunungkidul DIY, Lampung, Cikarang). Price list buyback transparan, cek lab 15 menit, dana cair instan. WA 6285979220599.",
+          "Pusat buyback & lelang hardware komputer: laptop, VGA artefak, motherboard mati total, PC kantor di 3 depo cabang (Cikarang, Gunungkidul DIY, Lampung). Estimasi < 15 menit, dana cair langsung di tempat. WA 0859-7922-0599.",
       },
       {
         name: "keywords",
         content:
-          "jual laptop bekas, jual laptop rusak, harga beli laptop mati, jual motherboard rusak, jual vga rusak, buyback gunungkidul, buyback lampung, buyback cikarang, tukar tambah laptop",
+          "gudang komputer, jual laptop bekas, jual laptop rusak, harga beli laptop mati, jual vga artefak, jual motherboard rusak, depo cikarang, depo gunungkidul, depo lampung, lelang pc kantor",
       },
       {
         property: "og:title",
-        content: "Jual Hardware Bekas & Rusak Jadi Rupiah — Gudang Komputer",
+        content: "Gudang Komputer — Jual Hardware. Cair Sekarang.",
       },
       {
         property: "og:description",
         content:
-          "Daripada jadi rongsokan, tukar hardware Anda menjadi rupiah di 3 cabang Gudang Komputer (Gunungkidul, Lampung, Cikarang). Terima laptop, PC, motherboard, VGA normal, rusak & matot — taksiran transparan, cair instan.",
+          "Ubah laptop, GPU, motherboard, & PC mati total menjadi uang tunai di 3 cabang resmi Gudang Komputer. Cek lab 15 menit, dana langsung cair detik itu juga.",
       },
       { property: "og:image", content: "https://gudangkomputer.web.id/gudangkomputer-logo.png" },
       { property: "og:url", content: "https://gudangkomputer.web.id/jual" },
@@ -74,7 +74,7 @@ function JualPage() {
   };
 
   return (
-    <div className="min-h-screen bg-surface">
+    <div className="min-h-screen bg-surface text-on-surface">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
@@ -82,12 +82,12 @@ function JualPage() {
       <SiteHeader query={query} onQueryChange={handleQueryChange} />
       <JualHero />
       <HardwareBentoGrid />
-      <HardwareConditionStage />
-      <PromoBonus />
-      <BuybackCatalog query={query} onQueryChange={handleQueryChange} onAjukan={handleAjukan} />
-      <GradeGuide />
-      <GalleryTerima />
       <StepsSection />
+      <B2BLiquidation />
+      <DepoLocations />
+      <TestimonialsSection />
+      <HardwareConditionStage />
+      <BuybackCatalog query={query} onQueryChange={handleQueryChange} onAjukan={handleAjukan} />
       <JualFaq />
       <TradeInCta />
       <SiteFooter />
