@@ -61,8 +61,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   /*
-   * Gudang Industrial Exchange theme tokens (from jual/DESIGN.md).
-   * Industrial High-Contrast Dark + Safety Orange (#FF5E14).
+   * Gudang Industrial Exchange theme tokens (from jual/DESIGN.md & code.html).
    */
   --font-sans: "Space Grotesk", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
@@ -74,32 +73,36 @@
   --color-surface-lowest: #0c0e10;
   --color-surface-low: #1a1c1e;
   --color-surface-container: #1e2022;
+  --color-surface-container-lowest: #0c0e10;
+  --color-surface-container-low: #1a1c1e;
+  --color-surface-container-high: #282a2c;
+  --color-surface-container-highest: #333537;
   --color-surface-high: #282a2c;
   --color-surface-highest: #333537;
   --color-surface-variant: #333537;
   --color-on-surface: #e2e2e5;
-  --color-on-surface-variant: #94a3b8;
+  --color-on-surface-variant: #e4beb2;
   --color-inverse-surface: #e2e2e5;
   --color-inverse-on-surface: #2f3133;
   --color-inverse-primary: #a93800;
-  --color-outline: #64748b;
-  --color-outline-variant: #2e343b;
-  --color-pri: #ff5e14;
-  --color-on-pri: #ffffff;
-  --color-pri-container: #ff5e14;
-  --color-on-pri-container: #ffffff;
-  --color-pri-fixed: #ffdbcf;
-  --color-pri-fixed-dim: #ffb59b;
-  --color-on-pri-fixed: #380d00;
-  --color-on-pri-fixed-variant: #812900;
-  --color-sec: #ff7a30;
-  --color-on-sec: #ffffff;
-  --color-sec-container: #ea6b21;
-  --color-on-sec-container: #4c1a00;
-  --color-sec-fixed: #ffdbcc;
-  --color-sec-fixed-dim: #ffb693;
-  --color-on-sec-fixed: #351000;
-  --color-on-sec-fixed-variant: #7a2f00;
+  --color-outline: #aa897e;
+  --color-outline-variant: #5b4138;
+  --color-primary-container: #ff5e14;
+  --color-on-primary-container: #541800;
+  --color-primary: #ffb59b;
+  --color-on-primary: #5b1a00;
+  --color-primary-fixed: #ffdbcf;
+  --color-primary-fixed-dim: #ffb59b;
+  --color-on-primary-fixed: #380d00;
+  --color-on-primary-fixed-variant: #812900;
+  --color-secondary-container: #ea6b21;
+  --color-on-secondary-container: #4c1a00;
+  --color-secondary: #ffb693;
+  --color-on-secondary: #561f00;
+  --color-secondary-fixed: #ffdbcc;
+  --color-secondary-fixed-dim: #ffb693;
+  --color-on-secondary-fixed: #351000;
+  --color-on-secondary-fixed-variant: #7a2f00;
   --color-tertiary: #b9c8de;
   --color-on-tertiary: #233143;
   --color-tertiary-container: #8695aa;
@@ -108,8 +111,17 @@
   --color-tertiary-fixed-dim: #b9c8de;
   --color-on-tertiary-fixed: #0d1c2d;
   --color-on-tertiary-fixed-variant: #39485a;
+  --color-pri: #ff5e14;
+  --color-on-pri: #ffffff;
+  --color-pri-container: #ff5e14;
+  --color-on-pri-container: #ffffff;
+  --color-pri-fixed: #ffdbcf;
+  --color-pri-fixed-dim: #ffb59b;
+  --color-sec: #ff7a30;
+  --color-on-sec: #ffffff;
+  --color-sec-container: #ea6b21;
   --color-error: #ef4444;
-  --color-on-error: #ffffff;
+  --color-on-error: #690005;
   --color-error-container: #93000a;
   --color-on-error-container: #ffdad6;
   --color-brand-50: #fff7ed;
@@ -122,6 +134,17 @@
   --color-techdark: #0c0e10;
   --color-technavy: #121416;
   --color-techslate: #1e2022;
+
+  --spacing-space-xl: 2.5rem;
+  --spacing-margin: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-gutter: 1rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-margin-desktop: 3rem;
+  --spacing-space-xs: 0.25rem;
+  --spacing-margin-tablet: 2rem;
+  --spacing-space-md: 1rem;
+  --spacing-gutter-desktop: 1.5rem;
 }
 
 :root {
@@ -218,6 +241,29 @@
     background-image: radial-gradient(rgba(255, 94, 20, 0.08) 1px, transparent 1px);
     background-size: 32px 32px;
   }
+
+  .font-label-tech { font-family: 'Space Grotesk', sans-serif; font-size: 11px; line-height: 14px; letter-spacing: 0.08em; font-weight: 700; }
+  .text-label-tech { font-size: 11px; line-height: 14px; letter-spacing: 0.08em; }
+  .font-label-md { font-family: 'Space Grotesk', sans-serif; font-size: 12px; line-height: 16px; letter-spacing: 0.04em; font-weight: 600; }
+  .text-label-md { font-size: 12px; line-height: 16px; letter-spacing: 0.04em; }
+  .font-label-lg { font-family: 'Space Grotesk', sans-serif; font-size: 14px; line-height: 20px; letter-spacing: 0.02em; font-weight: 600; }
+  .text-label-lg { font-size: 14px; line-height: 20px; letter-spacing: 0.02em; }
+  .font-body-sm { font-family: 'Space Grotesk', sans-serif; font-size: 12px; line-height: 16px; font-weight: 400; }
+  .text-body-sm { font-size: 12px; line-height: 16px; }
+  .font-body-md { font-family: 'Space Grotesk', sans-serif; font-size: 14px; line-height: 20px; font-weight: 400; }
+  .text-body-md { font-size: 14px; line-height: 20px; }
+  .font-body-lg { font-family: 'Space Grotesk', sans-serif; font-size: 16px; line-height: 24px; font-weight: 400; }
+  .text-body-lg { font-size: 16px; line-height: 24px; }
+  .font-title-md { font-family: 'Space Grotesk', sans-serif; font-size: 16px; line-height: 24px; font-weight: 600; }
+  .text-title-md { font-size: 16px; line-height: 24px; }
+  .font-headline-sm { font-family: 'Space Grotesk', sans-serif; font-size: 20px; line-height: 28px; font-weight: 600; }
+  .text-headline-sm { font-size: 20px; line-height: 28px; }
+  .font-headline-md { font-family: 'Space Grotesk', sans-serif; font-size: 24px; line-height: 32px; letter-spacing: -0.01em; font-weight: 600; }
+  .text-headline-md { font-size: 24px; line-height: 32px; letter-spacing: -0.01em; }
+  .font-headline-lg { font-family: 'Space Grotesk', sans-serif; font-size: 32px; line-height: 40px; letter-spacing: -0.02em; font-weight: 700; }
+  .text-headline-lg { font-size: 32px; line-height: 40px; letter-spacing: -0.02em; }
+  .font-display-lg { font-family: 'Space Grotesk', sans-serif; font-size: 48px; line-height: 56px; letter-spacing: -0.03em; font-weight: 700; }
+  .text-display-lg { font-size: 48px; line-height: 56px; letter-spacing: -0.03em; }
 
   ::selection {
     background: var(--color-pri-fixed);
