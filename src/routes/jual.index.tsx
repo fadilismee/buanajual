@@ -143,52 +143,35 @@ const STEPS = [
   },
 ];
 
-const TESTIMONIALS = [
+const TESTIMONIAL_ROWS = [
   [
-    '"5 unit RTX 3070 bekas mining langsung ditest suhu dan display live. Dalam 30 menit transfer BCA masuk penuh tanpa potongan aneh-aneh."',
-    "Rian P. • Tangerang",
-    "GPU BUYBACK",
+    ["Kembali laptop lama jadi cash, curan!", "Andi", "Bantul", "Laptop Core i5 Matot", "r1"],
+    ["Kartu grafis artefak, 20 menit langsung cair.", "Sari", "Jogja", "RTX 2060 Rusak", "r2"],
+    ["Kurir jemput gratis ke kantor, proses cepat.", "Budi", "Sleman", "PC Kantor x8", "r3"],
+    ["Motherboard gosong masih dibayar fair.", "Nadya", "Depok", "B450 Konslet", "r4"],
+    ["MacBook layar pecah, mainboard tetap dibeli.", "Clara", "Jakarta", "MacBook M1", "r5"],
   ],
   [
-    '"Lelang 38 laptop kantor eks-karyawan lancar. Tim datang ke kantor dengan sertifikat data wipe lengkap. Sangat profesional."',
-    "Bambang S. • Jakarta",
-    "B2B CORPORATE",
+    ["Lelang kantor 38 unit, semua cair.", "Bambang", "Jakarta", "Laptop Kantor x38", "r6"],
+    ["SSD &amp; RAM server lama, wipe data aman.", "Arif", "Bogor", "SSD Server x50", "r7"],
+    ["Warnet tutup, 24 PC full set dibi nasib baik.", "Eko", "Lampung", "PC Warnet x24", "r8"],
+    ["Rig kreator upgrade, RTX 4080 jual smooth.", "Dennis", "Cikarang", "RTX 4080", "r9"],
+    ["Rongsokan PCB kiloan tetap dihargai.", "Fajar", "Yogyakarta", "PCB 420kg", "r10"],
   ],
   [
-    '"Laptop Lenovo Legion kena tumpahan air dan matot. Tempat lain menolak, di Gudang Komputer tetap dihargai layarnya dan part yang hidup."',
-    "Nadya A. • Depok",
-    "UNIT RUSAK/MATOT",
+    ["Laptop Lenovo Legion kena air, tetap bayar.", "Nadya", "Depok", "Legion Matot", "r11"],
+    ["Server rackmount decommission, transfer cepat.", "Hendra", "Bekasi", "PowerEdge R730", "r12"],
+    ["5x RTX 3070 mining, cair tanpa nakal.", "Rian", "Tangerang", "RTX 3070 x5", "r13"],
+    ["MacBook logic board + baterai dibeli wajar.", "Clara", "Jogja", "MacBook Partial", "r14"],
+    ["SSD NVMe normal, harga pasar fair.", "Maya", "Sleman", "NVMe 1TB", "r15"],
   ],
-  [
-    '"Decommission 6 unit Dell PowerEdge Rackmount R730 server data center. Eksekusi tim rapi, penimbangan transparan, langsung pelunasan tunai transfer bank."',
-    "Hendra K. • Bekasi",
-    "SERVER & DATA CENTER",
-  ],
-  [
-    '"Jual borongan 420 kg rongsokan PCB motherboard jadul & power supply rusak dari bengkel servis. Timbangan akurat sistem timbang digital, harga per kilo fair."',
-    "Fajar M. • Yogyakarta",
-    "E-WASTE BULK",
-  ],
-  [
-    '"MacBook Pro M1 layar blank akibat retak engsel. Toko offline biasa nawar sadis, di Gudang Komputer dihargai wajar komponen logic board & baterainya."',
-    "Clara V. • Jakarta Selatan",
-    "MACBOOK PARTIAL",
-  ],
-  [
-    '"Tutup warnet e-sports 24 PC full set i5 + GTX 1660 Ti. Tim jemput langsung pakai armada blind van dalam 1 hari tuntas di-appraise dan dicairkan."',
-    "Eko Prasetyo • Bandar Lampung",
-    "WARNET LIQUIDATION",
-  ],
-  [
-    '"Upgrade rig kerja kreator 3D, jual RTX 4080 lama. Proses drop langsung ke Depo Cikarang cuma 20 menit tes FurMark & TimeSpy langsung deal."',
-    "Dennis A. • Cikarang",
-    "CREATOR PC UPGRADE",
-  ],
-  [
-    '"Penggantian berkala 50 unit SSD & RAM server kantor. Yang paling berharga adalah adanya Berita Acara & jaminan sertifikat DoD wipe 100% aman audit ISO."',
-    "Arif Wicaksono • Bogor",
-    "IT ASSET AUDIT",
-  ],
+];
+
+const REVIEW_STATS = [
+  ["4.9/5", "Tingkat Kepuasan"],
+  ["1.240+", "Penjual Dicairkan"],
+  ["15 Min", "Proses Cepat"],
+  ["3 Depo", "Cabang Resmi"],
 ];
 
 const DEPOTS = [
@@ -238,6 +221,33 @@ const FAQS = [
     a: "Untuk area Jabodetabek, DIY, dan Lampung kurir internal kami siap menjemput langsung ke alamat Anda secara gratis setelah estimasi disepakati via WhatsApp.",
   },
 ];
+
+const renderReviewCard = ([quote, name, loc, item, seed]: string[]) => (
+  <div className="marquee-card group">
+    <div className="relative mb-3 overflow-hidden rounded-lg bg-surface-container-low">
+      <img
+        alt={`Foto ${item}`}
+        className="h-28 w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+        src={`https://picsum.photos/seed/buana-${seed}/360/180`}
+        loading="lazy"
+      />
+      <span className="font-label-tech absolute bottom-2 left-2 inline-flex rounded bg-primary-container px-2 py-0.5 text-[10px] font-bold text-white tracking-wider">
+        {item}
+      </span>
+    </div>
+    <div className="flex items-center gap-0.5 text-primary-container">
+      <span className="material-symbols-outlined text-[14px]">star</span>
+      <span className="material-symbols-outlined text-[14px]">star</span>
+      <span className="material-symbols-outlined text-[14px]">star</span>
+      <span className="material-symbols-outlined text-[14px]">star</span>
+      <span className="material-symbols-outlined text-[14px]">star</span>
+      <span className="font-label-tech text-[10px] text-on-surface-variant ml-2">
+        {name} • {loc}
+      </span>
+    </div>
+    <p className="mt-1.5 font-body-md text-sm text-on-surface italic leading-relaxed">“{quote}”</p>
+  </div>
+);
 
 function JualPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -538,50 +548,77 @@ function JualPage() {
             </Reveal>
           </section>
 
-          {/* ==================== TESTIMONIALS ==================== */}
+          {/* ==================== TESTIMONIALS (MARQUEE ZIGZAG INFINITO) ==================== */}
           <section
-            className="relative w-full bg-surface-container-lowest/80 py-16 border-t border-surface-container"
+            className="relative w-full overflow-hidden bg-surface-container-lowest/80 py-16 border-t border-surface-container"
             id="testimoni"
           >
             <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-primary-container/10 blur-[130px] pointer-events-none rounded-full" />
             <div className="relative w-full max-w-[1280px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop">
               <Reveal from="bottom">
-                <div className="flex flex-col items-center text-center gap-2 mb-10">
+                <div className="flex flex-col items-center text-center gap-2 mb-8">
                   <span className="font-label-tech text-label-tech text-primary uppercase tracking-widest">
                     BUKTI KEPUASAN PELANGGAN
                   </span>
                   <h2 className="font-headline-lg text-2xl md:text-3xl uppercase text-on-surface tracking-tight font-bold">
-                    Kata Mereka yang Sudah Mencairkan
+                    Kata Penjual yang Sudah Dicairkan
                   </h2>
+                  <p className="font-body-md text-sm text-on-surface-variant max-w-lg">
+                    Dari laptop matot sampai kurir kantor — ini kode kata mereka yang sudah cair
+                    uang iman di 3 depo cabang.
+                  </p>
                 </div>
               </Reveal>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {TESTIMONIALS.map(([quote, author, tag], i) => (
-                  <Reveal key={author} from="bottom" delay={i * 60} className="h-full">
-                    <div className="bg-surface-container p-6 rounded-lg border border-surface-container-high flex flex-col justify-between hover:border-[#ff5e14]/50 transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(255,94,20,0.15)] hover:-translate-y-1 h-full">
-                      <div>
-                        <div className="flex items-center gap-1 text-primary mb-3">
-                          <span className="material-symbols-outlined text-[16px]">star</span>
-                          <span className="material-symbols-outlined text-[16px]">star</span>
-                          <span className="material-symbols-outlined text-[16px]">star</span>
-                          <span className="material-symbols-outlined text-[16px]">star</span>
-                          <span className="material-symbols-outlined text-[16px]">star</span>
-                        </div>
-                        <p className="font-body-md text-sm text-on-surface italic leading-relaxed">
-                          {quote}
-                        </p>
-                      </div>
-                      <div className="pt-4 mt-4 border-t border-surface-container-high flex items-center justify-between">
-                        <span className="font-title-md text-xs text-on-surface uppercase font-bold">
-                          {author}
-                        </span>
-                        <span className="font-label-tech text-[10px] text-primary">{tag}</span>
-                      </div>
+
+              {/* Stat count */}
+              <Reveal from="bottom" delay={80}>
+                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+                  {REVIEW_STATS.map(([num, label]) => (
+                    <div
+                      key={label}
+                      className="flex flex-col items-center justify-center min-w-[120px] rounded-xl bg-surface-container/80 backdrop-blur-sm border border-surface-container-high px-4 py-3 text-center transition-all duration-300 hover:border-primary-container/50"
+                    >
+                      <span className="font-headline-lg text-xl md:text-2xl font-extrabold text-on-surface tracking-tight">
+                        {num}
+                      </span>
+                      <span className="font-label-tech text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">
+                        {label}
+                      </span>
                     </div>
-                  </Reveal>
-                ))}
-              </div>
+                  ))}
+                </div>
+              </Reveal>
             </div>
+
+            {/* Track 1 → kiri */}
+            <Reveal from="bottom" delay={140} className="w-full">
+              <div className="marquee-viewport mt-8">
+                <div className="marquee-track marquee-left">
+                  {TESTIMONIAL_ROWS[0]!.map(renderReviewCard)}
+                  {TESTIMONIAL_ROWS[0]!.map(renderReviewCard)}
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Track 2 → kanan */}
+            <Reveal from="bottom" delay={220} className="w-full">
+              <div className="marquee-viewport mt-4">
+                <div className="marquee-track marquee-right">
+                  {TESTIMONIAL_ROWS[1]!.map(renderReviewCard)}
+                  {TESTIMONIAL_ROWS[1]!.map(renderReviewCard)}
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Track 3 → kiri */}
+            <Reveal from="bottom" delay={300} className="w-full">
+              <div className="marquee-viewport mt-4">
+                <div className="marquee-track marquee-left">
+                  {TESTIMONIAL_ROWS[2]!.map(renderReviewCard)}
+                  {TESTIMONIAL_ROWS[2]!.map(renderReviewCard)}
+                </div>
+              </div>
+            </Reveal>
           </section>
 
           {/* ==================== DEPOT & DROP POINT LOCATIONS ==================== */}
@@ -771,21 +808,254 @@ function JualPage() {
         </div>
       </main>
 
-      {/* ==================== FOOTER ==================== */}
-      <footer className="w-full bg-surface-container-lowest py-10 border-t border-surface-container-high">
-        <div className="w-full max-w-[1280px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-4 text-on-surface-variant text-xs">
-          <div className="flex items-center gap-3">
-            <img
-              alt="Gudang Komputer Logo"
-              className="h-6 w-6 object-contain"
-              src="/gudangkomputer-logo.png"
-            />
-            <span className="font-bold text-on-surface uppercase tracking-wide">
-              GUDANG KOMPUTER
-            </span>
-            <span>• ISO 14001:2015 Data Wipe Certified</span>
+      {/* ==================== FOOTER (PREMIUM) ==================== */}
+      <footer className="w-full bg-surface-container-lowest border-t border-surface-container-high">
+        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
+            {/* Brand */}
+            <div className="lg:col-span-4 space-y-4">
+              <div className="flex items-center gap-3">
+                <img
+                  alt="Gudang Komputer Logo"
+                  className="h-12 w-12 object-contain rounded-xl bg-white p-1"
+                  src="/gudangkomputer-logo.png"
+                />
+                <div>
+                  <p className="font-headline-lg text-base uppercase text-on-surface font-extrabold tracking-tight">
+                    GUDANG KOMPUTER
+                  </p>
+                  <p className="font-label-tech text-[10px] text-on-surface-variant uppercase tracking-widest">
+                    Buyback &amp; E-Waste Exchange
+                  </p>
+                </div>
+              </div>
+              <p className="font-body-md text-sm text-on-surface-variant leading-relaxed">
+                Pusat pertukaran &amp; buyback resmi hardware komputer di 3 depo cabang. Menggiven
+                dedikasi transparansi, verifikasi dokumentasi resmi, &amp; sertifikat sanitasi data
+                militer DoD 5220.22-M.
+              </p>
+              <div className="pt-1 space-y-1.5 font-body-sm text-xs text-on-surface-variant">
+                <p className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary-container text-[16px]">
+                    location_on
+                  </span>
+                  Mertosan Kulon, Potorono, Banguntapan, Bantul 55196
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary-container text-[16px]">
+                    schedule
+                  </span>
+                  Senin – Sabtu: 08:30 – 17:00 WIB
+                </p>
+                <p className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-emerald-500 text-[16px]">
+                    verified_user
+                  </span>
+                  ISO 14001:2015 Data Wipe Certified
+                </p>
+              </div>
+            </div>
+
+            {/* Kontak & Gerai */}
+            <div className="lg:col-span-3 text-sm">
+              <h4 className="font-label-tech text-xs text-on-surface uppercase tracking-widest mb-3">
+                Kontak &amp; Gerai
+              </h4>
+              <ul className="space-y-2.5 font-body-sm text-xs text-on-surface-variant">
+                <li>
+                  <a
+                    href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 hover:text-primary-container transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-primary-container text-[16px]">
+                      chat
+                    </span>
+                    WhatsApp: 0859-7922-0599
+                  </a>
+                </li>
+                <li className="inline-flex items-center gap-2">
+                  <span className="material-symbols-outlined text-primary-container text-[16px]">
+                    contact_support
+                  </span>
+                  PIC Depo: +62 859-7922-0599
+                </li>
+                <li>
+                  <a
+                    href="https://maps.google.com/?q=Kawasan+Industri+MM2100+Cikarang+Barat"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 hover:text-primary-container transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-primary-container text-[16px]">
+                      send
+                    </span>
+                    Depo Cikarang (Jabar) • Jabodetabek
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.google.com/?q=Wonosari+Gunungkidul+Yogyakarta"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 hover:text-primary-container transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-primary-container text-[16px]">
+                      send
+                    </span>
+                    Depo Gunungkidul (D.I. Yogyakarta)
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://maps.google.com/?q=Way+Halim+Bandar+Lampung"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 hover:text-primary-container transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-primary-container text-[16px]">
+                      send
+                    </span>
+                    Depo Lampung (Way Halim)
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Jam & Menu */}
+            <div className="lg:col-span-5 grid sm:grid-cols-2 gap-8 text-sm">
+              <div>
+                <h4 className="font-label-tech text-xs text-on-surface uppercase tracking-widest mb-3">
+                  Menu
+                </h4>
+                <ul className="space-y-2.5 font-body-sm text-xs">
+                  <li>
+                    <a
+                      href="/jual"
+                      className="text-on-surface-variant hover:text-primary-container transition-colors"
+                    >
+                      Katalog Kategori
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/berita"
+                      className="text-on-surface-variant hover:text-primary-container transition-colors"
+                    >
+                      Berita Acara Transaksi
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/jual/form"
+                      className="text-on-surface-variant hover:text-primary-container transition-colors"
+                    >
+                      Form Taksiran Online
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/jual#b2b-liquidation"
+                      className="text-on-surface-variant hover:text-primary-container transition-colors"
+                    >
+                      Layanan B2B / Lelang Kantor
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/jual#testimoni"
+                      className="text-on-surface-variant hover:text-primary-container transition-colors"
+                    >
+                      Testimoni Penjual
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://gudangkomputer.web.id/blog"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-on-surface-variant hover:text-primary-container transition-colors"
+                    >
+                      Blog &amp; Tips Hardware
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-label-tech text-xs text-on-surface uppercase tracking-widest mb-3">
+                  Akses Cepat
+                </h4>
+                <ul className="space-y-3">
+                  <li>
+                    <a
+                      href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20hardware%20komputer"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-label-md inline-flex w-full items-center justify-center gap-2 bg-primary-container hover:bg-secondary-container text-white py-2.5 rounded font-bold transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,94,20,0.4)]"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">send</span>
+                      Chat CS • Konsultasi Gratis
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/jual/form"
+                      className="font-label-md inline-flex w-full items-center justify-center gap-2 bg-surface-container-high hover:bg-surface-bright text-on-surface py-2.5 rounded border border-surface-container-high font-bold transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">
+                        document_scanner
+                      </span>
+                      Form Taksiran Instan
+                    </a>
+                  </li>
+                  <li className="font-body-sm text-xs text-on-surface-variant pt-1">
+                    {DEPOTS.map((d) => d.name).join(" • ")} — siap layani satuan &amp; borongan
+                    kantor.
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <p>© 2026 PT Gudang Komputer Nusantara. Seluruh Hak Cipta Dilindungi.</p>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="border-t border-surface-container-high">
+          <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-xs font-body-sm text-on-surface-variant">
+            <div className="flex items-center gap-2.5">
+              <img
+                alt="Gudang Komputer"
+                className="h-5 w-5 object-contain rounded bg-white p-0.5"
+                src="/gudangkomputer-logo.png"
+              />
+              <span className="font-bold text-on-surface uppercase tracking-wide">
+                GUDANG KOMPUTER
+              </span>
+              <span>© 2026 PT Gudang Komputer Nusantara. Seluruh Hak Cipta Dilindungi.</span>
+            </div>
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href="https://gudangkomputer.web.id/about"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary-container transition-colors"
+              >
+                Kebijakan Garansi &amp; Refund
+              </a>
+              <a
+                href="https://gudangkomputer.web.id/about"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary-container transition-colors"
+              >
+                Kebijakan Privasi
+              </a>
+              <span className="inline-flex items-center gap-1 text-emerald-500">
+                <span className="material-symbols-outlined text-[14px]">verified_user</span>
+                ISO 14001
+              </span>
+            </div>
+          </div>
         </div>
       </footer>
 
