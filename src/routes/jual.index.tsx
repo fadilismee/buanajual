@@ -263,27 +263,28 @@ function JualPage() {
               className="absolute inset-0 w-full h-full object-cover object-center animate-[kenburns_18s_ease-out_infinite]"
               src={SHOWCASE_IMG}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-surface-container-lowest/95 via-surface-container-lowest/75 to-surface-container-lowest" />
-            <div className="absolute inset-0 bg-gradient-to-r from-surface/80 via-transparent to-surface/40" />
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[450px] bg-primary-container/25 blur-[140px] pointer-events-none rounded-full" />
-            <div className="absolute -top-10 right-10 w-[350px] h-[350px] bg-amber-500/20 blur-[110px] pointer-events-none rounded-full" />
-            <div className="absolute bottom-0 left-10 w-[400px] h-[300px] bg-secondary-container/20 blur-[130px] pointer-events-none rounded-full" />
+            {/* Light glass overlays for readability on light theme */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/60 to-white/90" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-white/30" />
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[450px] bg-primary-container/15 blur-[140px] pointer-events-none rounded-full" />
+            <div className="absolute -top-10 right-10 w-[350px] h-[350px] bg-amber-500/10 blur-[110px] pointer-events-none rounded-full" />
+            <div className="absolute bottom-0 left-10 w-[400px] h-[300px] bg-secondary-container/10 blur-[130px] pointer-events-none rounded-full" />
 
             <div className="relative w-full max-w-[1280px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex flex-col items-center text-center py-24">
               <Reveal from="scale" delay={0}>
-                <div className="inline-flex items-center gap-2 bg-surface-container/90 backdrop-blur-sm px-3.5 py-1.5 rounded-full mb-5 border border-surface-container-high shadow-[0_0_15px_rgba(255,94,20,0.15)]">
+                <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-3.5 py-1.5 rounded-full mb-5 border border-surface-container-high shadow-[0_0_15px_rgba(255,94,20,0.15)]">
                   <div className="relative flex h-2 w-2 items-center justify-center">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75" />
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary-container" />
                   </div>
-                  <span className="font-label-tech text-label-tech text-primary uppercase tracking-widest">
+                  <span className="font-label-tech text-label-tech text-primary-container uppercase tracking-widest">
                     ESTIMASI &lt; 15 MENIT
                   </span>
                 </div>
               </Reveal>
 
               <Reveal from="bottom" delay={100}>
-                <h1 className="font-display-lg text-4xl md:text-6xl lg:text-7xl uppercase text-on-surface tracking-tight font-bold leading-tight mb-4">
+                <h1 className="font-display-lg text-4xl md:text-6xl lg:text-7xl uppercase text-on-surface tracking-tight font-extrabold leading-tight mb-4">
                   JUAL HARDWARE.{" "}
                   <span className="bg-gradient-to-r from-primary-container via-[#ff7836] to-secondary-container bg-clip-text text-transparent">
                     CAIR SEKARANG.
@@ -301,7 +302,7 @@ function JualPage() {
               <Reveal from="bottom" delay={300}>
                 <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
                   <a
-                    className="inline-flex items-center gap-2 bg-primary-container hover:bg-secondary-container text-on-primary-container px-8 py-4 rounded font-label-lg text-label-lg uppercase tracking-wider font-bold transition-all duration-300 shadow-lg shadow-primary-container/25 hover:shadow-[0_0_30px_rgba(255,94,20,0.5)] hover:scale-[1.02]"
+                    className="inline-flex items-center gap-2 bg-primary-container hover:bg-secondary-container text-white px-8 py-4 rounded font-label-lg text-label-lg uppercase tracking-wider font-bold transition-all duration-300 shadow-lg shadow-primary-container/25 hover:shadow-[0_0_30px_rgba(255,94,20,0.5)] hover:scale-[1.02]"
                     href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20cek%20estimasi%20harga%20hardware"
                     rel="noopener noreferrer"
                     target="_blank"
@@ -310,7 +311,7 @@ function JualPage() {
                     <span>CEK HARGA INSTAN</span>
                   </a>
                   <a
-                    className="inline-flex items-center gap-2 bg-surface-container/90 backdrop-blur-sm hover:bg-surface-container border border-surface-container-high hover:border-primary-container/40 text-on-surface px-8 py-4 rounded font-label-lg text-label-lg uppercase tracking-wider font-bold transition-all duration-300"
+                    className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm hover:bg-surface-container border border-surface-container-high hover:border-primary-container/40 text-on-surface px-8 py-4 rounded font-label-lg text-label-lg uppercase tracking-wider font-bold transition-all duration-300"
                     href="/berita"
                   >
                     <span className="material-symbols-outlined text-[20px]">receipt_long</span>
@@ -328,7 +329,7 @@ function JualPage() {
                   ].map(([no, city, desc]) => (
                     <div
                       key={no}
-                      className="group flex items-center gap-3 rounded-xl bg-surface-container/80 backdrop-blur-sm border border-surface-container-high px-4 py-3.5 text-left transition-all duration-300 hover:border-primary-container/50 hover:shadow-[0_8px_25px_-10px_rgba(255,94,20,0.3)] hover:-translate-y-0.5"
+                      className="group flex items-center gap-3 rounded-xl bg-white/80 backdrop-blur-sm border border-surface-container-high px-4 py-3.5 text-left transition-all duration-300 hover:border-primary-container/50 hover:shadow-[0_8px_25px_-10px_rgba(255,94,20,0.3)] hover:-translate-y-0.5"
                     >
                       <span className="font-monotech text-primary-container text-xs font-bold flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-container/15 border border-primary-container/30">
                         {no}
