@@ -466,7 +466,7 @@ function JualPage() {
               <Reveal from="bottom">
                 <div className="flex flex-col items-center text-center gap-2 mb-12">
                   <span className="font-label-tech text-label-tech text-primary uppercase tracking-widest">
-                    ALUR SIMPEL &AMP; CEPAT
+                    ALUR SIMPEL &amp; CEPAT
                   </span>
                   <h2 className="font-headline-lg text-2xl md:text-3xl uppercase text-on-surface tracking-tight font-bold">
                     Cara Kerja Transparan 4 Langkah
@@ -513,7 +513,7 @@ function JualPage() {
                         corporate_fare
                       </span>
                       <span className="font-label-tech text-label-tech text-primary uppercase">
-                        LAYANAN B2B &AMP; ASSET DISPOSAL
+                        LAYANAN B2B &amp; ASSET DISPOSAL
                       </span>
                     </div>
                     <h3 className="font-headline-lg text-xl md:text-2xl uppercase text-on-surface font-bold tracking-tight">
@@ -604,7 +604,7 @@ function JualPage() {
                       </span>
                     </div>
                     <h2 className="font-headline-lg text-3xl md:text-5xl uppercase text-on-surface font-bold tracking-tight">
-                      LOKASI DEPO &AMP; DROP POINT
+                      LOKASI DEPO &amp; DROP POINT
                     </h2>
                   </div>
                   <p className="font-body-md text-on-surface-variant max-w-md text-sm">
