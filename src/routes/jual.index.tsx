@@ -830,9 +830,9 @@ function JualPage() {
                 </div>
               </div>
               <p className="font-body-md text-sm text-on-surface-variant leading-relaxed">
-                Pusat pertukaran &amp; buyback resmi hardware komputer di 3 depo cabang. Menggiven
-                dedikasi transparansi, verifikasi dokumentasi resmi, &amp; sertifikat sanitasi data
-                militer DoD 5220.22-M.
+                Pusat pertukaran &amp; buyback resmi hardware komputer di 3 depo cabang. Prioritas
+                kami: transparansi harga, dokumentasi resmi, &amp; sanitasi data militer berstandar
+                DoD 5220.22-M.
               </p>
               <div className="pt-1 space-y-1.5 font-body-sm text-xs text-on-surface-variant">
                 <p className="flex items-center gap-2">
