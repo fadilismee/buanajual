@@ -72,7 +72,7 @@ export function SiteHeader({ query: propQuery, onQueryChange }: SiteHeaderProps)
       <div className="mx-auto flex max-w-[1280px] items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         {/* Brand Logo */}
         <Link to="/jual" className="flex shrink-0 items-center gap-2" aria-label="Gudang Komputer">
-          <div className="rounded-lg bg-white p-1 shadow-sm">
+          <div className="rounded-lg border border-surface-container-high bg-surface-low p-1 shadow-sm">
             <img
               src="/gudangkomputer-logo.png"
               alt="Gudang Komputer Logo"

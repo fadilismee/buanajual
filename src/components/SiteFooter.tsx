@@ -36,7 +36,7 @@ export function SiteFooter() {
         <div className="grid gap-10 lg:grid-cols-12 pb-12 border-b border-surface-container">
           <div className="lg:col-span-5 space-y-4">
             <div className="flex items-center gap-2">
-              <div className="rounded-lg bg-white p-1.5 shadow-sm inline-flex items-center">
+              <div className="rounded-lg border border-surface-container-high bg-surface-low p-1.5 shadow-sm inline-flex items-center">
                 <img
                   src="/gudangkomputer-logo.png"
                   alt="Gudang Komputer Logo"
@@ -44,7 +44,7 @@ export function SiteFooter() {
                   loading="lazy"
                 />
               </div>
-              <span className="font-heading text-lg font-extrabold uppercase tracking-tight text-white">
+              <span className="font-heading text-lg font-extrabold uppercase tracking-tight text-on-surface">
                 GUDANG KOMPUTER
               </span>
             </div>
@@ -56,7 +56,7 @@ export function SiteFooter() {
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <span className="font-monotech inline-flex items-center gap-1.5 text-[11px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded">
+              <span className="font-monotech inline-flex items-center gap-1.5 text-[11px] text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded">
                 <ShieldCheck size={13} />
                 ISO 14001:2015 Data Wipe Certified
               </span>
@@ -65,7 +65,7 @@ export function SiteFooter() {
 
           <div className="lg:col-span-7 grid gap-8 sm:grid-cols-3">
             <div className="text-sm">
-              <h4 className="font-monotech text-xs font-bold uppercase tracking-widest text-primary-fixed mb-3">
+              <h4 className="font-monotech text-xs font-bold uppercase tracking-widest text-primary-container mb-3">
                 Layanan Kami
               </h4>
               <ul className="space-y-2 text-xs text-on-surface-variant font-heading font-medium">
@@ -98,26 +98,26 @@ export function SiteFooter() {
             </div>
 
             <div className="text-sm">
-              <h4 className="font-monotech text-xs font-bold uppercase tracking-widest text-primary-fixed mb-3">
+              <h4 className="font-monotech text-xs font-bold uppercase tracking-widest text-primary-container mb-3">
                 Jam Operasional
               </h4>
               <ul className="space-y-2 text-xs text-on-surface-variant font-monotech">
                 <li>
-                  <strong className="text-white">Senin – Sabtu:</strong>
+                  <strong className="text-on-surface">Senin – Sabtu:</strong>
                   <br />
                   08.30 – 17.00 WIB
                 </li>
                 <li>
-                  <strong className="text-white">Minggu:</strong>
+                  <strong className="text-on-surface">Minggu:</strong>
                   <br />
                   Janjian Online via WA
                 </li>
-                <li className="pt-1 text-[11px] text-emerald-400">Konsultasi WA: 24 Jam</li>
+                <li className="pt-1 text-[11px] text-emerald-600">Konsultasi WA: 24 Jam</li>
               </ul>
             </div>
 
             <div className="text-sm">
-              <h4 className="font-monotech text-xs font-bold uppercase tracking-widest text-primary-fixed mb-3">
+              <h4 className="font-monotech text-xs font-bold uppercase tracking-widest text-primary-container mb-3">
                 Hotline &amp; B2B
               </h4>
               <ul className="space-y-2 text-xs text-on-surface-variant font-heading font-medium">
@@ -161,11 +161,11 @@ export function SiteFooter() {
               <span className="font-monotech text-[10px] font-bold uppercase tracking-widest text-primary-container">
                 JARINGAN DEPO RESMI
               </span>
-              <h3 className="font-heading text-lg font-bold text-white sm:text-xl uppercase">
+              <h3 className="font-heading text-lg font-bold text-on-surface sm:text-xl uppercase">
                 3 Lokasi Depo &amp; Lab Gudang Komputer
               </h3>
             </div>
-            <span className="font-monotech rounded-full bg-surface-container px-3 py-1 text-[11px] text-primary-fixed border border-surface-container-high">
+            <span className="font-monotech rounded-full bg-surface-container px-3 py-1 text-[11px] text-primary-container border border-surface-container-high">
               Siap Layani Satuan &amp; Borongan Kantor
             </span>
           </div>
@@ -178,16 +178,18 @@ export function SiteFooter() {
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-monotech inline-flex items-center gap-1 rounded bg-primary-container/20 px-2 py-0.5 text-[10px] font-bold text-primary-fixed">
+                    <span className="font-monotech inline-flex items-center gap-1 rounded bg-primary-container/20 px-2 py-0.5 text-[10px] font-bold text-primary-container">
                       <Building2 size={12} />
                       {b.badge}
                     </span>
-                    <span className="flex items-center gap-1 text-[10px] text-emerald-400 font-monotech">
+                    <span className="flex items-center gap-1 text-[10px] text-emerald-600 font-monotech">
                       <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       Aktif Melayani
                     </span>
                   </div>
-                  <h4 className="font-heading text-sm font-bold text-white uppercase">{b.city}</h4>
+                  <h4 className="font-heading text-sm font-bold text-on-surface uppercase">
+                    {b.city}
+                  </h4>
                   <p className="flex items-start gap-1.5 text-xs text-on-surface-variant">
                     <MapPin size={13} className="shrink-0 text-primary-container mt-0.5" />
                     <span>{b.address}</span>
@@ -200,7 +202,7 @@ export function SiteFooter() {
                     href={`https://wa.me/6285979220599?text=${encodeURIComponent(b.waText)}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-monotech inline-flex w-full items-center justify-center gap-1.5 rounded bg-surface-container-low hover:bg-primary-container hover:text-white border border-surface-container-high py-2 text-xs font-bold text-on-surface transition-colors"
+                    className="font-monotech inline-flex w-full items-center justify-center gap-1.5 rounded bg-surface-container-low hover:bg-primary-container hover:text-on-surface border border-surface-container-high py-2 text-xs font-bold text-on-surface transition-colors"
                   >
                     <MessageCircle size={13} />
                     <span>Hubungi {b.city.split(" ")[1]}</span>
