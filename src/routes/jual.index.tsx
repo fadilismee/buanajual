@@ -355,7 +355,7 @@ function JualPage() {
 
           {/* ==================== KATEGORI DITERIMA (BENTO GRID) ==================== */}
           <section
-            className="relative w-full bg-surface/90 py-20 border-b border-surface-container"
+            className="relative w-full bg-surface-low py-20 border-b border-surface-container-high"
             id="katalog-buyback"
           >
             <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-primary-container/10 blur-[130px] pointer-events-none rounded-full" />
@@ -469,7 +469,7 @@ function JualPage() {
 
           {/* ==================== HOW IT WORKS ==================== */}
           <section
-            className="relative w-full bg-surface-container-lowest/90 py-16 border-t border-surface-container"
+            className="relative w-full bg-surface-container-lowest py-16 border-b border-surface-container-high"
             id="cara-kerja"
           >
             <div className="absolute top-1/2 right-10 w-[400px] h-[400px] bg-primary-container/10 blur-[120px] pointer-events-none rounded-full" />
@@ -514,7 +514,10 @@ function JualPage() {
           </section>
 
           {/* ==================== B2B LIKUIDASI KANTOR ==================== */}
-          <section className="w-full bg-surface py-12 relative" id="b2b-liquidation">
+          <section
+            className="w-full bg-surface-low py-12 relative border-b border-surface-container-high"
+            id="b2b-liquidation"
+          >
             <Reveal from="bottom">
               <div className="w-full max-w-[1280px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop">
                 <div className="bg-surface-container border border-surface-container-high hover:border-[#ff5e14]/40 transition-all duration-300 rounded-xl p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl">
@@ -551,7 +554,7 @@ function JualPage() {
 
           {/* ==================== TESTIMONIALS (MARQUEE ZIGZAG INFINITO) ==================== */}
           <section
-            className="relative w-full overflow-hidden bg-surface-container-lowest/80 py-16 border-t border-surface-container"
+            className="relative w-full overflow-hidden bg-surface-container-lowest py-16 border-b border-surface-container-high"
             id="testimoni"
           >
             <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-primary-container/10 blur-[130px] pointer-events-none rounded-full" />
@@ -624,7 +627,7 @@ function JualPage() {
 
           {/* ==================== DEPOT & DROP POINT LOCATIONS ==================== */}
           <section
-            className="relative w-full bg-surface-container-lowest py-20 border-t border-surface-container"
+            className="relative w-full bg-surface-low py-20 border-b border-surface-container-high"
             id="lokasi-depo"
           >
             <div className="absolute top-1/2 left-1/3 -translate-x-1/2 w-[600px] h-[350px] bg-primary-container/10 blur-[140px] pointer-events-none rounded-full" />
@@ -734,7 +737,7 @@ function JualPage() {
 
           {/* ==================== FAQ ==================== */}
           <section
-            className="relative w-full bg-surface py-16 border-t border-surface-container"
+            className="relative w-full bg-surface-container-lowest py-16 border-b border-surface-container-high"
             id="faq"
           >
             <div className="w-full max-w-[840px] mx-auto px-margin md:px-margin-tablet">
@@ -785,6 +788,7 @@ function JualPage() {
 
           {/* ==================== FINAL CALLOUT ==================== */}
           <section className="relative w-full bg-surface-container py-14 border-t border-surface-container-high text-center overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-container/5 via-transparent to-secondary-container/10 pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-primary-container/15 blur-[120px] pointer-events-none rounded-full" />
             <Reveal from="bottom">
               <div className="relative w-full max-w-[800px] mx-auto px-margin flex flex-col items-center gap-4">
