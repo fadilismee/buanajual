@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { FloatingWa } from "@/components/FloatingWa";
-import { Reveal } from "@/components/Reveal";
+import { Reveal, TextReveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 
@@ -402,7 +402,7 @@ function JualPage() {
           <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-primary-container/20 blur-[120px]" aria-hidden="true" />
           <div className="relative mx-auto w-full max-w-[1080px] px-5 md:px-8 flex flex-col items-center text-center pt-20 pb-16 md:pt-28 md:pb-20">
             <Reveal from="scale" delay={0}>
-              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary-container/40 bg-primary-container/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-200">
+              <p className="mg-breathe mb-5 inline-flex items-center gap-2 rounded-full border border-primary-container/40 bg-primary-container/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-200">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-container opacity-75" />
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary-container" />
@@ -412,8 +412,11 @@ function JualPage() {
             </Reveal>
             <Reveal from="bottom" delay={100}>
               <h1 className="text-4xl md:text-6xl font-extrabold uppercase tracking-tight leading-[1.05] text-white">
-                Sampah elektronik{" "}
-                <span className="bg-gradient-to-r from-primary-container to-amber-400 bg-clip-text text-transparent">jadi uang tunai.</span>
+                <TextReveal text="Sampah elektronik" motion baseDelay={150} stepDelay={70} />
+                {" "}
+                <span className="bg-gradient-to-r from-primary-container to-amber-400 bg-clip-text text-transparent">
+                  <TextReveal text="jadi uang tunai." motion baseDelay={450} stepDelay={70} />
+                </span>
               </h1>
             </Reveal>
             <Reveal from="bottom" delay={200}>
@@ -511,11 +514,10 @@ function JualPage() {
             {/* bento: kartu 1 lebar, 2–5 standar, kartu 6 panorama */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {GALERI.map((g, i) => (
-                <Reveal
+                <div
                   key={g.title}
-                  from="bottom"
-                  delay={(i % 3) * 80}
-                  className={`h-full ${g.span}`}
+                  className={`mg-pop h-full ${g.span}`}
+                  style={{ animationDelay: `${(i % 3) * 110}ms` }}
                 >
                   <a
                     href={g.wa}
@@ -569,7 +571,7 @@ function JualPage() {
                       </span>
                     </div>
                   </a>
-                </Reveal>
+                </div>
               ))}
             </div>
             <Reveal from="bottom" delay={100}>
@@ -700,12 +702,16 @@ function JualPage() {
               </Reveal>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-8">
               {STEPS.map((s, i) => (
-                <Reveal key={s.n} from="bottom" delay={i * 80} className="h-full">
+                <div
+                  key={s.n}
+                  className={`h-full ${i % 2 === 0 ? "mg-skew-l" : "mg-skew-r"}`}
+                  style={{ animationDelay: `${i * 120}ms` }}
+                >
                   <div className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest p-5 transition-colors hover:border-primary-container">
                     <span className="pointer-events-none absolute -right-2 -top-4 select-none text-6xl font-extrabold tracking-tight text-white/[0.06] transition-colors group-hover:text-primary-container/20">
                       {s.n}
                     </span>
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary-container/15 text-primary-container">
+                    <span className="mg-spin-once inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary-container/15 text-primary-container" style={{ animationDelay: `${200 + i * 120}ms` }}>
                       <span className="material-symbols-outlined text-[20px]">
                         {s.icon}
                       </span>
@@ -720,7 +726,7 @@ function JualPage() {
                       {s.desc}
                     </p>
                   </div>
-                </Reveal>
+                </div>
               ))}
               </div>
             </div>
@@ -805,7 +811,11 @@ function JualPage() {
             </Reveal>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {DEPOTS.map((d, i) => (
-                <Reveal key={d.name} from="bottom" delay={i * 80} className="h-full">
+                <div
+                  key={d.name}
+                  className="mg-swing h-full"
+                  style={{ animationDelay: `${i * 130}ms` }}
+                >
                   <div className="flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest">
                     <div className="relative h-52 w-full overflow-hidden bg-surface-container">
                       <iframe
@@ -854,7 +864,7 @@ function JualPage() {
                       </div>
                     </div>
                   </div>
-                </Reveal>
+                </div>
               ))}
             </div>
           </div>
@@ -931,7 +941,11 @@ function JualPage() {
               {FAQS.map((f, i) => {
                 const isOpen = openFaq === i;
                 return (
-                  <Reveal key={f.q} from="bottom" delay={i * 60}>
+                  <div
+                    key={f.q}
+                    className={`h-full ${i % 2 === 0 ? "mg-skew-r" : "mg-skew-l"}`}
+                    style={{ animationDelay: `${i * 90}ms` }}
+                  >
                     <div className="overflow-hidden rounded-xl border border-outline-variant bg-surface-container transition-colors">
                       <button
                         className="flex w-full items-center justify-between gap-3 p-4 text-left"
@@ -955,7 +969,7 @@ function JualPage() {
                         </p>
                       )}
                     </div>
-                  </Reveal>
+                  </div>
                 );
               })}
               </div>

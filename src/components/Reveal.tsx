@@ -202,6 +202,7 @@ export function TextReveal({
   from = "bottom",
   className = "",
   as: Component = "span",
+  motion = false, // true = gaya motion-graphic (mask + rotate per kata)
   ...props
 }: {
   text: string;
@@ -211,6 +212,7 @@ export function TextReveal({
   from?: RevealProps["from"];
   className?: string;
   as?: keyof React.JSX.IntrinsicElements;
+  motion?: boolean;
 } & Omit<RevealProps, "children" | "delay" | "from">) {
   const parts =
     splitBy === "char"
@@ -218,6 +220,22 @@ export function TextReveal({
       : splitBy === "word"
         ? text.split(/(\s+)/)
         : text.split("\n");
+
+  if (motion && splitBy === "word") {
+    return (
+      <Component className={`inline ${className}`} {...props}>
+        {parts.map((part, i) =>
+          /^\s+$/.test(part) || part === "" ? (
+            <span key={i}>{part}</span>
+          ) : (
+            <span key={i} className="reveal-word">
+              <span style={{ animationDelay: `${baseDelay + i * stepDelay}ms` }}>{part}</span>
+            </span>
+          ),
+        )}
+      </Component>
+    );
+  }
 
   return (
     <Component

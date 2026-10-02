@@ -589,11 +589,25 @@
   .hover-scale,
   .hover-glow,
   .tap-shrink,
+  .mg-pop,
+  .mg-skew-l,
+  .mg-skew-r,
+  .mg-swing,
+  .mg-spin-once,
+  .mg-orbit,
+  .mg-breathe,
+  .reveal-word > span,
   .skeleton {
     animation: none !important;
     transition: none !important;
     transform: none !important;
   }
+  .mg-pop,
+  .mg-skew-l,
+  .mg-skew-r,
+  .mg-swing,
+  .mg-spin-once,
+  .reveal-word > span { opacity: 1 !important; }
   .skeleton { animation: none; background: var(--color-surface-variant); }
 }
 
@@ -633,10 +647,6 @@
   opacity: 0;
   animation: slide-up 600ms cubic-bezier(0.16,1,0.3,1) forwards;
 }
-.stagger-container > *:nth-child(1) { animation-delay: 0ms; }
-.stagger-container > *:nth-child(2) { animation-delay: 80ms; }
-.stagger-container > *:nth-child(3) { animation-delay: 160ms; }
-.stagger-container > *:nth-child(4) { animation-delay: 240ms; }
 .stagger-container > *:nth-child(5) { animation-delay: 320ms; }
 .stagger-container > *:nth-child(6) { animation-delay: 400ms; }
 .stagger-container > *:nth-child(7) { animation-delay: 480ms; }
@@ -648,8 +658,60 @@
 
 /* Hero text reveal per word/char — utilities for JS-driven */
 .reveal-word { display: inline-block; overflow: hidden; }
-.reveal-word > span { display: inline-block; transform: translateY(100%); animation: slide-up 700ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.reveal-word > span { display: inline-block; transform: translateY(110%) rotate(4deg); opacity: 0; animation: mg-word-up 800ms cubic-bezier(0.16,1,0.3,1) forwards; }
 .reveal-char { display: inline-block; transform: translateY(100%); animation: slide-up 500ms cubic-bezier(0.16,1,0.3,1) forwards; }
+
+/* ============================================================= */
+/* Motion-graphic kit: overshoot pop, skew-slide, swing, orbit.  */
+/* Dipakai via class di komponen (sekali main, hormat             */
+/* prefers-reduced-motion lewat blok override di bawah).          */
+/* ============================================================= */
+@keyframes mg-pop {
+  0% { opacity: 0; transform: scale(0.6) translateY(30px); }
+  55% { opacity: 1; transform: scale(1.06) translateY(-6px); }
+  75% { transform: scale(0.97) translateY(2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes mg-word-up {
+  0% { opacity: 0; transform: translateY(110%) rotate(4deg); }
+  60% { opacity: 1; transform: translateY(-4%) rotate(-1deg); }
+  100% { opacity: 1; transform: translateY(0) rotate(0); }
+}
+@keyframes mg-skew-in {
+  0% { opacity: 0; transform: translateX(-64px) skewX(-12deg); }
+  60% { opacity: 1; transform: translateX(8px) skewX(3deg); }
+  100% { opacity: 1; transform: translateX(0) skewX(0); }
+}
+@keyframes mg-skew-in-r {
+  0% { opacity: 0; transform: translateX(64px) skewX(12deg); }
+  60% { opacity: 1; transform: translateX(-8px) skewX(-3deg); }
+  100% { opacity: 1; transform: translateX(0) skewX(0); }
+}
+@keyframes mg-swing {
+  0% { opacity: 0; transform: rotate(-10deg) scale(0.85); }
+  55% { opacity: 1; transform: rotate(4deg) scale(1.04); }
+  75% { transform: rotate(-2deg) scale(0.99); }
+  100% { opacity: 1; transform: rotate(0) scale(1); }
+}
+@keyframes mg-spin-once {
+  from { opacity: 0; transform: rotate(-120deg) scale(0.7); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+@keyframes mg-orbit {
+  from { transform: rotate(0deg) translateX(10px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(10px) rotate(-360deg); }
+}
+@keyframes mg-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.mg-pop { opacity: 0; animation: mg-pop 700ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.mg-skew-l { opacity: 0; animation: mg-skew-in 700ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.mg-skew-r { opacity: 0; animation: mg-skew-in-r 700ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.mg-swing { opacity: 0; animation: mg-swing 800ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.mg-spin-once { opacity: 0; animation: mg-spin-once 800ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.mg-orbit { animation: mg-orbit 7s linear infinite; }
+.mg-breathe { animation: mg-breathe 3.5s ease-in-out infinite; }
 
 /* Smooth scroll enhancements for anchor links */
 html:not([data-reduced-motion]) {
