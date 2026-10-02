@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FloatingWa } from "@/components/FloatingWa";
 import { Reveal } from "@/components/Reveal";
+import { SiteFooter } from "@/components/SiteFooter";
+import { SiteHeader } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/jual/")({
   validateSearch: (search: Record<string, unknown>): { q?: string | undefined } => ({
@@ -50,188 +52,162 @@ export const Route = createFileRoute("/jual/")({
   component: JualPage,
 });
 
-const SHOWCASE_IMG =
-  "https://lh3.googleusercontent.com/aida/AEtjO1Wc7mrgO28jINYhAENDm2FOg1qnmexVSMZNbQS5aV2aiH68dXwf3yoXchx-PY7WzuZNEq52Zt3CmrpubcxkixgaJGbhAbC9NbHPOpEBBttS9cKZH4vosBAlUvTbps6qbPBBWM32ShUQIJ08FpM1srlaKswP-16jBOOq--7S3pAbdJTD7kbmSWMI9HKVvAPYWn_FeYOu5OhfqVgCL_wSmP0gx5vTWNRY23gAkZv2Q2nBrVKeq3CqvosB340j";
+// (hero simple black — tanpa foto background/orang)
 
-const TILES = [
-  {
-    span: "md:col-span-5 lg:col-span-4 md:row-span-2 h-full",
-    tag: "NOTEBOOK & MACBOOK",
-    title: "Laptop & MacBook",
-    price: "s/d Rp 18,5 Jt",
-    priceOnImage: true,
-    tall: true,
-    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20Laptop%20MacBook",
-    img: "https://lh3.googleusercontent.com/aida/AEtjO1WGYoemnXceGxHRG3U7J46agNDt8yxEZJGsuDY0Fk6YMmMhcwfF3Nq-H93MEIB1r2GvmSoy6i2GQHiHfTKj9E7e5ZwJR1iGsniLOCD9nYgQyQqf5Aai2ogH48f39fO7Yvhl35WEbRX03C-dISDDoGPtvVKzPXfhWz3i5E-FZw1QqH4CTtZvDTyEtHmoo1ZIreAThaVcQLdOWAkNEb38CJ2JNIiaGWqsmxVorIEile5hp3aOrI2lkQT9d_JS",
-  },
-  {
-    span: "md:col-span-7 lg:col-span-5 h-full",
-    tag: "SERIES RTX & RX",
-    title: "VGA / Kartu Grafis",
-    price: "s/d Rp 14,0 Jt",
-    priceOnImage: true,
-    tall: false,
-    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20VGA%20GPU",
-    img: "https://lh3.googleusercontent.com/aida/AEtjO1VFYTJ66IZcoaOtGNFIRXDslEH1CLVSrJbNbDn61bMqnRsbAQhm7lfPgDT4Dy63vpBfOI2qD9XP1cdCNi_w977aPZRAZYQhMwIxfPl1CpC3WoELDy-78xBg3jCTEi7cm41-elrnm-F3JmbyKv_FLsLnRzDF_reQdMS2j4mQvf8uv8atXgdNNzs4-Mb708C2GK_hZkXzM7__gkZ82yiVyPb96MPMnkCe-Z8irRIWHSx1R-rk9xqvIRqvEGt7",
-  },
-  {
-    span: "md:col-span-6 lg:col-span-3 h-full",
-    tag: "CUSTOM RIG & AIO",
-    title: "PC Desktop & Rig",
-    price: "s/d Rp 22,0 Jt",
-    priceOnImage: false,
-    tall: false,
-    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20PC%20Desktop",
-    img: "https://lh3.googleusercontent.com/aida/AEtjO1V2Vw_faD54FK9_gfV3LuMhk2___EXozZjUCuVZ5AOM5KBtMXga8c0_XPlBUPDtKKTPxQL7MHbmeR26yFbEWyITLmxAfSFZjy2xMGRbhuU36gA6LcYVQClLZfXJtdeGWO77N3rErQzw3A9Q6ANMIKHM4L1VkR8Mziz9T1qmf-LfmdRP_g0WSQPuTAJv88QGR8EcZkNQfpGgEXlABx-BPsY2IWGJGRdBa-SKLPLINW5zbflHc-k30UvCgY",
-  },
-  {
-    span: "md:col-span-6 lg:col-span-4 h-full",
-    tag: "RACKMOUNT & STORAGE",
-    title: "Server & Enterprise",
-    price: "s/d Rp 85,0 Jt",
-    priceOnImage: false,
-    tall: false,
-    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20Server%20Enterprise",
-    img: "https://lh3.googleusercontent.com/aida/AEtjO1X0-wlf0EoJrAR84kLu2l31wLEyVPbjKXRtwLjhrz59rOyGQKI4UfQjWgGRUI2z4RKu_EuvchHXUa5WHwJ27wc40ihynT6TNSoNm8cBalVVhD62lknhuE67cIRsvtb1xMs3PZCS16tnV4sor6o7oWj79dWuEdSBQP3aLQdVOzj2APdeHOFnf1obY6f1scaah_UDC0ATU95teep_AfXSx6ANk9L1cIGoOCRULWCh_gLEhEro-dkHTAoG6cIA",
-  },
-  {
-    span: "md:col-span-6 lg:col-span-2 h-full",
-    tag: "CPU & MOBO",
-    title: "Motherboard",
-    price: "s/d Rp 7,5 Jt",
-    priceOnImage: false,
-    tall: false,
-    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20Motherboard%20CPU",
-    img: "https://lh3.googleusercontent.com/aida/AEtjO1XpJ4-8x5qTfwLW8IDiew6MeY0QkbKQRQpRAg11jYCPLwIFPjGj7pBDrGF3SY5VhdNEsqs2QTdPgq7C7GpuV9lB3Vv55ZSH2zRJv45-fXSqOfMbuTC-eT06e7W_vGPwNt1yvsxg9bcaKAwdWWSQBWKn60PrYViAtykcxJ5N3c9fjBZWFn-NPHG8lGyLXrv6sYUGXGB5LxW7lzh0S2nPey-ePFzTbuMTAWVZ-SJ4Cvjba5OkHle9eMJpido6",
-  },
-  {
-    span: "md:col-span-6 lg:col-span-2 h-full",
-    tag: "PART MATI & KANIBAL",
-    title: "E-Waste",
-    price: "Rp 350rb/Kg",
-    priceOnImage: true,
-    tall: false,
-    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20Limbah%20E-Waste",
-    img: "https://lh3.googleusercontent.com/aida/AEtjO1Uzez8G6LJablXLTLJAFTpXIV4tJQbjyKlo8EUZx4WVzh5COoE3GM_qQl9UBibfvGFIyyKFOdt0PL-g0w-btajpJUEd3JrdzsnMipGJu8ntEWh70o0syNsOoSeFDylCqhUg5OlGfWD9zLCegdhm84OlBfvkhLs8u9LpgaIeMxYbs2nRzx3a9Zmy_iYrno3OBDzafKZIelje2GdQLScDaCIEFrv4OZmhd43AhXwUeRHuX-EfL5fXxWsrU9pw",
-  },
-];
+const WA_ESTIMASI =
+  "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20cek%20estimasi%20harga%20hardware";
+
+// ============================================================
+// ASET PROMO — foto orang gaya idwebhost (cut-out + kartu melayang).
+// Ganti tiap URL dengan foto asli (mis. "/img/teknisi.png" kalau file
+// sudah ditaruh di public/img — PNG transparan hasilnya paling rapi).
+// Placeholder unsplash di bawah hanya sementara.
+// ============================================================
+const PROMO_ASSETS = {
+  steps: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=480&q=80&auto=format&fit=crop",
+  faq: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=480&q=80&auto=format&fit=crop",
+  footer: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format&fit=crop",
+};
 
 const STEPS = [
   {
     n: "01",
+    icon: "photo_camera",
     title: "Kirim Foto & Spek",
-    desc: "Foto unit via WhatsApp. Tim langsung berikan estimasi harga dalam 15 menit.",
-    foot: "Respons < 5 Menit",
+    desc: "Foto unit via WhatsApp. Estimasi harga keluar dalam 15 menit.",
   },
   {
     n: "02",
+    icon: "local_shipping",
     title: "Jemput / Drop Unit",
-    desc: "Kurir kami jemput gratis ke alamat Anda (Jabodetabek, DIY, Lampung) atau antar ke depo terdekat.",
-    foot: "Gratis Ongkir & Kurir",
+    desc: "Kurir jemput gratis (Jabodetabek, DIY, Lampung) atau antar ke depo.",
   },
   {
     n: "03",
+    icon: "biotech",
     title: "Tes Terbuka Live",
-    desc: "Uji fungsi benchmark transparan disaksikan Anda tanpa manipulasi minus.",
-    foot: "Software Standar ISO",
+    desc: "Benchmark transparan, disaksikan langsung tanpa manipulasi.",
   },
   {
     n: "04",
+    icon: "payments",
     title: "Dana Cair Instan",
-    desc: "Transfer detik itu juga ke rekening/QRIS + sanitasi penghapusan data permanen.",
-    foot: "Data Wipe Aman 100%",
+    desc: "Transfer detik itu juga + sanitasi data permanen.",
+  },
+];
+
+// ============================================================
+// GALERI BARANG — GANTI FOTO ASLI DI SINI.
+// Nanti tinggal timpa tiap `img` dengan URL foto barang bekas
+// (mis. "/img/laptop-matot-1.jpg" kalau sudah taruh di public/img).
+// Placeholder picsum di bawah hanya sementara.
+// `span` mengatur bentangan bento-grid (jangan diubah kalau
+// tidak perlu). `price` = estimasi tertinggi per kategori.
+// ============================================================
+const GALERI = [
+  {
+    no: "01",
+    icon: "laptop_mac",
+    tag: "LAPTOP & MACBOOK",
+    title: "Laptop & MacBook",
+    desc: "Mati total, layar pecah, atau normal — semua seri dari Celeron sampai M3.",
+    chip: "MATI / MINUS / NORMAL",
+    price: "s/d Rp 18,5 Jt",
+    span: "sm:col-span-2 lg:col-span-2",
+    img: "https://picsum.photos/seed/gudang-laptop/1000/700",
+    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20Laptop%20MacBook",
+  },
+  {
+    no: "02",
+    icon: "memory",
+    tag: "VGA / KARTU GRAFIS",
+    title: "VGA / GPU",
+    desc: "Artefak, no display, ex-mining — GTX sampai RTX 40 series.",
+    chip: "ARTEFAK / NO DISPLAY",
+    price: "s/d Rp 9,2 Jt",
+    span: "",
+    img: "https://picsum.photos/seed/gudang-vga/800/600",
+    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20VGA%20GPU",
+  },
+  {
+    no: "03",
+    icon: "dns",
+    tag: "PC & SERVER KANTOR",
+    title: "PC & Server",
+    desc: "Satuan sampai borongan — ex-kantor, warnet, studio.",
+    chip: "SATUAN / BORONGAN",
+    price: "s/d Rp 25 Jt",
+    span: "",
+    img: "https://picsum.photos/seed/gudang-pc/800/600",
+    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20PC%20Server%20kantor",
+  },
+  {
+    no: "04",
+    icon: "developer_board",
+    tag: "MOTHERBOARD & CPU",
+    title: "Motherboard & CPU",
+    desc: "Konslet, korosi, socket patah — tetap ada nilainya.",
+    chip: "KONSLET / MATI",
+    price: "s/d Rp 7,5 Jt",
+    span: "",
+    img: "https://picsum.photos/seed/gudang-mobo/800/600",
+    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20Motherboard%20CPU",
+  },
+  {
+    no: "05",
+    icon: "sd_card",
+    tag: "STORAGE & RAM",
+    title: "SSD, HDD & RAM",
+    desc: "Bad sector & normal — wipe data standar militer.",
+    chip: "BAD SECTOR / NORMAL",
+    price: "s/d Rp 3,1 Jt",
+    span: "",
+    img: "https://picsum.photos/seed/gudang-storage/800/600",
+    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20SSD%20RAM%20storage",
+  },
+  {
+    no: "06",
+    icon: "recycling",
+    tag: "E-WASTE KILOAN",
+    title: "E-Waste Kiloan",
+    desc: "PCB, kabel, PSU jebol, part kanibal — ditimbang fair di depan Anda, cocok untuk bersih-bersih gudang kantor.",
+    chip: "DITIMBANG FAIR",
+    price: "s/d Rp 185 Rb/Kg",
+    span: "sm:col-span-2 lg:col-span-3",
+    img: "https://picsum.photos/seed/gudang-ewaste/1400/500",
+    wa: "https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20Limbah%20E-Waste",
   },
 ];
 
 const TESTIMONIAL_ROWS = [
   [
-    ["Kembali laptop lama jadi cash, curan!", "Andi", "Bantul", "Laptop Core i5 Matot", "r1"],
-    ["Kartu grafis artefak, 20 menit langsung cair.", "Sari", "Jogja", "RTX 2060 Rusak", "r2"],
-    ["Kurir jemput gratis ke kantor, proses cepat.", "Budi", "Sleman", "PC Kantor x8", "r3"],
-    ["Motherboard gosong masih dibayar fair.", "Nadya", "Depok", "B450 Konslet", "r4"],
-    ["MacBook layar pecah, mainboard tetap dibeli.", "Clara", "Jakarta", "MacBook M1", "r5"],
+    ["Laptop lama kembali jadi cash, cepat!", "Andi", "Bantul", "Laptop Core i5 Matot", "gudang-t1"],
+    ["Kartu grafis artefak, 20 menit langsung cair.", "Sari", "Jogja", "RTX 2060 Rusak", "gudang-t2"],
+    ["Kurir jemput gratis ke kantor, proses cepat.", "Budi", "Sleman", "PC Kantor x8", "gudang-t3"],
+    ["Motherboard gosong masih dibayar fair.", "Nadya", "Depok", "B450 Konslet", "gudang-t4"],
+    ["MacBook layar pecah, mainboard tetap dibeli.", "Clara", "Jakarta", "MacBook M1", "gudang-t5"],
   ],
   [
-    ["Lelang kantor 38 unit, semua cair.", "Bambang", "Jakarta", "Laptop Kantor x38", "r6"],
-    ["SSD &amp; RAM server lama, wipe data aman.", "Arif", "Bogor", "SSD Server x50", "r7"],
-    ["Warnet tutup, 24 PC full set dibi nasib baik.", "Eko", "Lampung", "PC Warnet x24", "r8"],
-    ["Rig kreator upgrade, RTX 4080 jual smooth.", "Dennis", "Cikarang", "RTX 4080", "r9"],
-    ["Rongsokan PCB kiloan tetap dihargai.", "Fajar", "Yogyakarta", "PCB 420kg", "r10"],
-  ],
-  [
-    ["Laptop Lenovo Legion kena air, tetap bayar.", "Nadya", "Depok", "Legion Matot", "r11"],
-    ["Server rackmount decommission, transfer cepat.", "Hendra", "Bekasi", "PowerEdge R730", "r12"],
-    ["5x RTX 3070 mining, cair tanpa nakal.", "Rian", "Tangerang", "RTX 3070 x5", "r13"],
-    ["MacBook logic board + baterai dibeli wajar.", "Clara", "Jogja", "MacBook Partial", "r14"],
-    ["SSD NVMe normal, harga pasar fair.", "Maya", "Sleman", "NVMe 1TB", "r15"],
+    ["Lelang kantor 38 unit, semua cair.", "Bambang", "Jakarta", "Laptop Kantor x38", "gudang-t6"],
+    ["SSD & RAM server lama, wipe data aman.", "Arif", "Bogor", "SSD Server x50", "gudang-t7"],
+    ["Warnet tutup, 24 PC full set laku semua.", "Eko", "Lampung", "PC Warnet x24", "gudang-t8"],
+    ["Rig kreator upgrade, RTX 4080 jual smooth.", "Dennis", "Cikarang", "RTX 4080", "gudang-t9"],
+    ["Server rackmount decommission, transfer cepat.", "Hendra", "Bekasi", "PowerEdge R730", "gudang-t10"],
   ],
 ];
 
-const REVIEW_STATS = [
-  ["4.9/5", "Tingkat Kepuasan"],
-  ["1.240+", "Penjual Dicairkan"],
-  ["15 Min", "Proses Cepat"],
-  ["3 Depo", "Cabang Resmi"],
-];
-
-const DEPOTS = [
-  {
-    name: "Cikarang",
-    badge: "PUSAT INDUSTRI JABODETABEK",
-    status: "Live Testing",
-    addr: "Kawasan Industri MM2100, Jl. Selayar Blok D, Cikarang Barat, Kabupaten Bekasi, Jawa Barat 17530",
-    map: "https://maps.google.com/?q=Kawasan+Industri+MM2100+Cikarang+Barat",
-    embed:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63456.88330752538!2d107.0733834!3d-6.3023812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699b0c79e6cf61%3A0x6b4db9228fb8bf5a!2sKawasan%20Industri%20MM2100%2C%20Cikarang%20Barat%2C%20Bekasi%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1700000000001",
-    wa: "https://wa.me/6285979220599?text=Halo%20PIC%20Depo%20Cikarang,%20saya%20mau%20jadwalkan%20drop-off%20hardware",
-  },
-  {
-    name: "Gunungkidul",
-    badge: "DEPO DIY & JAWA TENGAH",
-    status: "E-Waste & PC",
-    addr: "Jl. KH Agus Salim, Ledoksari, Kepek, Kec. Wonosari, Kabupaten Gunungkidul, D.I. Yogyakarta 55813",
-    map: "https://maps.google.com/?q=Wonosari+Gunungkidul+Yogyakarta",
-    embed:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63234.34141671981!2d110.5694205!3d-7.9654714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7bca9c1b3f7215%3A0x4027a76e3531b20!2sWonosari%2C%20Kabupaten%20Gunung%20Kidul%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1700000000002",
-    wa: "https://wa.me/6285979220599?text=Halo%20PIC%20Depo%20Gunungkidul,%20saya%20mau%20drop-off%20komputer%20dan%20limbah%20hardware",
-  },
-  {
-    name: "Lampung",
-    badge: "DEPO SUMATERA & LAMPUNG",
-    status: "Hub Sumatera",
-    addr: "Jl. Sultan Agung No. 88, Way Halim Permai, Kec. Way Halim, Kota Bandar Lampung, Lampung 35141",
-    map: "https://maps.google.com/?q=Way+Halim+Bandar+Lampung",
-    embed:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63550.04696152146!2d105.2418342!3d-5.3991206!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40db0366eb4b21%3A0xa193dfeb6ec6e0bf!2sWay%20Halim%2C%20Kota%20Bandar%20Lampung%2C%20Lampung!5e0!3m2!1sid!2sid!4v1700000000003",
-    wa: "https://wa.me/6285979220599?text=Halo%20PIC%20Depo%20Lampung,%20saya%20mau%20appraisal%20laptop%20dan%20hardware",
-  },
-];
-
-const FAQS = [
-  {
-    q: "Komputer atau laptop mati total apakah tetap bernilai?",
-    a: "Ya, tetap bernilai! Kami menghitung nilai komponen yang masih berfungsi (layar LCD, RAM, SSD, casing) maupun nilai lebur material motherboard.",
-  },
-  {
-    q: "Apakah data pribadi di dalam hard disk/SSD aman?",
-    a: "100% aman terjamin. Setiap drive melalui proses data sanitization permanen berstandar militer NIST 800-88 & DoD 5220.22-M sehingga file tidak dapat dipulihkan kembali.",
-  },
-  {
-    q: "Bagaimana proses penjemputan barangnya?",
-    a: "Untuk area Jabodetabek, DIY, dan Lampung kurir internal kami siap menjemput langsung ke alamat Anda secara gratis setelah estimasi disepakati via WhatsApp.",
-  },
-];
-
-const renderReviewCard = ([quote, name, loc, item, seed]: string[]) => (
-  <div className="marquee-card group">
+const renderReviewCard = (t: string[], key: string) => {
+  const [quote, name, loc, item, seed] = t;
+  return (
+  <div key={key} className="marquee-card group">
     <div className="relative mb-3 overflow-hidden rounded-lg bg-surface-container-low">
       <img
         alt={`Foto ${item}`}
         className="h-28 w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-        src={`https://picsum.photos/seed/buana-${seed}/360/180`}
+        src={`https://picsum.photos/seed/${seed}/400/200`}
         loading="lazy"
       />
-      <span className="font-label-tech absolute bottom-2 left-2 inline-flex rounded bg-primary-container px-2 py-0.5 text-[10px] font-bold text-white tracking-wider">
+      <span className="absolute bottom-2 left-2 inline-flex rounded bg-primary-container px-2 py-0.5 text-[10px] font-bold tracking-wider text-white">
         {item}
       </span>
     </div>
@@ -241,829 +217,779 @@ const renderReviewCard = ([quote, name, loc, item, seed]: string[]) => (
       <span className="material-symbols-outlined text-[14px]">star</span>
       <span className="material-symbols-outlined text-[14px]">star</span>
       <span className="material-symbols-outlined text-[14px]">star</span>
-      <span className="font-label-tech text-[10px] text-on-surface-variant ml-2">
+      <span className="ml-2 text-[10px] font-bold tracking-wider text-on-surface-variant">
         {name} • {loc}
       </span>
     </div>
-    <p className="mt-1.5 font-body-md text-sm text-on-surface italic leading-relaxed">“{quote}”</p>
+    <p className="mt-1.5 text-sm italic leading-relaxed text-on-surface">&ldquo;{quote}&rdquo;</p>
   </div>
-);
+  );
+};
+
+const STATS = [
+  ["4.9/5", "Kepuasan"],
+  ["1.240+", "Penjual Cair"],
+  ["15 Mnt", "Estimasi"],
+  ["3", "Depo Resmi"],
+];
+
+const DEPOTS = [
+  {
+    name: "Cikarang",
+    area: "Jawa Barat • Jabodetabek",
+    addr: "Kawasan Industri MM2100, Jl. Selayar Blok D, Cikarang Barat, Kab. Bekasi 17530",
+    map: "https://maps.google.com/?q=Kawasan+Industri+MM2100+Cikarang+Barat",
+    embed: "https://www.google.com/maps?q=Kawasan+Industri+MM2100+Cikarang+Barat&output=embed",
+    wa: "https://wa.me/6285979220599?text=Halo%20PIC%20Depo%20Cikarang,%20saya%20mau%20jadwalkan%20drop-off%20hardware",
+  },
+  {
+    name: "Gunungkidul",
+    area: "DIY • Jawa Tengah",
+    addr: "Jl. KH Agus Salim, Ledoksari, Kepek, Wonosari, Kab. Gunungkidul 55813",
+    map: "https://maps.google.com/?q=Wonosari+Gunungkidul+Yogyakarta",
+    embed: "https://www.google.com/maps?q=Wonosari+Gunungkidul+Yogyakarta&output=embed",
+    wa: "https://wa.me/6285979220599?text=Halo%20PIC%20Depo%20Gunungkidul,%20saya%20mau%20drop-off%20hardware",
+  },
+  {
+    name: "Lampung",
+    area: "Sumatera",
+    addr: "Jl. Sultan Agung No. 88, Way Halim Permai, Bandar Lampung 35141",
+    map: "https://maps.google.com/?q=Way+Halim+Bandar+Lampung",
+    embed: "https://www.google.com/maps?q=Way+Halim+Bandar+Lampung&output=embed",
+    wa: "https://wa.me/6285979220599?text=Halo%20PIC%20Depo%20Lampung,%20saya%20mau%20appraisal%20hardware",
+  },
+];
+
+const FAQS = [
+  {
+    q: "Komputer atau laptop mati total apakah tetap bernilai?",
+    a: "Ya, tetap bernilai. Kami menghitung nilai komponen yang masih berfungsi (layar LCD, RAM, SSD, casing) maupun nilai material motherboard.",
+  },
+  {
+    q: "Apakah data pribadi di hard disk/SSD aman?",
+    a: "100% aman. Setiap drive melalui sanitasi data permanen standar militer NIST 800-88 & DoD 5220.22-M sehingga file tidak bisa dipulihkan.",
+  },
+  {
+    q: "Bagaimana proses penjemputan barangnya?",
+    a: "Untuk Jabodetabek, DIY, dan Lampung kurir kami jemput gratis ke alamat Anda setelah estimasi disepakati via WhatsApp.",
+  },
+  {
+    q: "Berapa lama estimasi harga keluar?",
+    a: "Kurang dari 15 menit via WhatsApp — cukup kirim foto unit + spek singkat, tim kami langsung balas dengan kisaran harga final.",
+  },
+  {
+    q: "Apakah menerima borongan / lelang komputer kantor?",
+    a: "Ya, ini spesialisasi kami. 20+ unit bisa appraisal on-site ke kantor Anda, lengkap dengan BAST resmi + faktur pajak untuk kebutuhan B2B.",
+  },
+  {
+    q: "Bagaimana sistem pembayarannya?",
+    a: "Transfer langsung detik itu juga setelah tes terbuka disepakati — tunai di depo atau transfer bank/e-wallet, tanpa tempo tanpa DP.",
+  },
+  {
+    q: "VGA artefak / ex-mining masih laku?",
+    a: "Laku. VGA artefak, no display, sampai ex-mining tetap kami beli sesuai kondisi chip & pasar — s/d Rp 9,2 Jt untuk seri atas.",
+  },
+];
 
 function JualPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  // Urutan intro sinematik: 0 = splash logo, 1 = hook jual,
+  // 2 = hook e-waste, 3 = selesai (hero normal).
+  const [introAct, setIntroAct] = useState(0);
+  const introDone = introAct >= 3;
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIntroAct(3);
+      return;
+    }
+    const timers = [
+      window.setTimeout(() => setIntroAct(1), 1200),
+      window.setTimeout(() => setIntroAct(2), 3000),
+      window.setTimeout(() => setIntroAct(3), 4800),
+    ];
+    return () => timers.forEach((t) => window.clearTimeout(t));
+  }, []);
+
+  const splashDone = introAct >= 1;
 
   return (
-    <div className="bg-background font-body-md text-on-surface antialiased tech-grid-bg min-h-screen">
-      <main className="w-full bg-background min-h-screen relative overflow-hidden">
-        <div className="flex flex-col w-full relative">
-          {/* ==================== HERO FULL BANNER ==================== */}
-          <section className="relative w-full min-h-screen overflow-hidden flex items-center justify-center bg-surface-container-lowest">
-            <img
-              alt="Hardware Buyback Showcase"
-              className="absolute inset-0 w-full h-full object-cover object-center animate-[kenburns_18s_ease-out_infinite]"
-              src={SHOWCASE_IMG}
-            />
-            {/* Light glass overlays for readability on light theme */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/60 to-white/90" />
-            <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-transparent to-white/30" />
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[450px] bg-primary-container/15 blur-[140px] pointer-events-none rounded-full" />
-            <div className="absolute -top-10 right-10 w-[350px] h-[350px] bg-amber-500/10 blur-[110px] pointer-events-none rounded-full" />
-            <div className="absolute bottom-0 left-10 w-[400px] h-[300px] bg-secondary-container/10 blur-[130px] pointer-events-none rounded-full" />
-
-            <div className="relative w-full max-w-[1280px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop flex flex-col items-center text-center py-24">
-              <Reveal from="scale" delay={0}>
-                <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-3.5 py-1.5 rounded-full mb-5 border border-surface-container-high shadow-[0_0_15px_rgba(255,94,20,0.15)]">
-                  <div className="relative flex h-2 w-2 items-center justify-center">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75" />
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary-container" />
-                  </div>
-                  <span className="font-label-tech text-label-tech text-primary-container uppercase tracking-widest">
-                    ESTIMASI &lt; 15 MENIT
-                  </span>
-                </div>
-              </Reveal>
-
-              <Reveal from="bottom" delay={100}>
-                <h1 className="font-display-lg text-4xl md:text-6xl lg:text-7xl uppercase text-on-surface tracking-tight font-extrabold leading-tight mb-4">
-                  JUAL HARDWARE.{" "}
-                  <span className="bg-gradient-to-r from-primary-container via-[#ff7836] to-secondary-container bg-clip-text text-transparent">
-                    CAIR SEKARANG.
-                  </span>
-                </h1>
-              </Reveal>
-
-              <Reveal from="bottom" delay={200}>
-                <p className="font-body-md text-base md:text-xl text-on-surface-variant max-w-2xl mb-8">
-                  Laptop, GPU, PC &amp; Server mati/normal dibeli langsung di 3 cabang resmi —
-                  proses lab transparan, dana cair detik itu juga.
-                </p>
-              </Reveal>
-
-              <Reveal from="bottom" delay={300}>
-                <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
-                  <a
-                    className="inline-flex items-center gap-2 bg-primary-container hover:bg-secondary-container text-white px-8 py-4 rounded font-label-lg text-label-lg uppercase tracking-wider font-bold transition-all duration-300 shadow-lg shadow-primary-container/25 hover:shadow-[0_0_30px_rgba(255,94,20,0.5)] hover:scale-[1.02]"
-                    href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20cek%20estimasi%20harga%20hardware"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">bolt</span>
-                    <span>CEK HARGA INSTAN</span>
-                  </a>
-                  <a
-                    className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm hover:bg-surface-container border border-surface-container-high hover:border-primary-container/40 text-on-surface px-8 py-4 rounded font-label-lg text-label-lg uppercase tracking-wider font-bold transition-all duration-300"
-                    href="/berita"
-                  >
-                    <span className="material-symbols-outlined text-[20px]">receipt_long</span>
-                    <span>Lihat Berita Acara</span>
-                  </a>
-                </div>
-              </Reveal>
-
-              <Reveal from="bottom" delay={420} className="w-full">
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-3xl mx-auto">
-                  {[
-                    ["01", "Gunungkidul (DIY)", "Drop-off & COD Jogja"],
-                    ["02", "Lampung (Sumatera)", "Hub Regional Sumatera"],
-                    ["03", "Cikarang (Jabar)", "Kawasan Industri & Jabodetabek"],
-                  ].map(([no, city, desc]) => (
-                    <div
-                      key={no}
-                      className="group flex items-center gap-3 rounded-xl bg-white/80 backdrop-blur-sm border border-surface-container-high px-4 py-3.5 text-left transition-all duration-300 hover:border-primary-container/50 hover:shadow-[0_8px_25px_-10px_rgba(255,94,20,0.3)] hover:-translate-y-0.5"
-                    >
-                      <span className="font-monotech text-primary-container text-xs font-bold flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-container/15 border border-primary-container/30">
-                        {no}
-                      </span>
-                      <div className="min-w-0">
-                        <p className="font-headline-sm text-sm uppercase text-on-surface tracking-tight font-bold truncate">
-                          {city}
-                        </p>
-                        <p className="font-body-sm text-xs text-on-surface-variant truncate">
-                          {desc}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Reveal>
-            </div>
-
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 animate-bounce text-on-surface-variant">
-              <span className="material-symbols-outlined text-[28px]">expand_more</span>
+    <div className="bg-surface-container-lowest font-body-md text-on-surface antialiased min-h-screen">
+      {/* ===== Splash logo pembuka ===== */}
+      <div className={`intro-curtain ${splashDone ? "is-done" : ""}`} aria-hidden={splashDone}>
+        <div className="relative flex items-center justify-center">
+          <div className="intro-ring absolute h-40 w-40 rounded-full border border-dashed border-primary-container/60 md:h-52 md:w-52" />
+          <div className="intro-ring absolute h-32 w-32 rounded-full border border-white/15 md:h-40 md:w-40" />
+          <img
+            src="/gudangkomputer-logo.png"
+            alt=""
+            className="intro-logo h-24 w-24 rounded-3xl bg-white object-contain p-2 md:h-28 md:w-28"
+          />
+        </div>
+      </div>
+      <SiteHeader />
+      <main className="w-full">
+        {/* ===== Hook 1: kamu mau jual barang second? ===== */}
+        {introAct >= 1 && introAct < 3 && (
+          <section className="relative flex min-h-[calc(100svh-60px)] w-full items-center justify-center overflow-hidden bg-black px-5 text-center">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[20vw] font-extrabold uppercase leading-none tracking-tight text-white/[0.04] md:text-[10rem]"
+            >
+              JUAL?
+            </span>
+            <div className="intro-act is-on relative max-w-2xl">
+              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary-container">
+                Pertanyaan simpel
+              </p>
+              <p className="mt-4 text-3xl font-extrabold uppercase leading-tight tracking-tight text-white md:text-5xl">
+                Kamu mau jual barang second kamu?
+              </p>
+              <p className="mt-4 text-base text-white/60 md:text-lg">
+                Laptop nganggur, VGA artefak, PC mati total —{" "}
+                <span className="font-bold text-white">kami adalah solusinya.</span>
+              </p>
+              <button
+                type="button"
+                onClick={() => setIntroAct(2)}
+                className="mt-8 inline-flex items-center gap-1.5 rounded-lg border border-white/20 px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-white/70 transition-colors hover:border-primary-container hover:text-primary-container"
+              >
+                Lanjut
+                <span className="material-symbols-outlined text-[16px]">arrow_downward</span>
+              </button>
             </div>
           </section>
-
-          {/* ==================== KATEGORI DITERIMA (BENTO GRID) ==================== */}
-          <section
-            className="relative w-full bg-surface-low py-20 border-b border-surface-container-high"
-            id="katalog-buyback"
-          >
-            <div className="absolute -top-32 left-1/4 w-[500px] h-[500px] bg-primary-container/10 blur-[130px] pointer-events-none rounded-full" />
-            <div className="relative w-full max-w-[1280px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop py-4">
-              <Reveal from="bottom">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-                  <div className="flex flex-col gap-2">
-                    <div className="inline-flex items-center gap-2">
-                      <div className="relative flex h-2 w-2 items-center justify-center">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75" />
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary-container" />
-                      </div>
-                      <span className="font-label-tech text-label-tech text-primary uppercase tracking-widest">
-                        KATALOG HARGA TERKINI
-                      </span>
-                    </div>
-                    <h2 className="font-headline-lg text-3xl md:text-5xl uppercase text-on-surface font-bold tracking-tight">
-                      KATEGORI DITERIMA
-                    </h2>
-                  </div>
-                  <p className="font-body-md text-on-surface-variant max-w-sm text-sm">
-                    Hardware apa saja yang bisa dicairkan hari ini.
-                  </p>
-                </div>
-              </Reveal>
-
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-6 auto-rows-[250px] lg:auto-rows-[270px]">
-                {TILES.map((tile, tileIdx) => (
-                  <Reveal key={tile.title} from="bottom" delay={tileIdx * 80} className={tile.span}>
-                    <a
-                      className="group relative h-full rounded-2xl overflow-hidden border border-surface-container-high/80 hover:border-primary-container hover:-translate-y-1.5 hover:shadow-[0_12px_35px_-10px_rgba(255,94,20,0.3)] transition-all duration-300 ease-out flex flex-col justify-end bg-surface-container-lowest"
-                      href={tile.wa}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      {tile.tall ? (
-                        <>
-                          <div className="relative w-full h-[68%] md:h-[72%] overflow-hidden bg-surface-container-low">
-                            <img
-                              alt={tile.title}
-                              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
-                              src={tile.img}
-                              loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-black/30" />
-                            <div className="absolute top-4 left-4 z-10">
-                              <span className="inline-block bg-primary-container text-on-primary-container font-label-tech text-xs uppercase font-bold px-3.5 py-1.5 rounded-full shadow-lg tracking-wider">
-                                {tile.price}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="relative z-10 p-5 lg:p-6 flex items-center justify-between bg-surface-container-lowest">
-                            <div>
-                              <span className="font-label-tech text-primary uppercase tracking-widest text-[10px] block mb-1">
-                                {tile.tag}
-                              </span>
-                              <h3 className="font-headline-lg text-xl lg:text-2xl uppercase text-on-surface font-bold tracking-tight group-hover:text-primary transition-colors">
-                                {tile.title}
-                              </h3>
-                            </div>
-                            <div className="w-10 h-10 rounded-full bg-surface-container border border-surface-container-high flex items-center justify-center group-hover:bg-primary-container group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(255,94,20,0.5)] transition-all shrink-0">
-                              <span className="material-symbols-outlined text-on-surface group-hover:text-on-primary-container group-hover:translate-x-0.5 transition-all text-[20px]">
-                                arrow_forward
-                              </span>
-                            </div>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <img
-                            alt={tile.title}
-                            className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
-                            src={tile.img}
-                            loading="lazy"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/65 to-transparent" />
-                          <div className="absolute top-4 right-4 z-10">
-                            <span
-                              className={
-                                tile.priceOnImage
-                                  ? "inline-block bg-primary-container text-on-primary-container font-label-tech text-xs uppercase font-bold px-3 py-1.5 rounded-full shadow-lg tracking-wider"
-                                  : "inline-block bg-surface/90 backdrop-blur-md border border-surface-container-high px-3 py-1 rounded-full text-primary font-label-tech text-xs font-bold shadow-md"
-                              }
-                            >
-                              {tile.price}
-                            </span>
-                          </div>
-                          <div className="relative z-10 p-5 lg:p-6 flex items-center justify-between">
-                            <div>
-                              <span className="font-label-tech text-primary uppercase tracking-widest text-[10px] block mb-0.5">
-                                {tile.tag}
-                              </span>
-                              <h3 className="font-headline-md text-base lg:text-lg uppercase text-on-surface font-bold tracking-tight group-hover:text-primary transition-colors truncate">
-                                {tile.title}
-                              </h3>
-                            </div>
-                            <div className="w-9 h-9 rounded-full bg-surface/80 backdrop-blur-md border border-surface-container-high flex items-center justify-center group-hover:bg-primary-container group-hover:border-primary-container group-hover:shadow-[0_0_15px_rgba(255,94,20,0.5)] transition-all shrink-0">
-                              <span className="material-symbols-outlined text-on-surface group-hover:text-on-primary-container group-hover:translate-x-0.5 transition-all text-[18px]">
-                                arrow_forward
-                              </span>
-                            </div>
-                          </div>
-                        </>
-                      )}
-                    </a>
-                  </Reveal>
-                ))}
-              </div>
+        )}
+        {/* ===== Hook 2: sampah elektronik jadi uang ===== */}
+        {introAct === 2 && (
+          <section className="relative flex min-h-[calc(100svh-60px)] w-full items-center justify-center overflow-hidden bg-black px-5 text-center">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[20vw] font-extrabold uppercase leading-none tracking-tight text-primary-container/10 md:text-[10rem]"
+            >
+              E-WASTE
+            </span>
+            <div className="intro-act is-on relative max-w-2xl">
+              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary-container">
+                Bersama Gudang Komputer
+              </p>
+              <p className="mt-4 text-3xl font-extrabold uppercase leading-tight tracking-tight text-white md:text-5xl">
+                Jadikan sampah elektronik{" "}
+                <span className="text-primary-container">menjadi uang.</span>
+              </p>
+              <p className="mt-4 text-base text-white/60 md:text-lg">
+                Satuan sampai borongan kantor — dites terbuka, dana cair instan.
+              </p>
+              <button
+                type="button"
+                onClick={() => setIntroAct(3)}
+                className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary-container px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-secondary-container"
+              >
+                <span className="material-symbols-outlined text-[20px]">bolt</span>
+                Masuk ke website
+              </button>
             </div>
           </section>
-
-          {/* ==================== HOW IT WORKS ==================== */}
-          <section
-            className="relative w-full bg-surface-container-lowest py-16 border-b border-surface-container-high"
-            id="cara-kerja"
-          >
-            <div className="absolute top-1/2 right-10 w-[400px] h-[400px] bg-primary-container/10 blur-[120px] pointer-events-none rounded-full" />
-            <div className="relative w-full max-w-[1280px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop">
-              <Reveal from="bottom">
-                <div className="flex flex-col items-center text-center gap-2 mb-12">
-                  <span className="font-label-tech text-label-tech text-primary uppercase tracking-widest">
-                    ALUR SIMPEL &amp; CEPAT
-                  </span>
-                  <h2 className="font-headline-lg text-2xl md:text-3xl uppercase text-on-surface tracking-tight font-bold">
-                    Cara Kerja Transparan 4 Langkah
-                  </h2>
-                  <p className="font-body-md text-on-surface-variant max-w-xl text-sm md:text-base">
-                    Langsung cair tanpa birokrasi berbelit. Diagnosa hardware terbuka disaksikan
-                    penjual.
-                  </p>
-                </div>
-              </Reveal>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {STEPS.map((s, i) => (
-                  <Reveal key={s.n} from="bottom" delay={i * 100} className="h-full">
-                    <div className="bg-surface-container p-6 rounded-lg border border-surface-container-high hover:border-[#ff5e14]/50 transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(255,94,20,0.15)] hover:-translate-y-1 flex flex-col justify-between h-full">
-                      <div>
-                        <span className="font-headline-sm text-primary font-bold text-xl block mb-2">
-                          {s.n}
-                        </span>
-                        <h3 className="font-title-md text-base text-on-surface uppercase mb-2">
-                          {s.title}
-                        </h3>
-                        <p className="font-body-sm text-on-surface-variant text-xs leading-relaxed">
-                          {s.desc}
-                        </p>
-                      </div>
-                      <span className="font-label-tech text-[10px] text-primary uppercase mt-4 block">
-                        {s.foot}
-                      </span>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* ==================== B2B LIKUIDASI KANTOR ==================== */}
-          <section
-            className="w-full bg-surface-low py-12 relative border-b border-surface-container-high"
-            id="b2b-liquidation"
-          >
-            <Reveal from="bottom">
-              <div className="w-full max-w-[1280px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop">
-                <div className="bg-surface-container border border-surface-container-high hover:border-[#ff5e14]/40 transition-all duration-300 rounded-xl p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl">
-                  <div className="flex flex-col gap-2 max-w-2xl">
-                    <div className="inline-flex items-center gap-2 bg-surface-container-lowest px-2.5 py-1 rounded w-fit border border-surface-container-high/60">
-                      <span className="material-symbols-outlined text-primary text-[16px]">
-                        corporate_fare
-                      </span>
-                      <span className="font-label-tech text-label-tech text-primary uppercase">
-                        LAYANAN B2B &amp; ASSET DISPOSAL
-                      </span>
-                    </div>
-                    <h3 className="font-headline-lg text-xl md:text-2xl uppercase text-on-surface font-bold tracking-tight">
-                      Punya 20+ Unit Komputer Kantor Mau Dilelang?
-                    </h3>
-                    <p className="font-body-md text-sm text-on-surface-variant">
-                      Appraisal on-site ke kantor Anda, dokumen BAST resmi, faktur pajak, dan
-                      sertifikat penghapusan data permanen DoD 5220.22-M.
-                    </p>
-                  </div>
-                  <a
-                    className="shrink-0 inline-flex items-center gap-2 bg-primary-container hover:bg-secondary-container text-on-primary-container px-6 py-3 rounded font-label-lg text-label-lg uppercase tracking-wider font-bold transition-all duration-300 shadow-md hover:shadow-[0_0_25px_rgba(255,94,20,0.4)] hover:scale-[1.02]"
-                    href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20kami%20ingin%20mengajukan%20likuidasi%20aset%20hardware%20kantor%20B2B"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <span className="material-symbols-outlined text-[18px]">handshake</span>
-                    <span>Ajukan Appraisal Kantor</span>
-                  </a>
-                </div>
-              </div>
+        )}
+        {/* ============ HERO (black + grid glow + marquee barang) ============ */}
+        {introDone && (
+        <>
+        <section className="relative w-full overflow-hidden bg-black">
+          {/* glow grid background */}
+          <div className="pointer-events-none absolute inset-0 opacity-40" aria-hidden="true"
+            style={{ backgroundImage: "linear-gradient(rgba(255,94,20,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,94,20,0.12) 1px, transparent 1px)", backgroundSize: "44px 44px", maskImage: "radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%)", WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 75%)" }}
+          />
+          <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-primary-container/20 blur-[120px]" aria-hidden="true" />
+          <div className="relative mx-auto w-full max-w-[1080px] px-5 md:px-8 flex flex-col items-center text-center pt-20 pb-16 md:pt-28 md:pb-20">
+            <Reveal from="scale" delay={0}>
+              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary-container/40 bg-primary-container/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-orange-200">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-container opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary-container" />
+                </span>
+                Buyback #1 • Estimasi &lt; 15 menit • Cair instan
+              </p>
             </Reveal>
-          </section>
-
-          {/* ==================== TESTIMONIALS (MARQUEE ZIGZAG INFINITO) ==================== */}
-          <section
-            className="relative w-full overflow-hidden bg-surface-container-lowest py-16 border-b border-surface-container-high"
-            id="testimoni"
-          >
-            <div className="absolute bottom-10 left-10 w-[450px] h-[450px] bg-primary-container/10 blur-[130px] pointer-events-none rounded-full" />
-            <div className="relative w-full max-w-[1280px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop">
-              <Reveal from="bottom">
-                <div className="flex flex-col items-center text-center gap-2 mb-8">
-                  <span className="font-label-tech text-label-tech text-primary uppercase tracking-widest">
-                    BUKTI KEPUASAN PELANGGAN
-                  </span>
-                  <h2 className="font-headline-lg text-2xl md:text-3xl uppercase text-on-surface tracking-tight font-bold">
-                    Kata Penjual yang Sudah Dicairkan
-                  </h2>
-                  <p className="font-body-md text-sm text-on-surface-variant max-w-lg">
-                    Dari laptop matot sampai kurir kantor — ini kode kata mereka yang sudah cair
-                    uang iman di 3 depo cabang.
-                  </p>
-                </div>
-              </Reveal>
-
-              {/* Stat count */}
-              <Reveal from="bottom" delay={80}>
-                <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-                  {REVIEW_STATS.map(([num, label]) => (
-                    <div
-                      key={label}
-                      className="flex flex-col items-center justify-center min-w-[120px] rounded-xl bg-surface-container/80 backdrop-blur-sm border border-surface-container-high px-4 py-3 text-center transition-all duration-300 hover:border-primary-container/50"
-                    >
-                      <span className="font-headline-lg text-xl md:text-2xl font-extrabold text-on-surface tracking-tight">
-                        {num}
-                      </span>
-                      <span className="font-label-tech text-[10px] text-on-surface-variant uppercase tracking-wider mt-0.5">
-                        {label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </Reveal>
-            </div>
-
-            {/* Track 1 → kiri */}
-            <Reveal from="bottom" delay={140} className="w-full">
-              <div className="marquee-viewport mt-8">
-                <div className="marquee-track marquee-left">
-                  {TESTIMONIAL_ROWS[0]!.map(renderReviewCard)}
-                  {TESTIMONIAL_ROWS[0]!.map(renderReviewCard)}
-                </div>
-              </div>
+            <Reveal from="bottom" delay={100}>
+              <h1 className="text-4xl md:text-6xl font-extrabold uppercase tracking-tight leading-[1.05] text-white">
+                Sampah elektronik{" "}
+                <span className="bg-gradient-to-r from-primary-container to-amber-400 bg-clip-text text-transparent">jadi uang tunai.</span>
+              </h1>
             </Reveal>
-
-            {/* Track 2 → kanan */}
-            <Reveal from="bottom" delay={220} className="w-full">
-              <div className="marquee-viewport mt-4">
-                <div className="marquee-track marquee-right">
-                  {TESTIMONIAL_ROWS[1]!.map(renderReviewCard)}
-                  {TESTIMONIAL_ROWS[1]!.map(renderReviewCard)}
-                </div>
-              </div>
+            <Reveal from="bottom" delay={200}>
+              <p className="mt-5 max-w-xl text-base md:text-lg text-white/70">
+                Laptop, GPU, PC &amp; Server — mati, minus, atau normal — dites
+                terbuka di depan matamu, dana cair detik itu juga.
+              </p>
             </Reveal>
-
-            {/* Track 3 → kiri */}
-            <Reveal from="bottom" delay={300} className="w-full">
-              <div className="marquee-viewport mt-4">
-                <div className="marquee-track marquee-left">
-                  {TESTIMONIAL_ROWS[2]!.map(renderReviewCard)}
-                  {TESTIMONIAL_ROWS[2]!.map(renderReviewCard)}
-                </div>
-              </div>
-            </Reveal>
-          </section>
-
-          {/* ==================== DEPOT & DROP POINT LOCATIONS ==================== */}
-          <section
-            className="relative w-full bg-surface-low py-20 border-b border-surface-container-high"
-            id="lokasi-depo"
-          >
-            <div className="absolute top-1/2 left-1/3 -translate-x-1/2 w-[600px] h-[350px] bg-primary-container/10 blur-[140px] pointer-events-none rounded-full" />
-            <div className="relative w-full max-w-[1280px] mx-auto px-margin md:px-margin-tablet lg:px-margin-desktop">
-              <Reveal from="bottom">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
-                  <div className="flex flex-col gap-2">
-                    <div className="inline-flex items-center gap-2">
-                      <div className="relative flex h-2 w-2 items-center justify-center">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75" />
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary-container" />
-                      </div>
-                      <span className="font-label-tech text-label-tech text-primary uppercase tracking-widest">
-                        JARINGAN REGIONAL RESMI
-                      </span>
-                    </div>
-                    <h2 className="font-headline-lg text-3xl md:text-5xl uppercase text-on-surface font-bold tracking-tight">
-                      LOKASI DEPO &amp; DROP POINT
-                    </h2>
-                  </div>
-                  <p className="font-body-md text-on-surface-variant max-w-md text-sm">
-                    Kunjungi depo kami untuk appraisal langsung di tempat atau jadwalkan kurir
-                    jemput gratis ke lokasi Anda.
-                  </p>
-                </div>
-              </Reveal>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {DEPOTS.map((d, i) => (
-                  <Reveal key={d.name} from="bottom" delay={i * 100} className="h-full">
-                    <div className="bg-surface-container rounded-xl border border-surface-container-high/80 overflow-hidden flex flex-col justify-between hover:border-[#ff5e14]/50 transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(255,94,20,0.15)] hover:-translate-y-1 h-full">
-                      <div className="relative w-full h-48 bg-surface-container-low overflow-hidden border-b border-surface-container-high">
-                        <iframe
-                          className="w-full h-full border-0 grayscale invert opacity-75 hover:opacity-100 transition-opacity"
-                          loading="lazy"
-                          referrerPolicy="no-referrer-when-downgrade"
-                          src={d.embed}
-                          title={`Peta Depo ${d.name}`}
-                        />
-                        <div className="absolute top-3 left-3">
-                          <span className="inline-flex items-center gap-1.5 bg-surface/90 backdrop-blur-md border border-surface-container-high px-2.5 py-1 rounded text-primary font-label-tech text-[10px] font-bold uppercase tracking-wider shadow-md">
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse" />
-                            {d.badge}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="p-6 flex flex-col flex-1 justify-between gap-4">
-                        <div>
-                          <div className="flex items-center justify-between gap-2 mb-2">
-                            <h3 className="font-headline-md text-xl uppercase text-on-surface font-bold tracking-tight">
-                              Depo {d.name}
-                            </h3>
-                            <span className="inline-flex items-center gap-1.5 font-label-tech text-[10px] bg-primary-container/10 border border-primary-container/30 text-primary px-2 py-0.5 rounded font-bold uppercase">
-                              <span className="relative flex h-1.5 w-1.5 items-center justify-center">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75" />
-                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary-container" />
-                              </span>
-                              {d.status}
-                            </span>
-                          </div>
-                          <p className="font-body-sm text-xs text-on-surface-variant mb-4 leading-relaxed">
-                            {d.addr}
-                          </p>
-                          <div className="flex flex-col gap-2 pt-3 border-t border-surface-container-high font-body-sm text-xs text-on-surface-variant">
-                            <div className="flex items-center gap-2">
-                              <span className="material-symbols-outlined text-primary text-[16px]">
-                                schedule
-                              </span>
-                              <span>Senin – Sabtu: 08:30 – 17:00 WIB</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <span className="material-symbols-outlined text-primary text-[16px]">
-                                support_agent
-                              </span>
-                              <span>PIC Depo: +62 859-7922-0599</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-2 pt-2">
-                          <a
-                            className="inline-flex items-center justify-center gap-1.5 bg-surface-container-high hover:bg-surface-bright text-on-surface text-xs font-label-md py-2.5 px-3 rounded border border-surface-container-high transition-colors text-center"
-                            href={d.map}
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            <span className="material-symbols-outlined text-[16px]">map</span>
-                            <span>Petunjuk Arah</span>
-                          </a>
-                          <a
-                            className="inline-flex items-center justify-center gap-1.5 bg-primary-container hover:bg-secondary-container text-on-primary-container text-xs font-label-md font-bold py-2.5 px-3 rounded transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,94,20,0.4)] text-center"
-                            href={d.wa}
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            <span className="material-symbols-outlined text-[16px]">
-                              calendar_today
-                            </span>
-                            <span>Jadwalkan</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* ==================== FAQ ==================== */}
-          <section
-            className="relative w-full bg-surface-container-lowest py-16 border-b border-surface-container-high"
-            id="faq"
-          >
-            <div className="w-full max-w-[840px] mx-auto px-margin md:px-margin-tablet">
-              <Reveal from="bottom">
-                <div className="flex flex-col items-center text-center gap-2 mb-8">
-                  <span className="font-label-tech text-label-tech text-primary uppercase tracking-widest">
-                    FAQ
-                  </span>
-                  <h2 className="font-headline-lg text-2xl md:text-3xl uppercase text-on-surface tracking-tight font-bold">
-                    Pertanyaan Sering Diajukan
-                  </h2>
-                </div>
-              </Reveal>
-              <div className="flex flex-col gap-3">
-                {FAQS.map((f, i) => {
-                  const isOpen = openFaq === i;
-                  return (
-                    <Reveal key={f.q} from="bottom" delay={i * 60}>
-                      <div className="faq-item bg-surface-container rounded-lg border border-surface-container-high hover:border-[#ff5e14]/40 transition-colors overflow-hidden">
-                        <button
-                          className="faq-toggle w-full p-4 flex items-center justify-between text-left focus:outline-none"
-                          type="button"
-                          onClick={() => setOpenFaq(isOpen ? null : i)}
-                        >
-                          <span className="font-title-md text-sm md:text-base text-on-surface uppercase font-semibold">
-                            {f.q}
-                          </span>
-                          <span
-                            className={`material-symbols-outlined text-primary text-[20px] transition-transform duration-200 ${
-                              isOpen ? "rotate-180" : ""
-                            }`}
-                          >
-                            expand_more
-                          </span>
-                        </button>
-                        {isOpen && (
-                          <div className="faq-content px-4 pb-4 text-on-surface-variant font-body-sm text-xs md:text-sm">
-                            {f.a}
-                          </div>
-                        )}
-                      </div>
-                    </Reveal>
-                  );
-                })}
-              </div>
-            </div>
-          </section>
-
-          {/* ==================== FINAL CALLOUT ==================== */}
-          <section className="relative w-full bg-surface-container py-14 border-t border-surface-container-high text-center overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary-container/5 via-transparent to-secondary-container/10 pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-primary-container/15 blur-[120px] pointer-events-none rounded-full" />
-            <Reveal from="bottom">
-              <div className="relative w-full max-w-[800px] mx-auto px-margin flex flex-col items-center gap-4">
-                <h2 className="font-headline-lg text-2xl md:text-3xl uppercase text-on-surface font-bold tracking-tight">
-                  Siap Ubah Hardware Menjadi Uang Tunai?
-                </h2>
-                <p className="font-body-md text-sm md:text-base text-on-surface-variant">
-                  Hubungi kami via WhatsApp sekarang untuk estimasi instan dalam 15 menit.
-                </p>
+            <Reveal from="bottom" delay={300}>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <a
-                  className="mt-2 inline-flex items-center gap-2 bg-primary-container hover:bg-secondary-container text-on-primary-container px-8 py-3.5 rounded font-label-lg text-label-lg uppercase tracking-wider font-bold transition-all duration-300 shadow-lg hover:shadow-[0_0_25px_rgba(255,94,20,0.5)] hover:scale-[1.02]"
-                  href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20hardware%20komputer"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary-container px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white shadow-[0_8px_32px_-8px_rgba(255,94,20,0.7)] transition-all hover:bg-secondary-container"
+                  href={WA_ESTIMASI}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
-                  <span className="material-symbols-outlined text-[20px]">send</span>
-                  <span>Konsultasi Penjualan via WhatsApp</span>
+                  <span className="material-symbols-outlined text-[20px]">bolt</span>
+                  Cek Harga Instan
+                </a>
+                <a
+                  className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white backdrop-blur-sm transition-colors hover:border-primary-container hover:text-primary-container"
+                  href="/jual/form"
+                >
+                  <span className="material-symbols-outlined text-[20px]">assignment</span>
+                  Form Taksiran
                 </a>
               </div>
             </Reveal>
-          </section>
-        </div>
-      </main>
-
-      {/* ==================== FOOTER (PREMIUM) ==================== */}
-      <footer className="w-full bg-surface-container-lowest border-t border-surface-container-high">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-14 sm:py-16">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
-            {/* Brand */}
-            <div className="lg:col-span-4 space-y-4">
-              <div className="flex items-center gap-3">
-                <img
-                  alt="Gudang Komputer Logo"
-                  className="h-12 w-12 object-contain rounded-xl bg-white p-1"
-                  src="/gudangkomputer-logo.png"
-                />
-                <div>
-                  <p className="font-headline-lg text-base uppercase text-on-surface font-extrabold tracking-tight">
-                    GUDANG KOMPUTER
+            <Reveal from="bottom" delay={400} className="w-full">
+              <div className="mx-auto mt-12 grid max-w-2xl grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10 sm:grid-cols-4">
+                {STATS.map(([num, label]) => (
+                  <div key={label} className="bg-black/50 px-4 py-4 text-center">
+                    <p className="text-xl font-extrabold text-white">{num}</p>
+                    <p className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.15em] text-white/50">
+                      {label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+          {/* marquee barang laku (!) — transisi ke galeri */}
+          <div className="marquee-viewport relative border-t border-white/10 bg-black/60 py-3 backdrop-blur-sm">
+            <div className="marquee-track marquee-left" style={{ animationDuration: "30s" }}>
+              {[...GALERI, ...GALERI].map((g, i) => (
+                <span key={`hero-m-${i}`} className="mx-5 inline-flex items-center gap-2 whitespace-nowrap text-[11px] font-bold uppercase tracking-[0.15em] text-white/50">
+                  <span className="material-symbols-outlined text-[14px] text-primary-container">{g.icon}</span>
+                  {g.title} <span className="text-primary-container">{g.price}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+        {/* ============ GALERI BARANG (TOP KATEGORI, ALA VISIPRO) ============ */}
+        <section
+          id="galeri"
+          className="relative w-full overflow-hidden border-outline-variant bg-surface-container-lowest"
+        >
+          {/* wash numbering ala brand-corporate */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-4 left-1/2 -translate-x-1/2 select-none whitespace-nowrap text-[22vw] font-extrabold uppercase leading-none tracking-tight text-white/[0.04] md:text-[13rem]"
+          >
+            BUYBACK
+          </span>
+          <div className="relative mx-auto w-full max-w-[1080px] px-5 py-14 md:px-8 md:py-20">
+            <Reveal from="bottom">
+              <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div className="max-w-xl">
+                  <p className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-primary-container">
+                    <span className="inline-block h-px w-8 bg-primary-container" />
+                    Top Kategori
                   </p>
-                  <p className="font-label-tech text-[10px] text-on-surface-variant uppercase tracking-widest">
-                    Buyback &amp; E-Waste Exchange
+                  <h2 className="mt-2 text-2xl md:text-4xl font-extrabold uppercase tracking-tight text-on-surface">
+                    Barang yang Kami Beli
+                  </h2>
+                  <p className="mt-2 text-sm text-on-surface-variant">
+                    Semua kondisi laku — klik kartu untuk langsung jual via
+                    WhatsApp, estimasi keluar &lt; 15 menit.
                   </p>
                 </div>
+                <a
+                  href={WA_ESTIMASI}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-lg border border-outline-variant px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-on-surface transition-colors hover:border-primary-container hover:text-primary-container md:self-auto"
+                >
+                  Semua estimasi
+                  <span className="material-symbols-outlined text-[16px]">
+                    arrow_forward
+                  </span>
+                </a>
               </div>
-              <p className="font-body-md text-sm text-on-surface-variant leading-relaxed">
-                Pusat pertukaran &amp; buyback resmi hardware komputer di 3 depo cabang. Prioritas
-                kami: transparansi harga, dokumentasi resmi, &amp; sanitasi data militer berstandar
-                DoD 5220.22-M.
-              </p>
-              <div className="pt-1 space-y-1.5 font-body-sm text-xs text-on-surface-variant">
-                <p className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary-container text-[16px]">
-                    location_on
-                  </span>
-                  Mertosan Kulon, Potorono, Banguntapan, Bantul 55196
-                </p>
-                <p className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary-container text-[16px]">
-                    schedule
-                  </span>
-                  Senin – Sabtu: 08:30 – 17:00 WIB
-                </p>
-                <p className="flex items-center gap-2">
-                  <span className="material-symbols-outlined text-emerald-500 text-[16px]">
-                    verified_user
-                  </span>
-                  ISO 14001:2015 Data Wipe Certified
-                </p>
-              </div>
-            </div>
-
-            {/* Kontak & Gerai */}
-            <div className="lg:col-span-3 text-sm">
-              <h4 className="font-label-tech text-xs text-on-surface uppercase tracking-widest mb-3">
-                Kontak &amp; Gerai
-              </h4>
-              <ul className="space-y-2.5 font-body-sm text-xs text-on-surface-variant">
-                <li>
+            </Reveal>
+            {/* bento: kartu 1 lebar, 2–5 standar, kartu 6 panorama */}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {GALERI.map((g, i) => (
+                <Reveal
+                  key={g.title}
+                  from="bottom"
+                  delay={(i % 3) * 80}
+                  className={`h-full ${g.span}`}
+                >
                   <a
-                    href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer"
-                    target="_blank"
+                    href={g.wa}
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 hover:text-primary-container transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-primary-container text-[16px]">
-                      chat
-                    </span>
-                    WhatsApp: 0859-7922-0599
-                  </a>
-                </li>
-                <li className="inline-flex items-center gap-2">
-                  <span className="material-symbols-outlined text-primary-container text-[16px]">
-                    contact_support
-                  </span>
-                  PIC Depo: +62 859-7922-0599
-                </li>
-                <li>
-                  <a
-                    href="https://maps.google.com/?q=Kawasan+Industri+MM2100+Cikarang+Barat"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 hover:text-primary-container transition-colors"
+                    className="g-card group relative flex h-full min-h-[380px] flex-col justify-end overflow-hidden rounded-2xl border border-white/10 bg-surface-container transition-all duration-300 hover:-translate-y-1 hover:border-primary-container hover:shadow-[0_24px_60px_-20px_rgba(255,94,20,0.45)]"
                   >
-                    <span className="material-symbols-outlined text-primary-container text-[16px]">
-                      send
+                    <img
+                      alt={`Foto ${g.title}`}
+                      className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.06]"
+                      src={g.img}
+                      loading="lazy"
+                    />
+                    <span className="g-shine" aria-hidden="true" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10" />
+                    <span className="absolute right-4 top-4 text-4xl font-extrabold tracking-tight text-white/25 transition-colors group-hover:text-white/50">
+                      {g.no}
                     </span>
-                    Depo Cikarang (Jabar) • Jabodetabek
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://maps.google.com/?q=Wonosari+Gunungkidul+Yogyakarta"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 hover:text-primary-container transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-primary-container text-[16px]">
-                      send
-                    </span>
-                    Depo Gunungkidul (D.I. Yogyakarta)
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://maps.google.com/?q=Way+Halim+Bandar+Lampung"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 hover:text-primary-container transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-primary-container text-[16px]">
-                      send
-                    </span>
-                    Depo Lampung (Way Halim)
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Jam & Menu */}
-            <div className="lg:col-span-5 grid sm:grid-cols-2 gap-8 text-sm">
-              <div>
-                <h4 className="font-label-tech text-xs text-on-surface uppercase tracking-widest mb-3">
-                  Menu
-                </h4>
-                <ul className="space-y-2.5 font-body-sm text-xs">
-                  <li>
-                    <a
-                      href="/jual"
-                      className="text-on-surface-variant hover:text-primary-container transition-colors"
-                    >
-                      Katalog Kategori
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/berita"
-                      className="text-on-surface-variant hover:text-primary-container transition-colors"
-                    >
-                      Berita Acara Transaksi
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/jual/form"
-                      className="text-on-surface-variant hover:text-primary-container transition-colors"
-                    >
-                      Form Taksiran Online
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/jual#b2b-liquidation"
-                      className="text-on-surface-variant hover:text-primary-container transition-colors"
-                    >
-                      Layanan B2B / Lelang Kantor
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/jual#testimoni"
-                      className="text-on-surface-variant hover:text-primary-container transition-colors"
-                    >
-                      Testimoni Penjual
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://gudangkomputer.web.id/blog"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-on-surface-variant hover:text-primary-container transition-colors"
-                    >
-                      Blog &amp; Tips Hardware
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-label-tech text-xs text-on-surface uppercase tracking-widest mb-3">
-                  Akses Cepat
-                </h4>
-                <ul className="space-y-3">
-                  <li>
-                    <a
-                      href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20saya%20mau%20jual%20hardware%20komputer"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-label-md inline-flex w-full items-center justify-center gap-2 bg-primary-container hover:bg-secondary-container text-white py-2.5 rounded font-bold transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,94,20,0.4)]"
-                    >
-                      <span className="material-symbols-outlined text-[16px]">send</span>
-                      Chat CS • Konsultasi Gratis
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/jual/form"
-                      className="font-label-md inline-flex w-full items-center justify-center gap-2 bg-surface-container-high hover:bg-surface-bright text-on-surface py-2.5 rounded border border-surface-container-high font-bold transition-colors"
-                    >
-                      <span className="material-symbols-outlined text-[16px]">
-                        document_scanner
+                    <span className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm">
+                      <span className="material-symbols-outlined text-[14px] text-primary-container">
+                        {g.icon}
                       </span>
-                      Form Taksiran Instan
+                      {g.tag}
+                    </span>
+                    <span className="absolute left-4 top-[52px] inline-flex items-center gap-1 rounded bg-primary-container px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-white shadow-lg">
+                      <span className="material-symbols-outlined text-[13px]">
+                        sell
+                      </span>
+                      {g.price}
+                    </span>
+                    <div className="g-content relative p-5 md:p-6">
+                      <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-primary-container">
+                        Kondisi diterima
+                      </p>
+                      <h3 className="text-xl font-extrabold uppercase tracking-tight text-white md:text-2xl">
+                        {g.title}
+                      </h3>
+                      <p className="mt-1.5 max-w-md text-xs leading-relaxed text-white/70 md:text-sm">
+                        {g.desc}
+                      </p>
+                      <span className="mt-4 flex items-center justify-between border-t border-white/15 pt-3.5">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/60">
+                          {g.chip}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3.5 py-2 text-[11px] font-extrabold uppercase tracking-wider text-black transition-colors group-hover:bg-primary-container group-hover:text-white">
+                          Jual
+                          <span className="material-symbols-outlined text-[15px]">
+                            arrow_forward
+                          </span>
+                        </span>
+                      </span>
+                    </div>
+                  </a>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal from="bottom" delay={100}>
+              <p className="mt-6 text-center text-[11px] uppercase tracking-[0.15em] text-on-surface-variant">
+                Tak ketemu kategorimu?{" "}
+                <a
+                  href="/jual/form"
+                  className="font-bold text-primary-container hover:underline"
+                >
+                  Isi form taksiran →
+                </a>
+              </p>
+            </Reveal>
+          </div>
+        </section>
+        {/* ============ TENTANG ============ */}
+        <section className="stack-section w-full border-b border-outline-variant bg-surface-container-lowest py-16 md:py-24">
+          <div className="mx-auto grid w-full max-w-[1080px] gap-8 px-5 md:px-8 lg:grid-cols-2 lg:items-center">
+            <Reveal from="left">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-container">
+                  Tentang Gudang Komputer
+                </p>
+                <h2 className="mt-2 text-2xl md:text-3xl font-extrabold uppercase tracking-tight text-on-surface">
+                  Buyback transparan, bukan tebak harga.
+                </h2>
+                <p className="mt-3 text-sm md:text-base leading-relaxed text-on-surface-variant">
+                  Kami membeli hardware mati, minus, dan normal — dari satuan
+                  sampai lelang kantor — dengan diagnosa terbuka disaksikan
+                  penjual, berita acara resmi, dan sanitasi data standar militer.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal from="right" delay={120}>
+              <ul className="space-y-3">
+                {[
+                  ["verified", "Diagnosa live disaksikan penjual"],
+                  ["description", "BAST resmi + faktur pajak (B2B)"],
+                  ["lock", "Data wipe DoD 5220.22-M"],
+                ].map(([icon, text]) => (
+                  <li
+                    key={text}
+                    className="flex items-center gap-3 rounded-xl border border-outline-variant bg-surface-container px-4 py-3.5"
+                  >
+                    <span className="material-symbols-outlined text-[20px] text-primary-container">
+                      {icon}
+                    </span>
+                    <span className="text-sm font-semibold text-on-surface">{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ============ CARA KERJA ============ */}
+        <section
+          id="cara-kerja"
+          className="stack-section w-full border-b border-outline-variant bg-surface-container-low py-16 md:py-24"
+        >
+          <div className="mx-auto w-full max-w-[1080px] px-5 md:px-8">
+            <Reveal from="bottom">
+              <div className="mb-10 text-center">
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-container">
+                  Alur simpel &amp; cepat
+                </p>
+                <h2 className="mt-2 text-2xl md:text-3xl font-extrabold uppercase tracking-tight text-on-surface">
+                  4 Langkah Cair
+                </h2>
+              </div>
+            </Reveal>
+            <div className="grid items-stretch gap-6 lg:grid-cols-12">
+              <Reveal from="left" className="h-full lg:col-span-4">
+                <figure className="flex h-full flex-col overflow-hidden rounded-2xl border border-outline-variant bg-surface-container">
+                  <div className="relative flex min-h-[300px] flex-1 items-end justify-center overflow-hidden bg-primary-container/10">
+                    <div className="blob-shape absolute bottom-4 left-1/2 h-60 w-72 -translate-x-1/2 bg-primary-container/25" aria-hidden="true" />
+                    <img
+                      alt="Teknisi Gudang Komputer siap mendiagnosa hardware"
+                      className="relative h-64 w-auto object-cover object-top"
+                      src={PROMO_ASSETS.steps}
+                      loading="lazy"
+                      style={{ maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)" }}
+                    />
+                    <span className="animate-float absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-black/70 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white shadow-xl backdrop-blur-md">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                      </span>
+                      Teknisi siaga
+                    </span>
+                    <span className="animate-float-slow absolute right-3 top-3 rounded-xl border border-white/10 bg-black/70 px-3 py-2 text-right shadow-xl backdrop-blur-md">
+                      <span className="block text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">
+                        Rating teknisi
+                      </span>
+                      <span className="flex items-center gap-0.5 text-amber-400">
+                        {Array.from({ length: 5 }).map((_, s) => (
+                          <span key={s} className="material-symbols-outlined text-[13px]">star</span>
+                        ))}
+                      </span>
+                    </span>
+                    <span className="animate-float-fast absolute bottom-3 right-3 flex h-16 w-16 items-center justify-center rounded-full border-4 border-white/20 bg-primary-container text-center leading-none text-white shadow-xl">
+                      <span>
+                        <span className="block text-base font-extrabold">15</span>
+                        <span className="block text-[8px] font-bold uppercase tracking-wider">Mnt cair</span>
+                      </span>
+                    </span>
+                  </div>
+                  <figcaption className="p-5">
+                    <p className="text-base font-extrabold uppercase leading-snug tracking-tight text-on-surface">
+                      Dites di depan mata, bukan di belakang layar.
+                    </p>
+                    <p className="mt-1 text-xs text-on-surface-variant">
+                      Datang langsung atau via video call — hasilnya sama transparannya.
+                    </p>
+                    <a
+                      href={WA_ESTIMASI}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary-container px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-wider text-white transition-colors hover:bg-secondary-container"
+                    >
+                      Mulai langkah 01
+                      <span className="material-symbols-outlined text-[15px]">
+                        arrow_forward
+                      </span>
                     </a>
-                  </li>
-                  <li className="font-body-sm text-xs text-on-surface-variant pt-1">
-                    {DEPOTS.map((d) => d.name).join(" • ")} — siap layani satuan &amp; borongan
-                    kantor.
-                  </li>
-                </ul>
+                  </figcaption>
+                </figure>
+              </Reveal>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-8">
+              {STEPS.map((s, i) => (
+                <Reveal key={s.n} from="bottom" delay={i * 80} className="h-full">
+                  <div className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest p-5 transition-colors hover:border-primary-container">
+                    <span className="pointer-events-none absolute -right-2 -top-4 select-none text-6xl font-extrabold tracking-tight text-white/[0.06] transition-colors group-hover:text-primary-container/20">
+                      {s.n}
+                    </span>
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary-container/15 text-primary-container">
+                      <span className="material-symbols-outlined text-[20px]">
+                        {s.icon}
+                      </span>
+                    </span>
+                    <span className="mt-3 text-xs font-bold tracking-[0.15em] text-on-surface-variant">
+                      LANGKAH {s.n}
+                    </span>
+                    <h3 className="mt-1 text-base font-bold uppercase text-on-surface">
+                      {s.title}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-on-surface-variant">
+                      {s.desc}
+                    </p>
+                  </div>
+                </Reveal>
+              ))}
+              </div>
+            </div>
+            <Reveal from="bottom" delay={100}>
+              <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-xl border border-primary-container/30 bg-primary-container/10 px-6 py-5 text-center sm:flex-row sm:text-left">
+                <p className="text-sm font-semibold text-on-surface">
+                  Punya 20+ unit komputer kantor mau dilelang?{" "}
+                  <span className="font-normal text-on-surface-variant">
+                    Appraisal on-site + BAST resmi.
+                  </span>
+                </p>
+                <a
+                  className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-primary-container px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-secondary-container"
+                  href="https://wa.me/6285979220599?text=Halo%20Gudang%20Komputer,%20kami%20ingin%20mengajukan%20likuidasi%20aset%20hardware%20kantor%20B2B"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <span className="material-symbols-outlined text-[16px]">handshake</span>
+                  Appraisal Kantor
+                </a>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ============ TESTIMONI ============ */}
+        <section
+          id="testimoni"
+          className="stack-section w-full border-b border-outline-variant bg-surface-container-lowest py-16 md:py-24"
+        >
+          <div className="mx-auto w-full max-w-[1080px] px-5 md:px-8">
+            <Reveal from="bottom">
+              <div className="mb-10 text-center">
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-container">
+                  Bukti kepuasan
+                </p>
+                <h2 className="mt-2 text-2xl md:text-3xl font-extrabold uppercase tracking-tight text-on-surface">
+                  Kata Mereka yang Sudah Cair
+                </h2>
+                <p className="mx-auto mt-2 max-w-md text-sm text-on-surface-variant">
+                  Berhenti saat disentuh. Tiap testimoni ada foto barangnya.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+          <div className="flex flex-col gap-6">
+            <div className="marquee-viewport">
+              <div className="marquee-track marquee-left">
+                {[...(TESTIMONIAL_ROWS[0] ?? []), ...(TESTIMONIAL_ROWS[0] ?? [])].map((t, i) =>
+                  renderReviewCard(t, `t1-${i}`),
+                )}
+              </div>
+            </div>
+            <div className="marquee-viewport">
+              <div className="marquee-track marquee-right">
+                {[...(TESTIMONIAL_ROWS[1] ?? []), ...(TESTIMONIAL_ROWS[1] ?? [])].map((t, i) =>
+                  renderReviewCard(t, `t2-${i}`),
+                )}
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Bottom bar */}
-        <div className="border-t border-surface-container-high">
-          <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-5 flex flex-col gap-3 md:flex-row md:items-center md:justify-between text-xs font-body-sm text-on-surface-variant">
-            <div className="flex items-center gap-2.5">
-              <img
-                alt="Gudang Komputer"
-                className="h-5 w-5 object-contain rounded bg-white p-0.5"
-                src="/gudangkomputer-logo.png"
-              />
-              <span className="font-bold text-on-surface uppercase tracking-wide">
-                GUDANG KOMPUTER
-              </span>
-              <span>© 2026 PT Gudang Komputer Nusantara. Seluruh Hak Cipta Dilindungi.</span>
-            </div>
-            <div className="flex flex-wrap items-center gap-4">
-              <a
-                href="https://gudangkomputer.web.id/about"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary-container transition-colors"
-              >
-                Kebijakan Garansi &amp; Refund
-              </a>
-              <a
-                href="https://gudangkomputer.web.id/about"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary-container transition-colors"
-              >
-                Kebijakan Privasi
-              </a>
-              <span className="inline-flex items-center gap-1 text-emerald-500">
-                <span className="material-symbols-outlined text-[14px]">verified_user</span>
-                ISO 14001
-              </span>
+        {/* ============ DEPO ============ */}
+        <section
+          id="lokasi-depo"
+          className="stack-section w-full border-b border-outline-variant bg-surface-container-low py-16 md:py-24"
+        >
+          <div className="mx-auto w-full max-w-[1080px] px-5 md:px-8">
+            <Reveal from="bottom">
+              <div className="mb-10 text-center">
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-container">
+                  Jaringan resmi
+                </p>
+                <h2 className="mt-2 text-2xl md:text-3xl font-extrabold uppercase tracking-tight text-on-surface">
+                  3 Depo Gudang Komputer
+                </h2>
+                <p className="mx-auto mt-2 max-w-md text-sm text-on-surface-variant">
+                  Drop-off langsung atau jadwalkan kurir jemput gratis.
+                </p>
+              </div>
+            </Reveal>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {DEPOTS.map((d, i) => (
+                <Reveal key={d.name} from="bottom" delay={i * 80} className="h-full">
+                  <div className="flex h-full flex-col overflow-hidden rounded-xl border border-outline-variant bg-surface-container-lowest">
+                    <div className="relative h-52 w-full overflow-hidden bg-surface-container">
+                      <iframe
+                        title={`Peta Depo ${d.name}`}
+                        src={d.embed}
+                        className="absolute inset-0 h-full w-full border-0"
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        allowFullScreen
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col p-5">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary-container">
+                        {d.area}
+                      </p>
+                      <h3 className="mt-1 text-lg font-bold uppercase text-on-surface">
+                        Depo {d.name}
+                      </h3>
+                      <p className="mt-2 flex-1 text-xs leading-relaxed text-on-surface-variant">
+                        {d.addr}
+                      </p>
+                      <p className="mt-3 border-t border-outline-variant pt-3 text-xs text-on-surface-variant">
+                        Senin – Sabtu: 08.30 – 17.00 WIB
+                      </p>
+                      <div className="mt-3 grid grid-cols-2 gap-2">
+                        <a
+                          className="inline-flex items-center justify-center gap-1 rounded-lg border border-outline-variant px-3 py-2 text-[11px] font-bold uppercase text-on-surface transition-colors hover:border-primary-container hover:text-primary-container"
+                          href={d.map}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          <span className="material-symbols-outlined text-[15px]">map</span>
+                          Arah
+                        </a>
+                        <a
+                          className="inline-flex items-center justify-center gap-1 rounded-lg bg-primary-container px-3 py-2 text-[11px] font-bold uppercase text-white transition-colors hover:bg-secondary-container"
+                          href={d.wa}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          <span className="material-symbols-outlined text-[15px]">
+                            calendar_today
+                          </span>
+                          Jadwalkan
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
-        </div>
-      </footer>
+        </section>
 
+        {/* ============ FAQ ============ */}
+        <section
+          id="faq"
+          className="stack-section w-full border-b border-outline-variant bg-surface-container-lowest py-16 md:py-24"
+        >
+          <div className="mx-auto w-full max-w-[1080px] px-5 md:px-8">
+            <Reveal from="bottom">
+              <div className="mb-8 text-center">
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-primary-container">
+                  FAQ
+                </p>
+                <h2 className="mt-2 text-2xl md:text-3xl font-extrabold uppercase tracking-tight text-on-surface">
+                  Sering Ditanyakan
+                </h2>
+              </div>
+            </Reveal>
+            <div className="grid items-start gap-6 lg:grid-cols-12">
+              <Reveal from="left" className="lg:col-span-5">
+                <figure className="flex flex-col overflow-hidden rounded-2xl border border-outline-variant bg-surface-container lg:sticky lg:top-24">
+                  <div className="relative flex min-h-[280px] items-end justify-center overflow-hidden bg-emerald-500/10">
+                    <div className="blob-shape absolute bottom-2 left-1/2 h-56 w-64 -translate-x-1/2 bg-emerald-500/20" aria-hidden="true" />
+                    <img
+                      alt="Customer support Gudang Komputer siap menjawab via WhatsApp"
+                      className="relative h-60 w-auto object-cover object-top"
+                      src={PROMO_ASSETS.faq}
+                      loading="lazy"
+                      style={{ maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)" }}
+                    />
+                    <span className="animate-float absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-xl bg-emerald-500 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.12em] text-white shadow-xl">
+                      <span className="relative flex h-1.5 w-1.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
+                      </span>
+                      Online sekarang
+                    </span>
+                    <span className="animate-float-slow absolute bottom-3 right-3 rounded-xl border border-white/10 bg-black/70 px-3 py-2 text-right shadow-xl backdrop-blur-md">
+                      <span className="block text-[10px] font-bold uppercase tracking-[0.12em] text-white/60">
+                        Dibalas &lt; 5 mnt
+                      </span>
+                      <span className="flex items-center gap-0.5 text-amber-400">
+                        {Array.from({ length: 5 }).map((_, s) => (
+                          <span key={s} className="material-symbols-outlined text-[13px]">star</span>
+                        ))}
+                      </span>
+                    </span>
+                  </div>
+                  <figcaption className="p-5">
+                    <p className="text-base font-extrabold uppercase leading-snug tracking-tight text-on-surface">
+                      Masih ragu? Tanya langsung, dijawab manusia.
+                    </p>
+                    <p className="mt-1 text-xs text-on-surface-variant">
+                      Rata-rata dibalas &lt; 5 menit jam kerja.
+                    </p>
+                    <a
+                      href={WA_ESTIMASI}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-primary-container px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-wider text-white transition-colors hover:bg-secondary-container"
+                    >
+                      Chat CS sekarang
+                      <span className="material-symbols-outlined text-[15px]">
+                        chat
+                      </span>
+                    </a>
+                  </figcaption>
+                </figure>
+              </Reveal>
+              <div className="flex flex-col gap-3 lg:col-span-7">
+              {FAQS.map((f, i) => {
+                const isOpen = openFaq === i;
+                return (
+                  <Reveal key={f.q} from="bottom" delay={i * 60}>
+                    <div className="overflow-hidden rounded-xl border border-outline-variant bg-surface-container transition-colors">
+                      <button
+                        className="flex w-full items-center justify-between gap-3 p-4 text-left"
+                        type="button"
+                        onClick={() => setOpenFaq(isOpen ? null : i)}
+                      >
+                        <span className="text-sm font-bold uppercase text-on-surface">
+                          {f.q}
+                        </span>
+                        <span
+                          className={`material-symbols-outlined shrink-0 text-[20px] text-primary-container transition-transform duration-200 ${
+                            isOpen ? "rotate-180" : ""
+                          }`}
+                        >
+                          expand_more
+                        </span>
+                      </button>
+                      {isOpen && (
+                        <p className="px-4 pb-4 text-sm leading-relaxed text-on-surface-variant">
+                          {f.a}
+                        </p>
+                      )}
+                    </div>
+                  </Reveal>
+                );
+              })}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============ CTA AKHIR ============ */}
+        <section className="stack-section w-full bg-surface-container-lowest py-16 text-center md:py-24">
+          <Reveal from="bottom">
+            <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-4 px-5">
+              <h2 className="text-2xl md:text-3xl font-extrabold uppercase tracking-tight text-on-surface">
+                Siap Ubah Hardware Jadi Uang Tunai?
+              </h2>
+              <p className="text-sm md:text-base text-on-surface-variant">
+                Chat WhatsApp sekarang, estimasi keluar dalam 15 menit.
+              </p>
+              <a
+                className="mt-2 inline-flex items-center gap-2 rounded-lg bg-primary-container px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-secondary-container"
+                href={WA_ESTIMASI}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <span className="material-symbols-outlined text-[20px]">send</span>
+                Konsultasi via WhatsApp
+              </a>
+            </div>
+          </Reveal>
+        </section>
+        </>
+        )}
+      </main>
+
+      <SiteFooter />
       <FloatingWa />
     </div>
   );
